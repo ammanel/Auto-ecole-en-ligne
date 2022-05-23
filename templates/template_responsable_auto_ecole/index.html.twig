@@ -1,0 +1,111 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block main %}
+
+<div class="row">
+<div class="col-12">
+<div class="page-title-container">
+<h1 class="mb-0 pb-0 display-4" id="title">Visual Dashboard</h1>
+<nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+<ul class="breadcrumb pt-0">
+<li class="breadcrumb-item"><a href="Dashboards.Default.html">Home</a></li>
+<li class="breadcrumb-item"><a href="Dashboards.html">Dashboards</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<section class="scroll-section" id="horizontal">
+<h2 class="small-title">Horizontal</h2>
+<div class="row g-2">
+<div class="col-12 col-xl-4 mb-5">
+<div class="card hover-border-primary">
+<div class="h-100 row g-0 card-body align-items-center">
+<div class="col-auto">
+<div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+<i data-acorn-icon="loaf" class="text-white"></i>
+</div>
+</div>
+<div class="col">
+<div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Completed Orders</div>
+</div>
+<div class="col-auto ps-3">
+<div class="display-5 text-primary">34</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-xl-4 mb-5">
+<div class="card active">
+<div class="h-100 row g-0 card-body align-items-center">
+<div class="col-auto">
+<div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary">
+<i data-acorn-icon="loaf" class="text-primary"></i>
+</div>
+</div>
+<div class="col">
+<div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Completed Orders</div>
+</div>
+<div class="col-auto ps-3">
+<div class="display-5 text-primary">235</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-xl-4 mb-5">
+<div class="card bg-gradient-light">
+<div class="h-100 row g-0 card-body align-items-center">
+<div class="col-auto">
+<div class="border border-foreground sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+<i data-acorn-icon="loaf" class="text-white"></i>
+</div>
+</div>
+<div class="col">
+<div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3 text-white">Completed Orders</div>
+</div>
+<div class="col-auto ps-3">
+<div class="display-5 text-white">16</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+ 
+<section class="scroll-section" id="tablesWithoutBorders">
+<h2 class="small-title">Tables Without Borders</h2>
+<div class="card mb-5">
+<div class="card-body">
+<table class="table table-borderless">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">First</th>
+<th scope="col">Last</th>
+<th scope="col">Handle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">1</th>
+<td>Mark</td>
+<td>Otto</td>
+<td>@mdo</td>
+</tr>
+<tr>
+<th scope="row">2</th>
+<td>Jacob</td>
+<td>Thornton</td>
+<td>@fat</td>
+</tr>
+<tr>
+<th scope="row">3</th>
+<td colspan="2">Larry the Bird</td>
+<td>@twitter</td>
+</tr>
+</tbody>
+</table>
+
+{% endblock %}

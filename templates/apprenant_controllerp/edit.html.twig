@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Apprenant</title>
+
+{% block body %}
+    <h1>Edit Apprenant</h1>
+
+    {{ include('apprenant_controllerp/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_apprenant_controllerp_index') }}">back to list</a>
+
+    {{ include('apprenant_controllerp/_delete_form.html.twig') }}
+{% endblock %}

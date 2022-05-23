@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<title>Apprenant index</title>
+
+{% block body %}
+    <h1>Apprenant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Telephone</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Addresse</th>
+                <th>Mail</th>
+                <th>Sex</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for apprenant in apprenants %}
+            <tr>
+                <td>{{ apprenant.id }}</td>
+                <td>{{ apprenant.Telephone }}</td>
+                <td>{{ apprenant.roles ? apprenant.roles|json_encode : '' }}</td>
+                <td>{{ apprenant.password }}</td>
+                <td>{{ apprenant.Nom }}</td>
+                <td>{{ apprenant.Prenom }}</td>
+                <td>{{ apprenant.Addresse }}</td>
+                <td>{{ apprenant.Mail }}</td>
+                <td>{{ apprenant.Sex }}</td>
+                <td>
+                    <a href="{{ path('app_apprenant_controllerp_show', {'id': apprenant.id}) }}">show</a>
+                    <a href="{{ path('app_apprenant_controllerp_edit', {'id': apprenant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_apprenant_controllerp_new') }}">Create new</a>
+{% endblock %}

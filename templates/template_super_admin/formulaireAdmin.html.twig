@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block contenu %}
+
+ <!-- <body data-layout="horizontal"> -->
+        <div class="auth-page">
+               <div class="auth-content my-auto">
+                                        <div class="text-center">
+                                            <h5 class="mb-0">Ajouter un Admin</h5>
+                                        </div>
+                                        <form class="needs-validation mt-4 pt-2" novalidate action="index.html">
+                                            <div class="mb-3">
+                                                <label for="useremail" class="form-label">Nom</label>
+                                                <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>  
+                                                <div class="invalid-feedback">
+                                                    Entrer votre nom
+                                                </div>      
+                                            </div>
+                    
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Prenom</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                <div class="invalid-feedback">
+                                                    Entrer votre prenom
+                                                </div>  
+                                            </div>
+                    
+                                            <div class="mb-3">
+                                                <label for="userpassword" class="form-label">Telephone</label>
+                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                                <div class="invalid-feedback">
+                                                    Entrer votre telephone
+                                                </div>       
+
+
+                                             <div class="mb-3">
+                                                <label for="userpassword" class="form-label">adresse</label>
+                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                                <div class="invalid-feedback">
+                                                    Entrer votre adresse
+                                                </div>       
+
+
+                                             <div class="mb-3">
+                                                <label for="userpassword" class="form-label">Email</label>
+                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                                <div class="invalid-feedback">
+                                                   Entrer votre Email
+                                                </div>       
+
+
+                                             <div class="mb-3">
+                                                <label for="userpassword" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Password
+                                                </div>       
+
+
+                                             <div class="mb-3">
+                                                <label for="userpassword" class="form-label">Sexe</label>
+                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                                <div class="invalid-feedback">
+                                                   Entrer votre sexe
+                                                </div>       
+                                            </div>
+                                            <div class="mb-4">
+                                            </div>
+                                            <div class="mb-3">
+                                                <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register</button>
+                                            </div>
+                                        </form>
+
+                                
+                                        </div>
+                                    </div>
+        </div>
+
+
+   <!-- JAVASCRIPT -->
+        <script src="{{asset('SuperAdmin/assets/libs/jquery/jquery.min.j')}}s"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/bootstrap/js/bootstrap.bundle.min.j')}}s"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/node-waves/waves.min.js')}}"></script>
+        <script src="assets/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="{{asset('SuperAdmin/assets/libs/pace-js/pace.min.js')}}"></script>
+
+        <!-- validation init -->
+        <script src="{{asset('SuperAdmin/assets/js/pages/validation.init.js')}}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block contenu %}
+
+ <!-- <body data-layout="horizontal"> -->
+        <div class="auth-page">
+               <div class="auth-content my-auto">
+                                        <div class="text-center">
+                                            <h5 class="mb-0">Ajouter une auto-école</h5>
+                                        </div>
+                                        <form class="needs-validation mt-4 pt-2" novalidate action="index.html">
+                                            <div class="mb-3">
+                                                <label for="useremail" class="form-label">Image</label>
+                                                <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>  
+                                                <div class="invalid-feedback">
+                                                   entrer une image
+                                                </div>      
+                                            </div>
+                    
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Nom de votre auto-école</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Username
+                                                </div>  
+                                            </div>
+                    
+                                            <div class="mb-3">
+                                                <label for="userpassword" class="form-label">Description</label>
+                                                <textarea class="form-control">
+                                                
+                                                </textarea>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Password
+                                                </div>       
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Horaire de debut</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Username
+                                                </div>  
+                                            </div>
+
+                                              <div class="mb-3">
+                                                <label for="username" class="form-label">Horaire de fin</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Username
+                                                </div>  
+                                            </div>
+                                           
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Contact</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Username
+                                                </div>  
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Localisation ou addresse</label>
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Username
+                                                </div>  
+                                            </div>
+                                           
+                                           
+                                            <div class="mb-3">
+                                                <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register</button>
+                                            </div>
+                                        </form>
+
+                                           
+                                        </div>
+                                    </div>
+        </div>
+
+
+   <!-- JAVASCRIPT -->
+        <script src="{{asset('SuperAdmin/assets/libs/jquery/jquery.min.j')}}s"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/bootstrap/js/bootstrap.bundle.min.j')}}s"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/node-waves/waves.min.js')}}"></script>
+        <script src="assets/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="{{asset('SuperAdmin/assets/libs/pace-js/pace.min.js')}}"></script>
+
+        <!-- validation init -->
+        <script src="{{asset('SuperAdmin/assets/js/pages/validation.init.js')}}"></script>
+
+
+{% endblock %}

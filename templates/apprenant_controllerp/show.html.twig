@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<title>Apprenant</title>
+
+{% block body %}
+    <h1>Apprenant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ apprenant.id }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ apprenant.Telephone }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ apprenant.roles ? apprenant.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ apprenant.password }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ apprenant.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ apprenant.Prenom }}</td>
+            </tr>
+            <tr>
+                <th>Addresse</th>
+                <td>{{ apprenant.Addresse }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ apprenant.Mail }}</td>
+            </tr>
+            <tr>
+                <th>Sex</th>
+                <td>{{ apprenant.Sex }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_apprenant_controllerp_index') }}">back to list</a>
+
+    <a href="{{ path('app_apprenant_controllerp_edit', {'id': apprenant.id}) }}">edit</a>
+
+    {{ include('apprenant_controllerp/_delete_form.html.twig') }}
+{% endblock %}
