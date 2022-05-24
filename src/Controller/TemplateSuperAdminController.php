@@ -55,7 +55,7 @@ class TemplateSuperAdminController extends AbstractController
                 ]);
             }
             $this->addFlash('notice','Inscription Effectuée');
-            $admin->setRoles(["ROLE_ADMIN"]);
+            $admin->setRoles(["ROLE_SUPER_ADMIN"]);
             $admin->setSex($_POST["Sex"]);
             $hashdePassword=$passwordhash->hashPassword($admin,$admin->getpassword());
             $admin->setpassword($hashdePassword);

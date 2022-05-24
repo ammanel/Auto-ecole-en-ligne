@@ -35,10 +35,6 @@ class AuthentificationController extends AbstractController
             return $this->redirectToRoute('app_template_super_admin');
         }
 
-        if ($this->isGranted('ROLE_ADMIN')) {
-            
-        }
-
         return $this->render('authentification/connexion.html.twig', [
             'controller_name' => 'AuthentificationController',
             'error'=>$error,
