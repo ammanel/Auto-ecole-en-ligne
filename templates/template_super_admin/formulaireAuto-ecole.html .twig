@@ -3,79 +3,36 @@
 {% block contenu %}
 
  <!-- <body data-layout="horizontal"> -->
+    
         <div class="auth-page">
                <div class="auth-content my-auto">
-                                        <div class="text-center">
-                                            <h5 class="mb-0">Ajouter une auto-école</h5>
-                                        </div>
-                                        <form class="needs-validation mt-4 pt-2" novalidate action="index.html">
-                                            <div class="mb-3">
-                                                <label for="useremail" class="form-label">Image</label>
-                                                <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>  
-                                                <div class="invalid-feedback">
-                                                   entrer une image
-                                                </div>      
-                                            </div>
-                    
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Nom de votre auto-école</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Username
-                                                </div>  
-                                            </div>
-                    
-                                            <div class="mb-3">
-                                                <label for="userpassword" class="form-label">Description</label>
-                                                <textarea class="form-control">
-                                                
-                                                </textarea>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Password
-                                                </div>       
-                                            </div>
+        {{form_start(form)}}
+        <div class="mb-3">
+        {{form_row(form.Nom)}}
+        {{form_row(form.Description)}}
+        {{form_row(form.Note)}}
+        {{form_row(form.Telephone)}}
+        {{form_row(form.password)}}
+        {{form_row(form.Mail)}}
+        {{form_row(form.Addresse)}}
+        {{form_row(form.image)}}
+        </div>
+        <div class="mb-3">
+            <input type="time" name="HeureDebut" class="form-control">
+        </div>
 
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Horaire de debut</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Username
-                                                </div>  
-                                            </div>
-
-                                              <div class="mb-3">
-                                                <label for="username" class="form-label">Horaire de fin</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Username
-                                                </div>  
-                                            </div>
-                                           
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Contact</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Username
-                                                </div>  
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Localisation ou addresse</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Username
-                                                </div>  
-                                            </div>
-                                           
-                                           
-                                            <div class="mb-3">
-                                                <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register</button>
-                                            </div>
-                                        </form>
-
-                                           
-                                        </div>
-                                    </div>
+        <div class="mb-3">
+            <input type="time" name="HeureFin" class="form-control">
+        </div>
+        
+        
+        <div class="mb-3">
+            {{form_row(form.Enregistrer)}}
+        
+        </div>
+       
+        {{form_end(form)}}
+                </div>
         </div>
 
 

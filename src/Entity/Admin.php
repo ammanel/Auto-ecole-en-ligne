@@ -2,24 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ApprenantRepository;
+use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
-
-#[ORM\Entity(repositoryClass: ApprenantRepository::class)]
-#[UniqueEntity(fields: ['Telephone'], message: 'There is already an account with this Telephone')]
-class Apprenant extends Personne
+#[ORM\Entity(repositoryClass: AdminRepository::class)]
+class Admin extends Personne
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     protected $id;
-
-
 
     #[ORM\Column(type: 'string')]
     private $Prenom;
@@ -57,12 +49,9 @@ class Apprenant extends Personne
         return $this;
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-   
-
-
 }

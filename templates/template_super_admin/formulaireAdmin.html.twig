@@ -8,73 +8,49 @@
                                         <div class="text-center">
                                             <h5 class="mb-0">Ajouter un Admin</h5>
                                         </div>
-                                        <form class="needs-validation mt-4 pt-2" novalidate action="index.html">
-                                            <div class="mb-3">
-                                                <label for="useremail" class="form-label">Nom</label>
-                                                <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>  
-                                                <div class="invalid-feedback">
-                                                    Entrer votre nom
-                                                </div>      
-                                            </div>
-                    
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Prenom</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                <div class="invalid-feedback">
-                                                    Entrer votre prenom
-                                                </div>  
-                                            </div>
-                    
-                                            <div class="mb-3">
-                                                <label for="userpassword" class="form-label">Telephone</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
-                                                <div class="invalid-feedback">
-                                                    Entrer votre telephone
-                                                </div>       
 
-
-                                             <div class="mb-3">
-                                                <label for="userpassword" class="form-label">adresse</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
-                                                <div class="invalid-feedback">
-                                                    Entrer votre adresse
-                                                </div>       
-
-
-                                             <div class="mb-3">
-                                                <label for="userpassword" class="form-label">Email</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
-                                                <div class="invalid-feedback">
-                                                   Entrer votre Email
-                                                </div>       
-
-
-                                             <div class="mb-3">
-                                                <label for="userpassword" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Password
-                                                </div>       
-
-
-                                             <div class="mb-3">
-                                                <label for="userpassword" class="form-label">Sexe</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
-                                                <div class="invalid-feedback">
-                                                   Entrer votre sexe
-                                                </div>       
-                                            </div>
-                                            <div class="mb-4">
-                                            </div>
-                                            <div class="mb-3">
-                                                <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register</button>
-                                            </div>
-                                        </form>
+                                        {{form_start(form)}}
+        <div class="mb-3">
+        {{form_row(form.Nom)}}
+        {{form_row(form.Prenom)}}
+        <div class="mb-3">
+        <label for="Sex">Sex</label>
+        <select name="Sex" class="form-control">
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+        </select>
+        </div>
+        {{form_row(form.Telephone)}}
+        {{form_row(form.password)}}
+        {% if erreur is defined %}
+        {{erreur}}
+        {% endif %}
+        <div class="mb-3">
+            <label for="">Confirmation Mot de passe</label>
+        <input type="Password" class="form-control" name="Confirmation">
+    </div>
+        {{form_row(form.Mail)}}
+        {{form_row(form.Addresse)}}
+        
+        </div>
+        
+        
+        
+        <div class="mb-3">
+            {{form_row(form.Enregistrer)}}
+        
+        </div>
+       
+        {{form_end(form)}}
+                                        
 
                                 
                                         </div>
                                     </div>
         </div>
+
+
+        
 
 
    <!-- JAVASCRIPT -->

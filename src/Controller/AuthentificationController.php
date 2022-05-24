@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Entity\Apprenant;
+use App\Entity\AutoEcole;
 use App\Form\ApprenantType;
+use App\Form\AutoEcoleType;
 use App\Repository\ApprenantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,9 +28,17 @@ class AuthentificationController extends AbstractController
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_template_apprenant');
         }
-        if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_AutoEcole')) {
             return $this->redirectToRoute('app_template_responsable_auto_ecole');
         }
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            return $this->redirectToRoute('app_template_super_admin');
+        }
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            
+        }
+
         return $this->render('authentification/connexion.html.twig', [
             'controller_name' => 'AuthentificationController',
             'error'=>$error,
