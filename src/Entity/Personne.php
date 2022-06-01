@@ -16,7 +16,7 @@ class Personne implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    protected $id;
 
     /**
      * @Assert\Regex(pattern="/^[+]{1}[0-9]{3}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}$/",message="Format telephone +22891281270")
@@ -46,6 +46,9 @@ class Personne implements UserInterface,PasswordAuthenticatedUserInterface
             
     #[ORM\Column(type: 'string')]
     private $Mail;
+
+    #[ORM\Column(type: 'boolean')]
+    private $Statut;
 
     
 
@@ -154,5 +157,17 @@ class Personne implements UserInterface,PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->Statut;
+    }
+
+    public function setStatut(bool $Statut): self
+    {
+        $this->Statut = $Statut;
+
+        return $this;
     }
 }

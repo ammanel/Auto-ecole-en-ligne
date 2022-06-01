@@ -1,5 +1,19 @@
 {% extends 'base_apprenant.html.twig' %}
+
+
+
+{% block username %} {{user.Nom}} {% endblock username %}
 {% block contenu %}
+
+{% if user.statut == false %}
+
+
+
+
+
+{% else %}
+
+
 <div class="container">
 <div class="page-title-container">
 <div class="row">
@@ -502,4 +516,5 @@ Liquorice caramels chupa chups bonbon. Jelly-o candy sugar chocolate cake carame
 </div>
 </div>
 </div>
+{% endif %}
 {% endblock %}

@@ -7,6 +7,7 @@ use App\Entity\Apprenant;
 use App\Entity\AutoEcole;
 use App\Form\ApprenantType;
 use App\Form\AutoEcoleType;
+use Goxens\Goxens;
 use App\Repository\ApprenantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +44,7 @@ class AuthentificationController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(Request $request,EntityManagerInterface $em,UserPasswordHasherInterface $passwordhash): Response
+    public function inscription(Request $request,EntityManagerInterface $em,UserPasswordHasherInterface $passwordhash, ApprenantRepository $ar): Response
     {
         $apprenant = new Apprenant();
         $form =$this->createForm(ApprenantType::class,$apprenant);
@@ -66,12 +67,17 @@ class AuthentificationController extends AbstractController
             $apprenant->setSex($_POST["sex"]);
             $hashdePassword=$passwordhash->hashPassword($apprenant,$apprenant->getpassword());
             $apprenant->setpassword($hashdePassword);
+            $apprenant->setStatut(false);
             $em->persist($apprenant);
             $em->flush($apprenant);
-            return $this->redirectToRoute("app_connexion");
+            
+            //$service = $ar->findBy(array('Nom' => $apprenant->getNom()));
+            return $this->render("authentification/confirmation.html.twig",["apprenant" => $apprenant,
+            "id" => $apprenant->getId() ]);
         }
         return $this->render('authentification/inscription.html.twig', [
             'controller_name' => 'AuthentificationController',
+            
             "form"=> $form->createView()
         ]);
     }
@@ -81,4 +87,35 @@ class AuthentificationController extends AbstractController
     {
         throw new \Exception('Désolée,Déconnexion échouée');
     }
+
+    #[Route('/{id}', name: 'Confirmation',  methods: ['GET', 'POST'])]
+    public function Confirmation(Apprenant $apprenant)
+    {
+        $apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
+        $userUid = " RORJJ4";
+
+        $moi = new Goxens($apiKey, $userUid);
+        $lien = "http://192.168.1.76:8001/validation/".$apprenant->getId();
+        //$lien= "test";
+        $message = "Monsieur ".$apprenant->getNom()." votre compte a bien ete créer \n Il ne vous reste plus qu'a l'activer avec ce lien ".$lien;
+        $sender = "AutoEcole";
+        $number = $apprenant->getTelephone();
+        $serve = $moi->sendSms("ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH","RORJJ4",$number,"AutoEcole",$message);
+        //return $this->redirectToRoute("app_connexion");
+        return $this->json($serve);
+    }
+
+
+    #[Route('/validation/{id}', name: 'app_validation',  methods: ['GET', 'POST'])]
+    public function validation(Apprenant $apprenant, ApprenantRepository $ar)
+    {
+        $apprenant->setStatut(true);
+        $ar->add($apprenant,true);
+        return $this->render('authentification/validation.html.twig',['apprenant' => $apprenant]);
+    }
+
+
+
+
+
 }

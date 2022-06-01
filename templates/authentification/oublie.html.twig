@@ -1,0 +1,84 @@
+{% extends 'base_authentification.html.twig' %}
+
+{% block body %}
+<div id="root" class="h-100">
+<div class="fixed-background"></div>
+<div class="container-fluid p-0 h-100 position-relative">
+<div class="row g-0 h-100">
+<div class="offset-0 col-12 d-none d-lg-flex offset-md-1 col-lg h-lg-100">
+<div class="min-h-100 d-flex align-items-center">
+<div class="w-100 w-lg-75 w-xxl-50">
+<div>
+<div class="mb-5">
+<h1 class="display-3 text-white">Multiple Niches</h1>
+<h1 class="display-3 text-white">Ready for Your Project</h1>
+</div>
+<p class="h6 text-white lh-1-5 mb-5">
+Dynamically target high-payoff intellectual capital for customized technologies. Objectively integrate emerging core competencies before process-centric communities...
+</p>
+<div class="mb-5">
+<a class="btn btn-lg btn-outline-white" href="index.html">Learn More</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-lg-auto h-100 pb-4 px-4 pt-0 p-lg-0">
+<div class="sw-lg-70 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
+<div class="sw-lg-50 px-5">
+<div class="sh-11">
+<a href="index.html">
+</a>
+</div>
+<div class="mb-5">
+<h2 class="cta-1 mb-0 text-primary">Recuperation</h2>
+</div>
+
+<div>
+<form action="{{path('app_connexion')}}" method="post">
+<div class="mb-3 filled form-group tooltip-end-top">
+
+<input class="form-control" value="" placeholder="Email" name="mail">
+</div>
+
+<button type="submit" class="btn btn-lg btn-primary">Valider</button>
+</form>
+</div>
+<p class="h6"></p><a href="{{url('app_connexion')}}">Retour</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="settings-buttons-container">
+<button type="button" class="btn settings-button btn-primary p-0" data-bs-toggle="modal" data-bs-target="#settings" id="settingsButton">
+<span class="d-inline-block no-delay" data-bs-delay="0" data-bs-offset="0,3" data-bs-toggle="tooltip" data-bs-placement="left" title="Settings">
+<i data-acorn-icon="paint-roller" class="position-relative"></i>
+</span>
+</button>
+<button type="button" class="btn settings-button btn-primary p-0" data-bs-toggle="modal" data-bs-target="#niches" id="nichesButton">
+<span class="d-inline-block no-delay" data-bs-delay="0" data-bs-offset="0,3" data-bs-toggle="tooltip" data-bs-placement="left" title="Niches">
+<i data-acorn-icon="toy" class="position-relative"></i>
+</span>
+</button>
+</div>
+<script src="{{asset('AdminResponsable/js/vendor/jquery-3.5.1.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/vendor/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/vendor/OverlayScrollbars.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/vendor/autoComplete.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/vendor/clamp.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/icon/acorn-icons.js')}}"></script>
+<script src="{{asset('AdminResponsable/icon/acorn-icons-interface.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/vendor/jquery.validate/jquery.validate.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/vendor/jquery.validate/additional-methods.min.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/base/helpers.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/base/globals.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/base/nav.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/base/search.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/base/settings.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/pages/auth.login.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/common.js')}}"></script>
+<script src="{{asset('AdminResponsable/js/scripts.js')}}"></script>
+{% endblock %}

@@ -2,6 +2,9 @@ version: '3'
 
 services:
 ###> doctrine/doctrine-bundle ###
+  mailer:
+    image: schickling/mailcatcher
+    ports: [1025, 1080]
   database:
     image: postgres:${POSTGRES_VERSION:-13}-alpine
     environment:
