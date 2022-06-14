@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
 #[InheritanceType("JOINED")]
-class Personne implements UserInterface,PasswordAuthenticatedUserInterface
+class Personne extends Infos implements UserInterface,PasswordAuthenticatedUserInterface 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

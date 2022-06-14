@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cours{% endblock %}
+
+{% block contenu %}
+   <div class="auth-page">
+               <div class="auth-content my-auto">
+                <div class="text-center">
+                <h5 class="mb-0">modifier un cours</h5>
+       </div>
+
+    {{ include('cours/_form.html.twig', {'button_label': 'Mettre a jour'}) }}
+
+    <a href="{{ path('app_cours_index') }}">Retour a la liste</a>
+
+   
+{% endblock %}

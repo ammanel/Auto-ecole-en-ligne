@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ApprenantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 #[ORM\Entity(repositoryClass: ApprenantRepository::class)]
@@ -28,6 +28,19 @@ class Apprenant extends Personne
  
     #[ORM\Column(type: 'string')]
     private $Sex;
+
+    #[ORM\ManyToMany(targetEntity: Cours::class, inversedBy: 'apprenants')]
+    private $coursAppris;
+
+  
+
+
+    public function __construct()
+    {
+        $this->leçonApprise = new ArrayCollection();
+        $this->coursAppris = new ArrayCollection();
+        $this->apprenants = new ArrayCollection();
+    }
 
     
 
@@ -61,6 +74,32 @@ class Apprenant extends Personne
     {
         return $this->id;
     }
+
+    /**
+     * @return Collection<int, Cours>
+     */
+    public function getCoursAppris(): Collection
+    {
+        return $this->coursAppris;
+    }
+
+    public function addCoursAppri(Cours $coursAppri): self
+    {
+        if (!$this->coursAppris->contains($coursAppri)) {
+            $this->coursAppris[] = $coursAppri;
+        }
+
+        return $this;
+    }
+
+    public function removeCoursAppri(Cours $coursAppri): self
+    {
+        $this->coursAppris->removeElement($coursAppri);
+
+        return $this;
+    }
+
+   
 
    
 

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cours{% endblock %}
+
+{% block contenu %}
+   
+       <div class="auth-page">
+               <div class="auth-content my-auto">
+                <div class="text-center">
+                <h5 class="mb-0">Ajouter un nouveau cours</h5>
+       </div>
+
+    {{ include('cours/_form.html.twig') }}
+
+    <a href="{{ path('app_cours_index') }}">Retour a la liste</a>
+{% endblock %}

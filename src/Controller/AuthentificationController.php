@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Admin;
+
 use App\Entity\Apprenant;
-use App\Entity\AutoEcole;
 use App\Form\ApprenantType;
-use App\Form\AutoEcoleType;
 use Goxens\Goxens;
 use App\Repository\ApprenantRepository;
 use Doctrine\ORM\EntityManagerInterface;

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Proposition{% endblock %}
+
+{% block contenu %}
+    <h1>Edit Proposition</h1>
+
+    {{ include('proposition/_form.html.twig', {'button_label': 'Mettre a jour'}) }}
+
+    <a href="{{ path('app_proposition_index') }}">Retour a la liste</a>
+
+{% endblock %}

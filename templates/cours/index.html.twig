@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours index{% endblock %}
+
+{% block contenu %}
+
+
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Example</h4>
+                                        <p class="card-title-desc">This is an experimental awesome solution for responsive tables with complex data.</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                                <table id="tech-companies-1" class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>id</th>
+                                                            <th data-priority="1">Titre </th>
+                                                            <th data-priority="3">Contenu Cours</th>
+                                                            <th data-priority="1">Actions</th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for cour in cours %}
+                                                        {% if cour.enable == false %}
+                                                        <tr>
+                                                            <th>{{ loop.index }} </th>
+                                                            <td>{{ cour.titre }}</td>
+                                                            <td>{{ cour.contenuCours|slice(0, 100) }}</td>
+                                                            <td>
+                                                                 <a href="{{ path('app_cours_show', {'id': cour.id}) }}">show</a>
+                                                                 <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
+                                                                 <a href="{{ path('app_cours_delete', {'id': cour.id}) }}">effacer</a>
+                                                            </td>
+                                                       
+                                                        </tr>
+                                                        {% endif %} 
+                                                         {% else %}
+                                                                <tr>
+                                                                    <td colspan="4">Pas de donnée trouver</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+        
+                                        </div>
+        
+                                    </div>
+                                </div>
+                                <!-- end card -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <a href="{{ path('app_cours_new') }}">Ajouter un Cours</a>
+
+        <script src="{{asset('SuperAdmin/assets/libs/jquery/jquery.min.j')}}s"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/bootstrap/js/bootstrap.bundle.min.j')}}s"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/node-waves/waves.min.js')}}"></script>
+        <script src="assets/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="{{asset('SuperAdmin/assets/libs/pace-js/pace.min.js')}}"></script>
+
+        <!-- validation init -->
+        <script src="{{asset('SuperAdmin/assets/js/pages/validation.init.js')}}"></script>
+
+ 
+  
+{% endblock %}

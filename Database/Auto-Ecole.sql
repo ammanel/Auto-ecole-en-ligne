@@ -1,21 +1,4 @@
--- --------------------------------------------------------
--- Hôte:                         127.0.0.1
--- Version du serveur:           10.4.24-MariaDB - mariadb.org binary distribution
--- SE du serveur:                Win64
--- HeidiSQL Version:             12.0.0.6468
--- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Listage de la structure de la base pour auto-ecole
 CREATE DATABASE IF NOT EXISTS `auto-ecole` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `auto-ecole`;
 
@@ -25,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sex` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_880E0D76BF396750` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
+  CONSTRAINT `FK_personne` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table auto-ecole.admin : ~0 rows (environ)
@@ -36,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `apprenant` (
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sex` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_C4EB462EBF396750` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
+  CONSTRAINT `FK_personne` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table auto-ecole.apprenant : ~1 rows (environ)
@@ -52,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `auto_ecole` (
   `horaire_debut` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `horaire_fin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_FD0557BF396750` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
+  CONSTRAINT `FK_personne` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table auto-ecole.auto_ecole : ~0 rows (environ)
@@ -87,9 +70,3 @@ CREATE TABLE IF NOT EXISTS `personne` (
 -- Listage des données de la table auto-ecole.personne : ~1 rows (environ)
 INSERT INTO `personne` (`id`, `telephone`, `roles`, `password`, `nom`, `addresse`, `mail`, `statut`, `dtype`) VALUES
 	(7, '+22891281270', '["ROLE_USER"]', '$2y$13$7Tnq074vFZeBveMrNDv44OPMJ3VWFBQEsoonOLnyV0bijIrcKtOJy', 'LOKO', 'BADOU', 'yoharh56@gmail.com', 1, 'apprenant');
-
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
