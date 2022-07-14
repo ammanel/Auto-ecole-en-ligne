@@ -24,6 +24,7 @@ class QuestionRepository extends ServiceEntityRepository
     public function add(Question $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
+        
 
         if ($flush) {
             $this->getEntityManager()->flush();

@@ -18,9 +18,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AuthentificationController extends AbstractController
 {
-    #[Route('', name: 'app_connexion')]
+   
+    #[Route('/connexion', name: 'app_connexion')]
     public function connexion(AuthenticationUtils $authenticationUtils): Response
-    {
+    {  
         $error=$authenticationUtils->getLastAuthenticationError();
         $LastUsername=$authenticationUtils->getLastUsername();
 
@@ -33,16 +34,15 @@ class AuthentificationController extends AbstractController
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             return $this->redirectToRoute('app_template_super_admin');
         }
-
         return $this->render('authentification/connexion.html.twig', [
-            'controller_name' => 'AuthentificationController',
+            'controller_name' => 'WebsiteController',
             'error'=>$error,
             'LastUsername'=>$LastUsername
         ]);
     }
 
     #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(Request $request,EntityManagerInterface $em,UserPasswordHasherInterface $passwordhash, ApprenantRepository $ar): Response
+    public function inscription(Request $request,EntityManagerInterface $em,UserPasswordHasherInterface $passwordhash): Response
     {
         $apprenant = new Apprenant();
         $form =$this->createForm(ApprenantType::class,$apprenant);
@@ -112,7 +112,10 @@ class AuthentificationController extends AbstractController
         return $this->render('authentification/validation.html.twig',['apprenant' => $apprenant]);
     }
 
+    
 
+
+   
 
 
 

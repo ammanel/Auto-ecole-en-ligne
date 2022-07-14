@@ -10,11 +10,11 @@
 <div class="page-title-container">
 <div class="row">
 <div class="col-12 col-sm-6">
-<h1 class="mb-0 pb-0 display-4" id="title">titre cours</h1>
+<h1 class="mb-0 pb-0 display-4" id="title">{{ cour.titre }}</h1>
 <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
 <ul class="breadcrumb pt-0">
-<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-<li class="breadcrumb-item"><a href="Course.Explore.html">Cours</a></li>
+<li class="breadcrumb-item"><a href="{{url('app_template_apprenant')}}">Home</a></li>
+<li class="breadcrumb-item"><a href="{{url('app_liste_cours')}}">Cours</a></li>
 </ul>
 </nav>
 </div>
@@ -27,21 +27,9 @@
 <img src="https://www.icbc.com/partners/PublishingImages/header-driver-training.png" class="card-img-top sh-25" alt="card image">
 </div>
 <div class="card-body">
-<h6>Cookie Macaroon</h6>
+<h6></h6>
 <p class="mb-4">
-Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry sweet roll carrot cake cake macaroon gingerbread cookie.Candy pie sweet roll biscuit marzipan. Chocolate bar candy canes macaroon liquorice danish biscuit biscuit.
-</p>
-<h6>Muffin</h6>
-<p class="mb-4">
-Tiramisu toffee brownie sweet roll sesame snaps halvah. Icing carrot cake cupcake gummi bears danish. Sesame snaps muffin macaroon tiramisu ice cream. Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry sweet roll carrot cake cake macaroon gingerbread cookie.
-</p>
-<h6>Liquorice</h6>
-<p class="mb-4">
-Snaps muffin macaroon tiramisu ice cream toffee carrot sesame tootsie roll.Brownie ice cream marshmallow topping. Icing liquorice oat cake caramels. Sugar plum gummi bears jujubes cookie jelly-o tootsie roll chocolate bar. Jujubes candy jelly-o topping lemon drops. Cupcake gingerbread cookie cookie lemon drops tootsie roll lollipop. Tiramisu toffee brownie sweet roll sesame snaps halvah. Icing carrot cake cupcake gummi bears danish.
-</p>
-<h6>Powder Cake</h6>
-<p class="mb-4">
-Sesame snaps brownie gummi bears tootsie roll caramels dragée. Powder cake gummies jelly beans toffee carrot cake bonbon powder muffin. Jujubes candy jelly-o topping lemon drops. Cupcake gingerbread cookie cookie lemon drops tootsie roll lollipop. Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry sweet roll carrot cake cake macaroon gingerbread cookie.Carrot cake jelly-o lemon drops toffee tootsie roll. Brownie topping toffee apple pie apple pie. Wafer pudding chocolate bar pastry bear claw tart carrot cake lemon drops icing. Gingerbread toffee topping. Tootsie roll cotton candy muffin cheesecake liquorice sweet. Sugar plum tart tart marshmallow chocolate wafer apple pie candy canes. Chocolate cake biscuit donut cotton candy soufflé cake macaroon. Halvah chocolate cotton candy sweet roll jelly-o candy danish dragée. Apple pie cotton candy tiramisu biscuit cake muffin tootsie roll bear claw cake. Cupcake cake fruitcake.
+{{cour.contenuCours}}
 </p>
 </div>
 <div class="card-footer border-0 pt-0">
@@ -49,7 +37,7 @@ Sesame snaps brownie gummi bears tootsie roll caramels dragée. Powder cake gumm
 <div class="col-6">
 <div class="d-flex align-items-center">
 <div class="sw-5 d-inline-block position-relative me-3">
-<a href="{{url('app_question_cours')}}" class="btn btn-primary btn-icon btn-icon-start w-100 w-sm-auto">
+<a href="{{url('app_question_cours',{'id':cour.id})}}" class="btn btn-primary btn-icon btn-icon-start w-100 w-sm-auto">
 <span>Essayer le questionnaire :)</span>
 </a>
 </div>

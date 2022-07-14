@@ -24,9 +24,13 @@ class Cours extends Infos
     #[ORM\ManyToMany(targetEntity: Apprenant::class, mappedBy: 'coursAppris')]
     private $apprenants;
 
+    #[ORM\OneToMany(mappedBy: 'coursDedie', targetEntity: Question::class)]
+    private $questions;
+
     public function __construct()
     {
         $this->apprenants = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,6 +84,36 @@ class Cours extends Infos
     {
         if ($this->apprenants->removeElement($apprenant)) {
             $apprenant->removeCoursAppri($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Question>
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setCoursDedie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getCoursDedie() === $this) {
+                $question->setCoursDedie(null);
+            }
         }
 
         return $this;

@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Cours;
+use App\Entity\Question;
 use App\Repository\ApprenantRepository;
 use App\Repository\CoursRepository;
+use App\Repository\QuestionRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,27 +47,35 @@ class TemplateApprenantController extends AbstractController
         
     }
 
-    #[Route('/template/apprenant/details/cours', name: 'app_detail_cours')]
-    public function detailCours(UserInterface $user): Response
+    #[Route('/template/apprenant/details/{id}/cours', name: 'app_detail_cours')]
+    public function detailCours(UserInterface $user,Cours $cours,CoursRepository $coursRepository): Response
     {
          $user->getUserIdentifier();
+         $courspecifique=$coursRepository->find($cours);
        
             return $this->render('template_apprenant/detailCours.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
-                "user"=> $user,
+                "user"=> $user,'cour' => $courspecifique,
             ]);
         
         
     }
 
-    #[Route('/template/apprenant/question/cours', name: 'app_question_cours')]
-    public function questionCours(UserInterface $user): Response
+    #[Route('/template/apprenant/question/{id}/cours', name: 'app_question_cours')]
+    public function questionCours(UserInterface $user,Cours $cours,QuestionRepository $questionRepository,ManagerRegistry $doctrine): Response
     {
          $user->getUserIdentifier();
+         $em=$doctrine->getManager();
+        
+        $resultQuestion= $questionRepository->findBy(["coursDedie"=>$cours->getId()]);
        
+ 
             return $this->render('template_apprenant/questionCours.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
-                "user"=> $user,
+                "user"=> $user,'cour' => $cours,
+                "qestion"=>$resultQuestion,
+             
+                
             ]);
         
         

@@ -27,7 +27,10 @@ class PropositionRepository extends ServiceEntityRepository
 
         if ($flush) {
             $this->getEntityManager()->flush();
+
         }
+
+        
     }
 
     public function remove(Proposition $entity, bool $flush = false): void
@@ -63,4 +66,6 @@ class PropositionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
 }

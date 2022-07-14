@@ -22,7 +22,13 @@ class Question extends Infos
     
 
     #[ORM\ManyToMany(targetEntity: Proposition::class, inversedBy: 'questions',orphanRemoval:true)]
+   /**
+    * @ORM\JoinTable(name="repondre")
+     */ 
     private $reponse;
+
+    #[ORM\ManyToOne(targetEntity: Cours::class, inversedBy: 'questions')]
+    private $coursDedie;
 
     public function __construct()
     {
@@ -70,6 +76,20 @@ class Question extends Infos
     public function removeReponse(Proposition $reponse): self
     {
         $this->reponse->removeElement($reponse);
+
+        return $this;
+    }
+
+    public function getCoursDedie(): ?Cours
+    {
+        return $this->coursDedie;
+    }
+
+    
+
+    public function setCoursDedie(?Cours $coursDedie): self
+    {
+        $this->coursDedie = $coursDedie;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Cours;
 use App\Entity\Proposition;
 use App\Entity\Question;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -16,6 +17,13 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('intitule',TextType::class,['attr'=>['class'=>'form-control']])
+            ->add('coursDedie',EntityType::class,[
+                'class'=>Cours::class, 'choice_label'=>function($cours){
+                    return $cours-> getTitre();
+                },
+                'attr'=>['class'=>'form-control']
+            
+        ])
             ->add('reponse',EntityType::class,[
                 'class'=>Proposition::class, 'choice_label'=>function($proposition){
                     return $proposition->getSuggestion();

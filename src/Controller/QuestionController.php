@@ -16,7 +16,9 @@ class QuestionController extends AbstractController
 {
     #[Route('/liste', name: 'app_question_index', methods: ['GET'])]
     public function index(QuestionRepository $questionRepository): Response
+
     {
+       
         return $this->render('question/index.html.twig', [
             'questions' => $questionRepository->findAll(),
         ]);
@@ -31,6 +33,7 @@ class QuestionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $questionRepository->add($question, true);
+            
 
             return $this->redirectToRoute('app_question_index');
         }
