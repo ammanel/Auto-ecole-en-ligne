@@ -1,4 +1,3 @@
-
 CREATE DATABASE IF NOT EXISTS `auto-ecole` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `auto-ecole`;
 
@@ -22,9 +21,6 @@ CREATE TABLE IF NOT EXISTS `apprenant` (
   CONSTRAINT `FK_personne` FOREIGN KEY (`id`) REFERENCES `personne` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table auto-ecole.apprenant : ~1 rows (environ)
-INSERT INTO `apprenant` (`id`, `prenom`, `sex`) VALUES
-	(7, 'Yohann', 'Homme');
 
 -- Listage de la structure de table auto-ecole. auto_ecole
 CREATE TABLE IF NOT EXISTS `auto_ecole` (
@@ -48,9 +44,6 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Listage des données de la table auto-ecole.doctrine_migration_versions : ~1 rows (environ)
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20220531182954', '2022-05-31 20:30:02', 421);
 
 -- Listage de la structure de table auto-ecole. personne
 CREATE TABLE IF NOT EXISTS `personne` (
@@ -67,6 +60,3 @@ CREATE TABLE IF NOT EXISTS `personne` (
   UNIQUE KEY `UNIQ_FCEC9EF450FF010` (`telephone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table auto-ecole.personne : ~1 rows (environ)
-INSERT INTO `personne` (`id`, `telephone`, `roles`, `password`, `nom`, `addresse`, `mail`, `statut`, `dtype`) VALUES
-	(7, '+22891281270', '["ROLE_USER"]', '$2y$13$7Tnq074vFZeBveMrNDv44OPMJ3VWFBQEsoonOLnyV0bijIrcKtOJy', 'LOKO', 'BADOU', 'yoharh56@gmail.com', 1, 'apprenant');

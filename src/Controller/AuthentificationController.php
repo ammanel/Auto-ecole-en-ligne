@@ -100,7 +100,7 @@ class AuthentificationController extends AbstractController
         $number = $apprenant->getTelephone();
         $serve = $moi->sendSms("ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH","RORJJ4",$number,"AutoEcole",$message);
         //return $this->redirectToRoute("app_connexion");
-        return $this->json($serve);
+        return $this->redirectToRoute("app_connexion");
     }
 
 

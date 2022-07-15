@@ -19,7 +19,7 @@ class WebsiteController extends AbstractController
         ]);
     }
 
-    #[Route('/apropos', name: 'app_apropos')]
+    #[Route('/apropos/website', name: 'app_apropos')]
     public function apropos(): Response
     {  
         $apprenant=new Apprenant();
