@@ -86,6 +86,7 @@ class TemplateSuperAdminController extends AbstractController
             $autoecole->setimage($_FILES['auto_ecole']['name']['image']);
             $autoecole->setHoraireDebut($_POST["HeureDebut"]);
             $autoecole->setHoraireFin($_POST["HeureFin"]);
+            $autoecole->setStatut(1);
             $ar->add($autoecole);
             return $this->redirectToRoute('app_template_super_admin', [], Response::HTTP_SEE_OTHER);
         }

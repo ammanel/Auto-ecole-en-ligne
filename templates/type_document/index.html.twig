@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Question index{% endblock %}
+{% block title %}Liste Type Document{% endblock %}
 
 {% block contenu %}
-
-
-       <div class="main-content">
+    <div class="main-content">
 
                 <div class="page-content">
                     <div class="container-fluid">
@@ -33,37 +31,35 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
+                                       
                                     </div>
                                     <div class="card-body">
                                         <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                             <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Intitule</th>
-                                                <th>Reponse</th>
-                                                <th>Actions</th>
+                                                <th>Libelle</th>
+                                                <th>Duree</th>
+                                                <th>actions</th>
                                                 
                                             </tr>
                                             </thead>
         
         
                                             <tbody>
-                                            <tr>
-                                            {% for question in questions %}
-                                                {% if question.enable == false %}
-                                                <td>{{ loop.index }}</td>
-                                                <td>{{ question.intitule }}</td>
-                                                {% for question in question.reponse %}
-                                                <td>{{ question.suggestion}}</td>
-                                                    {% endfor %}
-                                                <td>
-                                                    <a href="{{ path('app_question_delete', {'id': question.id}) }}" onclick="return confirm('Voulez vraiment Supprimer cette question?')">delete</a>
-                                                    <a href="{{ path('app_question_edit', {'id': question.id}) }}">modifier</a>
-                                                </td>
-                                                
-                                            </tr>
-                                             {% endif %} 
-                                             {% else %}
+                                            {% for type_document in type_documents %}
+                                                <tr>
+                                                 {% if type_document.enable == false %}
+                                                    <td>{{ type_document.id }}</td>
+                                                    <td>{{ type_document.libelle }}</td>
+                                                    <td>{{ type_document.duree }}</td>
+                                                    <td>
+                                                        <a href="{{ path('app_type_document_delete', {'id': type_document.id}) }}">effacer</a>
+                                                        <a href="{{ path('app_type_document_edit', {'id': type_document.id}) }}">edit</a>
+                                                    </td>
+                                                </tr>
+                                                 {% endif %} 
+                                            {% else %}
                                             <tr>
                                                 <td colspan="4">Pas de donnée trouver</td>
                                             </tr>
@@ -80,7 +76,7 @@
                 </div>
                 <!-- End Page-content -->
 
-                <a href="{{ path('app_question_new') }}">Ajouter une question</a>
+                <a href="{{ path('app_question_new') }}">Ajouter un type de document</a>
             
 
 
@@ -115,5 +111,4 @@
         <script src="{{asset('SuperAdmin/assets/js/pages/datatables.init.js')}}"></script>    
 
         <script src="{{asset('SuperAdmin/assets/js/app.js')}}"></script>
-
 {% endblock %}

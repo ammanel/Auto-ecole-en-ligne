@@ -1,0 +1,79 @@
+{% extends 'base_site_web.html.twig' %}
+
+{% block title %}Blog detail{% endblock %}
+
+{% block contenu %}
+
+<div class="content-wrapper">
+
+<div class="breadcrumb-wrap bg-f br-3">
+<div class="overlay op-8 bg-downriver"></div>
+<div class="container">
+<div class="breadcrumb-title">
+<h2>Blog Detail</h2>
+<ul class="breadcrumb-menu list-style">
+<li><a href="{{url('app_website')}}">Home </a></li>
+<li><a href="{{url('app_blog_liste')}}">Blog</a></li>
+<li>Blog Detail</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="blog-details-wrap ptb-100">
+<div class="container">
+<div class="row gx-5">
+<div class="col-xl-10 offset-xl-1">
+<article>
+<div class="post-img">
+<img src="{{asset('Post/' ~ post.image)}}" alt="Image">
+</div>
+<ul class="post-metainfo  list-style">
+<li><i class="flaticon-user-1"></i> <a href="posts-by-author.html">Admin</a></li>
+</ul>
+<h3>{{post.titre}}</h3>
+<div class="post-para">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt labore et dolore sitor magna aliqua. Quis ipsum suspendisse ultrices <strong>gravida</strong>. Risus commodo viverra manas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p>No sea takimata sanctus est Lorem <a href="index-2.html">Ipsum</a> dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.</p>
+<blockquote class="wp-block-quote">
+<div class="wp-quote-text">
+<p>“It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.”</p>
+</div>
+</blockquote>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua at vero amet dolor sit consect. </p>
+<ol>
+<li>Mauris ut in vestibulum hasellus ultrices fusce nibh justo, venenatis, amet. Lectus quam.</li>
+<li>Consectetur phasellus <strong>ultrices</strong> fusce nibh justo, venenatis, amet. Lectus quam.</li>
+<li>Lectus quam there are two thing is very important in Consectetur phasellus ultrices fusce.</li>
+</ol>
+<p>Consectetur ipsum dolor sit amet adipisicing elit. Repellat officiis et, autem ea distinctio mollitia quos animi accusantium, natus dolorum dolorem aliquam!</p>
+<h5>Things You Should Know</h5>
+<p>Ligula none metus placerat dis pulvinar porttitor montes dolor eleifend facilisi ullamcorper imperdiet lectus praese sem dictumst laoreet nunc fringilla iaculis porta volutpat sed aptent. Lacus tempor aliquet nec nibh facilisis duis ne dapibus porta nostra diam dis facilisis volutpat. Pede curae primis fringilla posuere lobortis vivamus molestie nisle ulla dise mus magnis primis cursus ligula nulla aliquam aptent metus leo.</p>
+<ul class="content-feature-list style2 list-style">
+<li>Class Lorem convallis nibh quam enim consectetuer </li>
+<li>Netus quam parturient mollis in porttitor magna </li>
+<li>Congue sapien augue nonummy vestibulum </li>
+<li>10M Conservation Programs dolor amet sit </li>
+<li>Save The Animals Movement</li>
+</ul>
+<p>Ligula none metus placerat dis pulvinar porttitor montes dolor eleifend facilisi ullamcorper imperdiet lectus praese sem dictumst laoreet nunc fringilla iaculis porta volutpat sed aptent. Lacus tempor aliquet nec nibh facilisis duis ne dapibus porta nostra diam dis facilisis volutpat. Pede curae primis fringilla posuere lobortis.</p>
+</div>
+</article>
+<div class="post-navigation">
+<a href="blog-details-left-sidebar.html" class="prev-post">
+PREV POST
+<span>Driving Tips ...</span>
+</a>
+<a href="blog-details-no-sidebar.html" class="next-post">
+NEXT POST
+<span>All You Need ...</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+{% endblock %}

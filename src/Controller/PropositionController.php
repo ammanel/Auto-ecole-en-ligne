@@ -41,14 +41,6 @@ class PropositionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_proposition_show', methods: ['GET'])]
-    public function show(Proposition $proposition): Response
-    {
-        return $this->render('proposition/show.html.twig', [
-            'proposition' => $proposition,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_proposition_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Proposition $proposition, PropositionRepository $propositionRepository): Response
     {
@@ -67,12 +59,12 @@ class PropositionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_proposition_delete', methods: ['POST'])]
-    public function delete(ManagerRegistry $doctrine, Proposition $proposition, PropositionRepository $propositionRepository): Response
+    #[Route('/{id}', name: 'app_proposition_delete')]
+    public function delete(ManagerRegistry $doctrine, Proposition $proposition): Response
     {
         $em=$doctrine->getManager();
         $proposition->setEnable(true);
         $em->flush();
-        return $this->redirectToRoute('app_proposition_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_proposition_index');
     }
 }

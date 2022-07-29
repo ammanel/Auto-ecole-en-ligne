@@ -1,32 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cours index{% endblock %}
+{% block title %}Cours liste {% endblock %}
 
 {% block contenu %}
 
+       <div class="main-content">
 
-                            <div class="row">
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">DataTables</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                            <li class="breadcrumb-item active">DataTables</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+        
+                        <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Example</h4>
-                                        <p class="card-title-desc">This is an experimental awesome solution for responsive tables with complex data.</p>
+                                        
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-rep-plugin">
-                                            <div class="table-responsive mb-0" data-pattern="priority-columns">
-                                                <table id="tech-companies-1" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>id</th>
-                                                            <th data-priority="1">Titre </th>
-                                                            <th data-priority="3">Contenu Cours</th>
-                                                            <th data-priority="1">Actions</th>
+                                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                            <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th data-priority="1">Titre </th>
+                                                <th data-priority="3">Contenu Cours</th>
+                                                <th data-priority="1">Actions</th>
                                                            
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {% for cour in cours %}
+                                                
+                                            </tr>
+                                            </thead>
+        
+        
+                                            <tbody>
+                                                 {% for cour in cours %}
                                                         {% if cour.enable == false %}
                                                         <tr>
                                                             <th>{{ loop.index }} </th>
@@ -35,7 +58,7 @@
                                                             <td>
                                                                  <a href="{{ path('app_cours_show', {'id': cour.id}) }}">show</a>
                                                                  <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
-                                                                 <a href="{{ path('app_cours_delete', {'id': cour.id}) }}">effacer</a>
+                                                                 <a href="{{ path('app_cours_delete', {'id': cour.id}) }}" onclick="return confirm('Voulez vraiment supprimer ce cours?')">effacer</a>
                                                             </td>
                                                        
                                                         </tr>
@@ -45,35 +68,56 @@
                                                                     <td colspan="4">Pas de donnée trouver</td>
                                                                 </tr>
                                                             {% endfor %}
-                                                        
-                                                    </tbody>
-                                                </table>
-                                            </div>
-        
-                                        </div>
-        
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <!-- end card -->
+                                <!-- end cardaa -->
                             </div> <!-- end col -->
                         </div> <!-- end row -->
-                        
                     </div> <!-- container-fluid -->
                 </div>
-                <a href="{{ path('app_cours_new') }}">Ajouter un Cours</a>
+                <!-- End Page-content -->
 
-        <script src="{{asset('SuperAdmin/assets/libs/jquery/jquery.min.j')}}s"></script>
-        <script src="{{asset('SuperAdmin/assets/libs/bootstrap/js/bootstrap.bundle.min.j')}}s"></script>
+                 <a href="{{ path('app_cours_new') }}">Ajouter un Cours</a>
+            
+
+
+             <!-- JAVASCRIPT -->
+        <script src="{{asset('SuperAdmin/assets/libs/jquery/jquery.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('SuperAdmin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
         <script src="{{asset('SuperAdmin/assets/libs/simplebar/simplebar.min.js')}}"></script>
         <script src="{{asset('SuperAdmin/assets/libs/node-waves/waves.min.js')}}"></script>
-        <script src="assets/libs/feather-icons/feather.min.js"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/feather-icons/feather.min.js')}}"></script>
         <!-- pace js -->
         <script src="{{asset('SuperAdmin/assets/libs/pace-js/pace.min.js')}}"></script>
 
-        <!-- validation init -->
-        <script src="{{asset('SuperAdmin/assets/js/pages/validation.init.js')}}"></script>
+        <!-- Required datatable js -->
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <!-- Buttons examples -->
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/jszip/jszip.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('SuperAdmin/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+
+        <!-- Datatable init js -->
+        <script src="{{asset('SuperAdmin/assets/js/pages/datatables.init.js')}}"></script>    
+
+        <script src="{{asset('SuperAdmin/assets/js/app.js')}}"></script>
+   
+{% endblock %}
+
 
  
   
-{% endblock %}
+

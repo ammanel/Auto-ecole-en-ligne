@@ -44,13 +44,6 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_question_show', methods: ['GET'])]
-    public function show(Question $question): Response
-    {
-        return $this->render('question/show.html.twig', [
-            'question' => $question,
-        ]);
-    }
 
     #[Route('/{id}/edit', name: 'app_question_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Question $question, QuestionRepository $questionRepository): Response

@@ -3,15 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-class Post
+class Post extends Infos
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    protected $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
@@ -21,6 +23,14 @@ class Post
 
     #[ORM\Column(type: 'text')]
     private $Contenu;
+
+    #[ORM\ManyToMany(targetEntity: Apprenant::class, inversedBy: 'posts')]
+    private $datev;
+
+    public function __construct()
+    {
+        $this->datev = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,30 @@ class Post
     public function setContenu(string $Contenu): self
     {
         $this->Contenu = $Contenu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Apprenant>
+     */
+    public function getDatev(): Collection
+    {
+        return $this->datev;
+    }
+
+    public function addDatev(Apprenant $datev): self
+    {
+        if (!$this->datev->contains($datev)) {
+            $this->datev[] = $datev;
+        }
+
+        return $this;
+    }
+
+    public function removeDatev(Apprenant $datev): self
+    {
+        $this->datev->removeElement($datev);
 
         return $this;
     }

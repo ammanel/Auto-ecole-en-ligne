@@ -525,29 +525,32 @@ Nunc quam arcu, pretium quis quam sed aoreet efficitur liuam volutpat. lobortis 
 <span>POSTS RÉCENTS</span>
 <h2>Lisez nos dernières nouvelles</h2>
 </div>
+
+
+
 <div class="row justify-content-center">
+{% for post in posts %}
 <div class="col-xl-4 col-lg-6 col-md-6">
 <div class="blog-card style1">
 <div class="blog-img">
-<img src="{{asset('WebSite/assets/img/blog/blog-1.jpg')}}" alt="Image">
-<p class="blog-date">18 Nov</p>
+<img src="{{asset('Post/' ~ post.image)}}" alt="Image">
+<p class="blog-date">New</p>
 </div>
 <div class="blog-info">
 <ul class="blog-metainfo  list-style">
 <li><i class="flaticon-user-1"></i> <a href="posts-by-author.html">Admin</a></li>
 </ul>
-<h3><a href="blog-details-right-sidebar.html">Le plus souvent cassé
-Lois sur la conduite</a></h3>
-<p>It is a long established fact that lorem will be when looking as it sito.</p>
-<a href="blog-details-right-sidebar.html" class="link style1">Read More
+<h3><a href="#">{{post.titre}}</a></h3>
+<p>{{post.contenu}}.</p>
+<a href="{{ path('app_blog_detail', {'id': post.id}) }}" class="link style1">Lire plus
 <i class="flaticon-right-arrow"></i>
 </a>
 </div>
 </div>
 </div>
-
-
+{% endfor %}
 </div>
+    
 
 </div>
 </section>
