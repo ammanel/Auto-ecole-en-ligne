@@ -1,150 +1,103 @@
 {% extends 'base_apprenant.html.twig' %}
 
-
-
-{% block username %} {{user.Nom}} {% endblock username %}
 {% block contenu %}
+<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="mr-auto">
+					<h3 class="page-title">QUestionnaire</h3>
+					<div class="d-inline-block align-items-center">
+						<nav>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+								<li class="breadcrumb-item" aria-current="page">Bienvenue</li>
+								<li class="breadcrumb-item active" aria-current="page">Bonne chance</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+				
+			</div>
+<!-- Main content -->
+		<section class="content">
+		  <div class="row">
 
-<div class="container">
-<div class="page-title-container">
-<div class="row">
-<div class="col-12 col-sm-6">
-<h1 class="mb-0 pb-0 display-4" id="title">Quizz de Test de Connaissance</h1>
-<nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
-<ul class="breadcrumb pt-0">
-<li class="breadcrumb-item"><a href="{{url('app_template_apprenant')}}">Home</a></li>
-</ul>
-</nav>
-</div>
-<div class="col-12 col-sm-6 d-flex align-items-start justify-content-end">
-<button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-sm-auto">
-<i data-acorn-icon="chevron-right"></i>
-<span>Start</span>
-</button>
-</div>
-</div>
-</div>
-<div class="row g-5">
-<div class="col-lg-4 col-xxl-3">
-<h2 class="small-title">Quiz Info</h2>
-<div class="card mb-5">
-<img src="https://img.freepik.com/free-vector/driving-school-driver-license-tiny-girl-studying-drive-lesson-passing-exams-online_501813-493.jpg?w=2000" class="card-img-top sh-25" alt="card image">
-<div class="card-body">
-<div class="mb-3 text-muted">
-Pie fruitcake jelly beans. Candy tootsie chocolate croissant jujubes icing chocolate croissant jujubes icing macaroon croissant.
-</div>
-<div class="row g-0 align-items-center mb-1">
-<div class="col-auto">
-<div class="sw-3 sh-4 d-flex justify-content-center align-items-center">
-<i data-acorn-icon="form-check" class="text-primary"></i>
-</div>
-</div>
-<div class="col ps-3">
-<div class="row g-0">
-<div class="col">
-<div class="text-alternate sh-4 d-flex align-items-center lh-1-25">Questions</div>
-</div>
-<div class="col-auto">
-<div class="sh-4 d-flex align-items-center text-alternate">25</div>
-</div>
-</div>
-</div>
-</div>
-<div class="row g-0 align-items-center mb-1">
-<div class="col-auto">
-<div class="sw-3 sh-4 d-flex justify-content-center align-items-center">
-<i data-acorn-icon="clock" class="text-primary"></i>
-</div>
-</div>
-<div class="col ps-3">
-<div class="row g-0">
-<div class="col">
-<div class="text-alternate sh-4 d-flex align-items-center lh-1-25">Time</div>
-</div>
-<div class="col-auto">
-<div class="sh-4 d-flex align-items-center text-alternate">5m</div>
-</div>
-</div>
-</div>
-</div>
-<div class="row g-0 align-items-center">
-<div class="col-auto">
-<div class="sw-3 sh-4 d-flex justify-content-center align-items-center">
-<i data-acorn-icon="graduation" class="text-primary"></i>
-</div>
-</div>
-<div class="col ps-3">
-<div class="row g-0">
-<div class="col">
-<div class="text-alternate sh-4 d-flex align-items-center lh-1-25">Level</div>
-</div>
-<div class="col-auto">
-<div class="sh-4 d-flex align-items-center text-alternate">Beginner</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<h2 class="small-title">Time</h2>
-<div class="card">
-<div class="card-body">
-<div id="timer"></div>
-</div>
-</div>
-</div>
-<div class="col-lg-8 col-xxl-9">
-<h2 class="small-title">Questions</h2>
-<pre>
-    {{ dump(qestion) }}
-</pre>
+          
+			{% for row in qestion %}
+			<div class="col-xl-4 connectedSortable">
+			  <div class="box box-solid box-warning">
+				<div class="box-header with-border">
+				  <h4 class="box-title">{{row.intitule}}</h4>
+				  <ul class="box-controls pull-right">
+					<li><a class="box-btn-close" href="#"></a></li>
+					<li><a class="box-btn-slide" href="#"></a></li>	
+					<li><a class="box-btn-fullscreen" href="#"></a></li>
+				  </ul>
+				</div>
+				<div class="box-body p-10">
+				  <ul class="todo-list">
+					<li class="b-1 p-0 mb-15">
+					  <div class="position-relative p-20">
+						  <!-- drag handle -->
+						  <div class="handle handle2"></div>
+						  <!-- checkbox -->
+						  <input type="checkbox" id="basic_checkbox_19" class="filled-in">
+						  <label for="basic_checkbox_19" class="mb-0 h-15 ml-15"></label>
+						  <!-- todo text -->
+						  <span class="text-line font-size-18">Phasellus interdum</span>
+						  <!-- General tools such as edit or delete-->
+						  <div class="pull-right d-block text-dark flexbox">
+							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Remove"><i class="fa fa-trash-o"></i></a>
+						  </div>
+						  <div class="mt-5 ml-50 pl-5">Sed ut perspiciatis unde omnis iste natus error sit.</div>
+						  <div class="mt-5 ml-50 pl-5"><em>21/06/2018</em></div>
+						</div>
+					</li>
+					<li class="b-1 p-0 mb-15">
+					  <div class="position-relative p-20">
+						  <!-- drag handle -->
+						  <div class="handle handle2"></div>
+						  <!-- checkbox -->
+						  <input type="checkbox" id="basic_checkbox_20" class="filled-in">
+						  <label for="basic_checkbox_20" class="mb-0 h-15 ml-15"></label>
+						  <!-- todo text -->
+						  <span class="text-line font-size-18">Floor cool cinders</span>
+						  <!-- General tools such as edit or delete-->
+						  <div class="pull-right d-block text-dark flexbox">
+							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Remove"><i class="fa fa-trash-o"></i></a>
+						  </div>
+						  <div class="mt-5 ml-50 pl-5">Sed ut perspiciatis unde omnis iste natus error sit.</div>
+						  <div class="mt-5 ml-50 pl-5"><em>21/06/2018</em></div>
+						</div>
+					</li>
+					<li class="b-1 p-0 mb-15">
+					  <div class="position-relative p-20">
+						  <!-- drag handle -->
+						  <div class="handle handle2"></div>
+						  <!-- checkbox -->
+						  <input type="checkbox" id="basic_checkbox_21" class="filled-in">
+						  <label for="basic_checkbox_21" class="mb-0 h-15 ml-15"></label>
+						  <!-- todo text -->
+						  <span class="text-line font-size-18">Floor cool cinders</span>
+						  <!-- General tools such as edit or delete-->
+						  <div class="pull-right d-block text-dark flexbox">
+							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Remove"><i class="fa fa-trash-o"></i></a>
+						  </div>
+						  <div class="mt-5 ml-50 pl-5">Sed ut perspiciatis unde omnis iste natus error sit.</div>
+						  <div class="mt-5 ml-50 pl-5"><em>21/06/2018</em></div>
+						</div>
+					</li>
 
-{% for row in qestion %}
-    
-
-<div class="card mb-3">
-<div class="card-body">
-<div class="d-flex flex-row align-content-center align-items-center mb-5">
-<div class="sw-5 me-4">
-<div class="border border-1 border-primary rounded-xl sw-5 sh-5 text-primary d-flex justify-content-center align-items-center">{{loop.index}}</div>
-</div>
-<div class="heading mb-0">
- {{row.intitule}}
-
-</div>
-</div>
-
-
-<div class="d-flex flex-row align-content-center align-items-center position-relative mb-3">
-<div class="sw-5 me-4 d-flex justify-content-center flex-grow-0 flex-shrink-0">
-<div class="d-flex justify-content-center align-items-center">
-<input type="radio" class="btn-check" id="answer1_2" name="radioOutline">
-<label class="btn btn-foreground hover-outline sw-4 sh-4 p-0 rounded-xl d-flex justify-content-center align-items-center stretched-link" for="answer1_2">
-B
-</label>
-</div>
-</div>
-<div class="mb-0 text-alternate">
-Liquorice chocolate bar toffee gummi bears. Danish brownie fruitcake tootsie roll donut bonbon ice cream.
-</div>
-</div>
-</div>
-</div>
-{% endfor %}
-
-
-<div class="row">
-<div class="col-12 text-center">
-<button class="btn btn-outline-primary btn-icon btn-icon-end sw-25">
-<span>Done</span>
-<i data-acorn-icon="check"></i>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
+				  </ul>
+				</div>
+				<!-- /.box-body -->
+			  </div>
+			</div>
+			{% endfor %}
+		  </div>
+		</section>
+		<!-- /.content -->
 
 {% endblock %}

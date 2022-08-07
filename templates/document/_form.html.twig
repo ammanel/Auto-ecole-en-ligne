@@ -1,0 +1,31 @@
+	<div class="col-lg-12 col-12">
+					<!-- Basic Forms -->
+					  <div class="box">
+						<div class="box-header with-border">
+						  <h4 class="box-title">Form Sections</h4>
+						</div>
+						<!-- /.box-header -->
+						{{ form_start(form)}}
+							<div class="box-body">
+								
+								<div class="form-group">
+									<label>Date d'établissement:</label>
+									{{ form_widget(form.dateEtablissement) }}
+								</div>
+								<div class="form-group">
+									<label>Type de document:</label>
+									{{ form_widget(form.typedoc) }}
+								</div>
+							
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer">
+								
+								  <button class="btn btn-rounded btn-success pull-right">{{ button_label|default('Save') }}</button>
+							</div>
+						{{ form_end(form) }}
+					  </div>
+					  <!-- /.box -->			
+				</div>
+
+

@@ -1,0 +1,58 @@
+{% extends 'base_apprenant.html.twig' %}
+
+{% block title %}Document index{% endblock %}
+{% block contenu %}
+
+
+    <div class="col-12">
+         <div class="box">
+                <div class="box-header with-border">
+				  <h3 class="box-title"></h3>
+				</div>
+				<div class="box-header with-border">
+				  <h3 class="box-title">Liste des documents enregistrer</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="table-responsive">
+					  <table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Document</th>
+								<th>Date</th>
+								<th>Actions</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+                         {% for document in documents %}
+							<tr>
+                             {% if document.enable == false %}
+								<td>{{ loop.index }}</td>
+								<td>{{ document.typedoc }}</td>
+								<td>{{ document.dateEtablissement ? document.dateEtablissement|date('Y-m-d') : '' }}</td>
+								<td><a href="{{ path('app_document_edit', {'id': document.id}) }} "><span class="glyphicon glyphicon-pencil"></span></a>|<a href=" {{ path('app_document_delete', {'id': document.id}) }}" onclick="return confirm('Voulez vraiment Supprimer ce document?')"><span class="glyphicon glyphicon-trash"></span></a></td>
+								
+							</tr>
+                             {% endif %} 
+							{% endfor %}
+							
+							
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Id</th>
+								<th>Document</th>
+								<th>Date</th>
+								<th>Actions</th>
+							</tr>
+						</tfoot>
+					  </table>
+					</div>
+				</div>
+				<!-- /.box-body -->
+			  </div>
+    </div>
+    
+{% endblock %}
