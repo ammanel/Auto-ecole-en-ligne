@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Pack{% endblock %}
+
+{% block contenu %}
+    <h1>Créer un nouveau Pack</h1>
+
+    {{ include('pack/_form.html.twig') }}
+
+    <a href="{{ path('app_pack_index') }}">Annuler</a>
+{% endblock %}

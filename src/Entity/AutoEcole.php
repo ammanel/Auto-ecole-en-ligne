@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AutoEcoleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,6 +30,18 @@ class AutoEcole extends Personne
 
     #[ORM\Column(type: 'string')]
     private $Horaire_fin;
+
+    #[ORM\OneToMany(mappedBy: 'createur', targetEntity: Rapport::class)]
+    private $rapports;
+
+    #[ORM\ManyToMany(targetEntity: Apprenant::class, mappedBy: 'idAutoEcolr')]
+    private $apprenants;
+
+    public function __construct()
+    {
+        $this->rapports = new ArrayCollection();
+        $this->apprenants = new ArrayCollection();
+    }
 
     
 
@@ -97,6 +111,63 @@ class AutoEcole extends Personne
     public function setHoraireFin(string $Horaire): self
     {
         $this->Horaire_fin = $Horaire;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Rapport>
+     */
+    public function getRapports(): Collection
+    {
+        return $this->rapports;
+    }
+
+    public function addRapport(Rapport $rapport): self
+    {
+        if (!$this->rapports->contains($rapport)) {
+            $this->rapports[] = $rapport;
+            $rapport->setCreateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRapport(Rapport $rapport): self
+    {
+        if ($this->rapports->removeElement($rapport)) {
+            // set the owning side to null (unless already changed)
+            if ($rapport->getCreateur() === $this) {
+                $rapport->setCreateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Apprenant>
+     */
+    public function getApprenants(): Collection
+    {
+        return $this->apprenants;
+    }
+
+    public function addApprenant(Apprenant $apprenant): self
+    {
+        if (!$this->apprenants->contains($apprenant)) {
+            $this->apprenants[] = $apprenant;
+            $apprenant->addIdAutoEcolr($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprenant(Apprenant $apprenant): self
+    {
+        if ($this->apprenants->removeElement($apprenant)) {
+            $apprenant->removeIdAutoEcolr($this);
+        }
 
         return $this;
     }

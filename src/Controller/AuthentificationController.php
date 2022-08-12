@@ -93,7 +93,7 @@ class AuthentificationController extends AbstractController
         $userUid = " RORJJ4";
 
         $moi = new Goxens($apiKey, $userUid);
-        $lien = "http://192.168.1.76:8001/validation/".$apprenant->getId();
+        $lien = "http://http://127.0.0.1:8000//validation/".$apprenant->getId();
         //$lien= "test";
         $message = "Monsieur ".$apprenant->getNom()." votre compte a bien ete créer \n Il ne vous reste plus qu'a l'activer avec ce lien ".$lien;
         $sender = "AutoEcole";

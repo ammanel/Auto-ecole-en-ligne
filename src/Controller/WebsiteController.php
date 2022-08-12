@@ -49,6 +49,7 @@ class WebsiteController extends AbstractController
     #[Route('/blog/detail/{id}/website', name: 'app_blog_detail')]
     public function blogDetail(Post $post,UserInterface $user,EntityManagerInterface $em): Response
     {  
+        
         $idpost=$post->getId();
         $idper=$user->getUserIdentifier();
         $post->addDatev($user);

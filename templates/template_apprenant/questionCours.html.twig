@@ -20,82 +20,39 @@
 <!-- Main content -->
 		<section class="content">
 		  <div class="row">
-
-          
 			{% for row in qestion %}
-			<div class="col-xl-4 connectedSortable">
-			  <div class="box box-solid box-warning">
-				<div class="box-header with-border">
-				  <h4 class="box-title">{{row.intitule}}</h4>
-				  <ul class="box-controls pull-right">
-					<li><a class="box-btn-close" href="#"></a></li>
-					<li><a class="box-btn-slide" href="#"></a></li>	
-					<li><a class="box-btn-fullscreen" href="#"></a></li>
-				  </ul>
+			
+			 <div class="col-12 col-xl-4">
+				<div class="box">
+					<div class="box-header with-border">
+						<h4 class="box-title">{{row.intitule}}</h4>
+					</div>
+					<div class="box-body">
+						<div class="d-flex align-items-center mb-25">
+							<span class="bullet bullet-bar bg-success align-self-stretch"></span>							
+							<div class="h-20 mx-20 flex-shrink-0">							
+								<input type="checkbox" id="md_checkbox_21" class="filled-in chk-col-success">
+								<label for="md_checkbox_21" class="h-20 p-10 mb-0"></label>
+							</div>
+							
+							<div class="d-flex flex-column flex-grow-1">
+								<a href="#" class="text-dark hover-success font-weight-500 font-size-16">
+									Create FireStone Logo
+								</a>
+								<span class="text-fade font-weight-500">
+									Due in 2 Days
+								</span>
+							</div>
+												 
+						</div>
+						
+					</div>
 				</div>
-				<div class="box-body p-10">
-				  <ul class="todo-list">
-					<li class="b-1 p-0 mb-15">
-					  <div class="position-relative p-20">
-						  <!-- drag handle -->
-						  <div class="handle handle2"></div>
-						  <!-- checkbox -->
-						  <input type="checkbox" id="basic_checkbox_19" class="filled-in">
-						  <label for="basic_checkbox_19" class="mb-0 h-15 ml-15"></label>
-						  <!-- todo text -->
-						  <span class="text-line font-size-18">Phasellus interdum</span>
-						  <!-- General tools such as edit or delete-->
-						  <div class="pull-right d-block text-dark flexbox">
-							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Remove"><i class="fa fa-trash-o"></i></a>
-						  </div>
-						  <div class="mt-5 ml-50 pl-5">Sed ut perspiciatis unde omnis iste natus error sit.</div>
-						  <div class="mt-5 ml-50 pl-5"><em>21/06/2018</em></div>
-						</div>
-					</li>
-					<li class="b-1 p-0 mb-15">
-					  <div class="position-relative p-20">
-						  <!-- drag handle -->
-						  <div class="handle handle2"></div>
-						  <!-- checkbox -->
-						  <input type="checkbox" id="basic_checkbox_20" class="filled-in">
-						  <label for="basic_checkbox_20" class="mb-0 h-15 ml-15"></label>
-						  <!-- todo text -->
-						  <span class="text-line font-size-18">Floor cool cinders</span>
-						  <!-- General tools such as edit or delete-->
-						  <div class="pull-right d-block text-dark flexbox">
-							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Remove"><i class="fa fa-trash-o"></i></a>
-						  </div>
-						  <div class="mt-5 ml-50 pl-5">Sed ut perspiciatis unde omnis iste natus error sit.</div>
-						  <div class="mt-5 ml-50 pl-5"><em>21/06/2018</em></div>
-						</div>
-					</li>
-					<li class="b-1 p-0 mb-15">
-					  <div class="position-relative p-20">
-						  <!-- drag handle -->
-						  <div class="handle handle2"></div>
-						  <!-- checkbox -->
-						  <input type="checkbox" id="basic_checkbox_21" class="filled-in">
-						  <label for="basic_checkbox_21" class="mb-0 h-15 ml-15"></label>
-						  <!-- todo text -->
-						  <span class="text-line font-size-18">Floor cool cinders</span>
-						  <!-- General tools such as edit or delete-->
-						  <div class="pull-right d-block text-dark flexbox">
-							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
-							<a href="#" data-toggle="tooltip" data-container="body" title="" data-original-title="Remove"><i class="fa fa-trash-o"></i></a>
-						  </div>
-						  <div class="mt-5 ml-50 pl-5">Sed ut perspiciatis unde omnis iste natus error sit.</div>
-						  <div class="mt-5 ml-50 pl-5"><em>21/06/2018</em></div>
-						</div>
-					</li>
-
-				  </ul>
-				</div>
-				<!-- /.box-body -->
 			  </div>
-			</div>
-			{% endfor %}
+          	{% endfor %}
+			
+	
+		
 		  </div>
 		</section>
 		<!-- /.content -->

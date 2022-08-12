@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Pack{% endblock %}
+
+{% block contenu %}
+    <h1>Edit Pack</h1>
+
+    {{ include('pack/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_pack_index') }}">Annuler</a>
+
+   
+{% endblock %}

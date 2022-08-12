@@ -38,6 +38,15 @@ class Apprenant extends Personne
     #[ORM\OneToMany(mappedBy: 'compte', targetEntity: Document::class)]
     private $documents;
 
+    #[ORM\OneToMany(mappedBy: 'IdApprenant', targetEntity: Transaction::class)]
+    private $transactions;
+
+    #[ORM\Column(type: 'boolean')]
+    private $coursActive=false;
+
+    #[ORM\ManyToMany(targetEntity: AutoEcole::class, inversedBy: 'apprenants')]
+    private $idAutoEcolr;
+
   
 
 
@@ -48,6 +57,8 @@ class Apprenant extends Personne
         $this->apprenants = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
+        $this->idAutoEcolr = new ArrayCollection();
     }
 
     
@@ -160,6 +171,72 @@ class Apprenant extends Personne
                 $document->setCompte(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transaction>
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): self
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setIdApprenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): self
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getIdApprenant() === $this) {
+                $transaction->setIdApprenant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isCoursActive(): ?bool
+    {
+        return $this->coursActive;
+    }
+
+    public function setCoursActive(bool $coursActive): self
+    {
+        $this->coursActive = $coursActive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AutoEcole>
+     */
+    public function getIdAutoEcolr(): Collection
+    {
+        return $this->idAutoEcolr;
+    }
+
+    public function addIdAutoEcolr(AutoEcole $idAutoEcolr): self
+    {
+        if (!$this->idAutoEcolr->contains($idAutoEcolr)) {
+            $this->idAutoEcolr[] = $idAutoEcolr;
+        }
+
+        return $this;
+    }
+
+    public function removeIdAutoEcolr(AutoEcole $idAutoEcolr): self
+    {
+        $this->idAutoEcolr->removeElement($idAutoEcolr);
 
         return $this;
     }

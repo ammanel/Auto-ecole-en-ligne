@@ -1,0 +1,98 @@
+{% extends 'base_apprenant.html.twig' %}
+
+{% block contenu %}
+
+<div class="col-12">
+				<div class="box">
+					<div class="box-header">
+					  <h4 class="box-title">Les Ecoles les mieux noté</h4>
+					</div>
+				</div>
+
+				{% for message in app.session.flashBag.get('info') %}
+
+				<div class="bg-info">
+					{{message}}
+
+				</div>
+				{% endfor %}
+					<!-- /.box-header -->
+				<div class="box-body">				  
+						<div class="owl-carousel owl-theme">
+							<div class="box mb-0">
+								<img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
+                                <p align="center">nom</p>
+                                <button type="button" class="waves-effect waves-light btn btn-outline btn-info-light mb-5">Voir profil</button>
+							</div>
+							<div class="box mb-0">
+								<img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
+                                <p align="center">nom</p>
+                                <button type="button" class="waves-effect waves-light btn btn-outline btn-info-light mb-5">Voir profil</button>
+							</div>
+							<div class="box mb-0">
+								<img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
+                                <p align="center">nom</p>
+                                <button type="button" class="waves-effect waves-light btn btn-outline btn-info-light mb-5">Voir profil</button>
+							</div>
+							<div class="box mb-0">
+								<img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
+                                <p align="center">nom</p>
+                                <button type="button" class="waves-effect waves-light btn btn-outline btn-info-light mb-5">Voir profil</button>
+							</div>
+							<div class="box mb-0">
+								<img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
+                                <p align="center">nom</p>
+                                <button type="button" class="waves-effect waves-light btn btn-outline btn-info-light mb-5">Voir profil</button>
+							</div>
+							<div class="box mb-0">
+								<img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
+                                 <p align="center">nom</p>
+                                <button type="button" class="waves-effect waves-light btn btn-outline btn-info-light mb-5">Voir profil</button>
+							</div>
+
+						</div>
+				</div>				
+	
+</div> 
+
+<div class="row">
+			  
+	{% for ecole in ecoles %}
+
+        <div class="col-md-12 col-lg-4">
+			   
+				<div class="card">
+				  <img class="card-img-top" src="{{asset('../AdminResponsable/img/ImageAutoEcole/' ~ ecole.image)}}" alt="Card image cap">			  
+
+					<div class="card-footer d-flex justify-content-between bt-0 pb-0">
+						<span class="text-muted">{{ecole.note}}</span>
+
+						<ul class="list-inline mb-0">
+							<li class="list-inline-item">
+								<a href="#" class="text-info"><i class="fa fa-thumbs-o-up"></i></a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="text-danger"><i class="fa fa-thumbs-o-down"></i></a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="text-muted"><i class="fa fa-flag-o"></i></a>
+							</li>
+						</ul>
+					</div>
+					
+				 	<div class="card-body">
+						<h4 class="card-title">{{ecole.nom}}</h4>
+						<p class="card-text">{{ecole.description}}</p>
+				    </div>
+					<div class="card-footer d-flex justify-content-between">
+						<a href="{{url('app_profil_Auto_Ecole',{'id':ecole.id})}}" class="waves-effect waves-light btn btn-outline btn-primary-light mb-5">Profil</a>
+						<a href="{{url('app_inscription',{'id':ecole.id})}}" class="waves-effect waves-light btn btn-outline btn-success-light mb-5">Inscription</a>
+					</div>
+				</div>
+		</div>
+		 
+	{% endfor %} 	
+
+
+</div>
+{% endblock %}

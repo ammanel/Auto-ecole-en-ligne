@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ModeDePaiement{% endblock %}
+
+{% block contenu %}
+    <h1>Edit ModeDePaiement</h1>
+
+    {{ include('mode_de_paiement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_mode_de_paiement_index') }}">Annuler</a>
+
+{% endblock %}

@@ -1,1 +1,0 @@
-class ComponentsNavs{constructor(){"undefined"!=typeof ResponsiveTab?this._initTitleTabs():console.error("[CS] ResponsiveTab is undefined.")}_initTitleTabs(){document.querySelectorAll(".responsive-tabs").forEach((e=>{new ResponsiveTab(e)}))}}

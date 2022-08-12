@@ -2,7 +2,15 @@
 
 {% block contenu %}
 
+{% if user.coursActive ==0 %}
 <section class="content">
+{% block transaction %}
+	{{ include('template_apprenant/transaction.html.twig') }}
+{% endblock %}
+</section>
+	
+{% else %}
+	<section class="content">
 
 		  <!-- START Card With Image -->			
 			<div class="card">
@@ -37,5 +45,7 @@
 		
 	
 		</section>
+
+{% endif %}
 
 {% endblock %}
