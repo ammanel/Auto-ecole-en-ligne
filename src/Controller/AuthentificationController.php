@@ -88,7 +88,7 @@ class AuthentificationController extends AbstractController
 
     #[Route('/{id}', name: 'Confirmation',  methods: ['GET', 'POST'])]
     public function Confirmation(Apprenant $apprenant)
-    {
+    {/*
         $apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
         $userUid = " RORJJ4";
 
@@ -99,7 +99,7 @@ class AuthentificationController extends AbstractController
         $sender = "AutoEcole";
         $number = $apprenant->getTelephone();
         $serve = $moi->sendSms("ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH","RORJJ4",$number,"AutoEcole",$message);
-        //return $this->redirectToRoute("app_connexion");
+        //return $this->redirectToRoute("app_connexion");*/
         return $this->redirectToRoute("app_connexion");
     }
 

@@ -39,6 +39,22 @@ class DocumentRepository extends ServiceEntityRepository
         }
     }
 
+    public function FindRappel($date_etablissement,$compte_id,$typedoc): array
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.compte_id = :compte')
+            ->andWhere('d.date_etablissement = :dateetablissement')
+            ->andWhere('d.typedoc_id == :typedoc')
+            ->setParameter('dateetablissement', $date_etablissement)
+            ->setParameter('compte',$compte_id)
+            ->setParameter('typedoc',$typedoc)
+            //->orderBy('d.id', 'ASC')
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Document[] Returns an array of Document objects
 //     */

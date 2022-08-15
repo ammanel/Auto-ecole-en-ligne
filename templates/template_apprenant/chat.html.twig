@@ -6,20 +6,24 @@
 
 		<div class="chat-box">
             <div class="chat-box-header p-15 d-flex justify-content-between align-items-center">
+               
                 <div class="btn-group">
+                    
                   <button class="waves-effect waves-circle btn btn-circle btn-primary-light h-40 w-40 rounded-circle l-h-45" type="button" data-toggle="dropdown">
                       <span class="icon-Add-user font-size-22"><span class="path1"></span><span class="path2"></span></span>
                   </button>
+                  
                   <div class="dropdown-menu min-w-200">
                     <a class="dropdown-item font-size-16" href="#">
                         <span class="icon-Color mr-15"></span>
-                        New Group</a>
+                        New Group </a>
                     <a class="dropdown-item font-size-16" href="#">
                         <span class="icon-Clipboard mr-15"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>
                         Contacts</a>
                     <a class="dropdown-item font-size-16" href="#">
                         <span class="icon-Group mr-15"><span class="path1"></span><span class="path2"></span></span>
                         Groups</a>
+                        
                     <a class="dropdown-item font-size-16" href="#">
                         <span class="icon-Active-call mr-15"><span class="path1"></span><span class="path2"></span></span>
                         Calls</a>
@@ -36,7 +40,7 @@
                   </div>
                 </div>
                 <div class="text-center flex-grow-1">
-                    <div class="text-dark font-size-18">Mayra Sibley</div>
+                    <div class="text-dark font-size-18">{{autoecole}} {{form_start(form)}} {{form_widget(form)}} <a id="envoi" type="submit" href="{{path('app_liste_Auto_Ecole')}}">Envoyer</a> {{form_end(form)}}</div>
                     <div>
                         <span class="badge badge-sm badge-dot badge-primary"></span>
                         <span class="text-muted font-size-12">Active</span>
@@ -58,7 +62,7 @@
                                 <img src="../images/avatar/2.jpg" class="avatar avatar-lg">
                             </span>
                             <div class="mx-10">
-                                <a href="#" class="text-dark hover-primary font-weight-bold">Mayra Sibley</a>
+                                <a href="#" class="text-dark hover-primary font-weight-bold"></a>
                                 <p class="text-muted font-size-12 mb-0">2 Hours</p>
                             </div>
                         </div>
@@ -86,7 +90,7 @@
                                 <img src="../images/avatar/2.jpg" class="avatar avatar-lg">
                             </span>
                             <div class="mx-10">
-                                <a href="#" class="text-dark hover-primary font-weight-bold">Mayra Sibley</a>
+                                <a href="#" class="text-dark hover-primary font-weight-bold"></a>
                                 <p class="text-muted font-size-12 mb-0">40 seconds</p>
                             </div>
                         </div>
@@ -97,8 +101,9 @@
                 </div><!--chat-log -->
             </div>
             <div class="chat-input">      
-                <form>
-                    <input type="text" id="chat-input" placeholder="Send a message..."/>
+                <form method="POST">
+                    <input type="text" id="chat-input" name="message" placeholder="Envoyer un message..."/>
+                    
                     <button type="submit" class="chat-submit" id="chat-submit">
                         <span class="icon-Send font-size-22"></span>
                     </button>

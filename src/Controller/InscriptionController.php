@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class InscriptionController extends AbstractController
 {
-    #[Route('/inscription/{id}/', name: 'app_inscription')]
+    #[Route('/inscriptions/{id}/', name: 'app_inscription_auto_ecole')]
     public function index(ApprenantRepository $ar,ManagerRegistry $doctrine,Request $request,UserInterface $user,AutoEcole $autoEcole,ChoisirRepository $choisirRepository): Response
     {
         $a = $user->getUserIdentifier();

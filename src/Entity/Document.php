@@ -27,6 +27,11 @@ class Document extends Infos
     #[ORM\OneToMany(mappedBy: 'idDoc', targetEntity: Rappel::class)]
     private $rappels;
 
+    
+    #[ORM\ManyToOne(targetEntity: Rappel::class, inversedBy: 'documents',cascade: array("persist"))]
+    #[ORM\GeneratedValue]
+    private $Rappel_id;
+
     public function __construct()
     {
         $this->rappels = new ArrayCollection();
@@ -99,6 +104,18 @@ class Document extends Infos
                 $rappel->setIdDoc(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRappelId(): ?Rappel
+    {
+        return $this->Rappel_id;
+    }
+
+    public function setRappelId(?Rappel $Rappel_id): self
+    {
+        $this->Rappel_id = $Rappel_id;
 
         return $this;
     }

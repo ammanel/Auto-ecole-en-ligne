@@ -6,9 +6,12 @@ use App\Entity\Document;
 use App\Entity\Rappel;
 use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
+use App\Repository\RappelRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +30,7 @@ class DocumentController extends AbstractController
     }
 
     #[Route('/new', name: 'app_document_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, DocumentRepository $documentRepository,UserInterface $user): Response
+    public function new(Request $request, DocumentRepository $documentRepository,UserInterface $user, RappelRepository $rappelRepository): Response
     {
         $document = new Document();
         $form = $this->createForm(DocumentType::class, $document);
@@ -41,9 +44,34 @@ class DocumentController extends AbstractController
            // $dateExpi=date('Y-m-d', strtotime($recupdate.' + 1 days')); 
 
             $rappel=new Rappel();
+            //$rappel->setIdDoc($document->getTypedoc());
+            
+            
+            //Durée à ajouter
+            $duree = $recupType->getDuree();
+
+            
+            
+            $dateFin         = date('Y-m-d', strtotime('+'.$duree.' Year', strtotime($recupdate->format("Y-m-d")) ));
+
+
+            $dateFin = new DateTime($dateFin);
+            //$a = new DateTime($date);
+            $rappel->setDateExpiration($dateFin);
+
+            $document->setRappelId($rappel);
+            
+            
             //$rappel->setDateExpiration(new DateTime($dateExpi));
 
+
             $documentRepository->add($document, true);
+
+            //Fonction creer dans le repository
+            //$doc = $documentRepository->FindRappel($document,$document->getId(),$recupType);
+            
+
+            $rappelRepository->add($rappel,true);
 
             return $this->redirectToRoute('app_document_index', [], Response::HTTP_SEE_OTHER);
         }

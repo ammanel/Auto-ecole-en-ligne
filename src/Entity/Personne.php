@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PersonneRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -49,6 +51,10 @@ class Personne extends Infos implements UserInterface,PasswordAuthenticatedUserI
 
     #[ORM\Column(type: 'boolean')]
     private $Statut;
+
+
+
+
 
     
 
@@ -170,4 +176,6 @@ class Personne extends Infos implements UserInterface,PasswordAuthenticatedUserI
 
         return $this;
     }
+
+
 }
