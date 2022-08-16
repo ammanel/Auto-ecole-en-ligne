@@ -40,12 +40,10 @@
                   </div>
                 </div>
                 <div class="text-center flex-grow-1">
-                    <div class="text-dark font-size-18"> 
-                        {% if autoecole is defined %}  
-                        {{autoecole}} {{form_start(form)}} {{form_widget(form)}} 
-                        <a id="envoi" type="submit" href="{{path('app_liste_Auto_Ecole')}}">Envoyer</a> {{form_end(form)}}</div>
+                    <div class="text-dark font-size-18">{% if autoecole is defined %}  
+                        {{autoecole}} 
                         {% else %} 
-                        {% endif %} 
+                        {% endif %} </div>
                     <div>
                         <span class="badge badge-sm badge-dot badge-primary"></span>
                         <span class="text-muted font-size-12">Active</span>
@@ -61,58 +59,94 @@
                 <div class="chat-box-overlay">   
                 </div>
                 <div class="chat-logs">
-                    <div class="chat-msg user">
-                        <div class="d-flex align-items-center">
-                            <span class="msg-avatar">
-                                <img src="../images/avatar/2.jpg" class="avatar avatar-lg">
-                            </span>
-                            <div class="mx-10">
-                                <a href="#" class="text-dark hover-primary font-weight-bold"></a>
-                                <p class="text-muted font-size-12 mb-0">2 Hours</p>
-                            </div>
-                        </div>
-                        <div class="cm-msg-text">
-                            Hi there, I'm Jesse and you?
-                        </div>
-                    </div>
+
+                    
+
+                    
+
+                    {% for i in messages %}
+                    
+                    {% if i.EnvoyerPar.id == user.id and i.RecuPar.id == recupar %}
+
+                    <!-- Mes messages -->
                     <div class="chat-msg self">
-                        <div class="d-flex align-items-center justify-content-end">
-                            <div class="mx-10">
-                                <a href="#" class="text-dark hover-primary font-weight-bold">You</a>
-                                <p class="text-muted font-size-12 mb-0">3 minutes</p>
-                            </div>
-                            <span class="msg-avatar">
-                                <img src="../images/avatar/3.jpg" class="avatar avatar-lg">
-                            </span>
-                        </div>
                         <div class="cm-msg-text">
-                           My name is Anne Clarc.         
-                        </div>        
+                            {{i.contenu}}
+                        </div>  
+                        <br/> 
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
+
+                    {% elseif i.EnvoyerPar.id == recupar and i.RecuPar.id == user.id %}
+
+                    <!-- Mes messages -->
                     <div class="chat-msg user">
-                        <div class="d-flex align-items-center">
-                            <span class="msg-avatar">
-                                <img src="../images/avatar/2.jpg" class="avatar avatar-lg">
-                            </span>
-                            <div class="mx-10">
-                                <a href="#" class="text-dark hover-primary font-weight-bold"></a>
-                                <p class="text-muted font-size-12 mb-0">40 seconds</p>
-                            </div>
-                        </div>
                         <div class="cm-msg-text">
-                            Nice to meet you Anne.<br>How can i help you?
-                        </div>
+                            {{i.contenu}}
+                        </div>  
+                        <br/> 
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
+                    
+                    {% endif %}
+                    
+
+                  
+
+                    
+                  
+
+                    
+
+
+                   
+                    
+
+                    
+
+                    {% endfor %}
+
+                         
+
+                    
+
+                        
+
+                            
+                    
+
+
+                    
+
+
                 </div><!--chat-log -->
             </div>
+
+
+
+
             <div class="chat-input">      
-                <form method="POST">
-                    <input type="text" id="chat-input" name="message" placeholder="Envoyer un message..."/>
-                    
-                    <button type="submit" class="chat-submit" id="chat-submit">
-                        <span class="icon-Send font-size-22"></span>
-                    </button>
-                </form>      
+                
+                {% if autoecole is defined %}  
+                        {{form_start(form)}} {{
+                            form_row(form.Contenu,{'id':"chat-input"})
+                            
+                    }} 
+                        
+                        <a id="envoi" type="submit" href="{{path('app_liste_Auto_Ecole')}}">
+                            
+                            
+                            <span class="icon-Send font-size-22 chat-submit"></span>
+                            </a> {{form_end(form)}}
+                        
+                        
+                        
+                        {% else %} 
+                        {% endif %}  
             </div>
 		</div>
 	</div>

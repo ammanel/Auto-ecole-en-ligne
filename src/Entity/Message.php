@@ -16,7 +16,7 @@ class Message
     #[ORM\Column(type: 'string', length: 255)]
     private $Contenu;
 
-    #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'RecuPar')]
+    #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'EnvoyerPar')]
     private $EnvoyerPar;
 
     #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'RecuPar')]

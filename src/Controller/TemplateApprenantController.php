@@ -152,20 +152,23 @@ class TemplateApprenantController extends AbstractController
         
         $form = $this->createForm(MessageType::class, $message);
 
-        print_r($_REQUEST);
+        
         
         $form->handleRequest($request);
-        $message->setContenu("AharhFodio");
         
-            if (isEmpty($_REQUEST)){
-            
-        }else{
-            $message->setContenu($_REQUEST["Contenu"]);
+        
+            if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != ""){
+            $message->setContenu($_REQUEST["contenu"]);
             $message->setEnvoyerPar($personneRepository->find($idConnecter));
             $message->setRecuPar($personneRepository->find($autoecoleId));
             $messageRepository->add($message,true);
+        }else{
             
-            return $this->redirectToRoute('app_liste_Auto_Ecole');
+            
+            echo "vide";
+
+            
+            
         }
 
         
@@ -175,14 +178,18 @@ class TemplateApprenantController extends AbstractController
         $session->set("idautoecole", $autoecole[0]->getId() );
         $session->set('autoecole', $autoecole[0]->getDescription() );
 
-        $webpath=$this->params->get("kernel.project_dir").'/src/Controller';
+        $messages = $messageRepository->findAll();
+        
+
+        
          return $this->render('template_apprenant/listeAutoEcole.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
                 "autoecole"=> $session->get("autoecole"),
                 "envoyerpar"=>$idConnecter,
                 "recupar"=>$autoecoleId,
-                "form" => $form->createView()
+                "form" => $form->createView(),
+                "messages"=> $messages
             ]);
         
         

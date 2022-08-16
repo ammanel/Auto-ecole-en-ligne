@@ -42,14 +42,18 @@ function Message(){
 function messageenvoi(event){
     event.preventDefault();
     const url = this.href;
-    var contenu = document.getElementById("message_Contenu").value;
+    document.getElementById("chat-input").innerHTML="";
+    var contenu = document.getElementById("chat-input").value;
     
     
     axios.post("ecole?contenu="+contenu);
 
     
+
+    
     
 }
+
 
 
 

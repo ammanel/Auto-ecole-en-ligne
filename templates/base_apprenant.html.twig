@@ -96,12 +96,18 @@
     <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+	
 	<script>
+
+		document.getElementById("chat-logs").reload();
 		
-		
+		setInterval("load_messages", 1000);
+		function load_messages(){
+			$('#chat-logs').load("template_apprenant/chat.html.twig");
+		}
 		
 	</script>
-
+	
 	<script src="{{asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js')}}"></script>
 	<script src="{{asset('assets/vendor_components/moment/min/moment.min.js')}}"></script>
 	<script src="{{asset('assets/vendor_components/fullcalendar/fullcalendar.js')}}"></script>
