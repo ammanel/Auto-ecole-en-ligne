@@ -54,6 +54,7 @@ class TemplateApprenantController extends AbstractController
             return $this->render('template_apprenant/index.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,
+                
             ]);
         }
         
