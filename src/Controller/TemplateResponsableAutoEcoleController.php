@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Date;
 
 class TemplateResponsableAutoEcoleController extends AbstractController
@@ -47,6 +48,25 @@ class TemplateResponsableAutoEcoleController extends AbstractController
 
         return $this->render('template_responsable_auto_ecole/rapport.html.twig', [
            
+        ]);
+    }
+
+    #[Route('/template/responsable/auto/ecole/{id}/profil', name: 'app_template_responsable_auto_ecole_profil')]
+    public function profilEcole(UserInterface $user): Response
+    {
+
+        return $this->render('template_responsable_auto_ecole/profil_auto_ecole.html.twig', [
+            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user
+        ]);
+    }
+
+
+    #[Route('/template/responsable/auto/ecole/{id}/paramètre/compte', name: 'app_template_responsable_auto_ecole_parametre')]
+    public function parametres(UserInterface $user): Response
+    {
+
+        return $this->render('template_responsable_auto_ecole/parametres.html.twig', [
+            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user
         ]);
     }
 }

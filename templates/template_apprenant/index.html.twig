@@ -65,36 +65,21 @@
 				<div class="col-xl-4 col-12">
 					<div class="box">
 						<div class="box-body">
-							<p class="text-fade">Total Cours</p>
-							<h3 class="mt-0 mb-20">19 <small class="text-success"><i class="fa fa-arrow-up ml-15 mr-5"></i> 2 nouveau</small></h3>
-							<div id="charts_widget_2_chart"></div>
+						<p class="text-fade">stat numéro 1</p>
+							<canvas id="stat1" width="400" height="400"></canvas>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-5 col-12">
+				<div class="col-xl-7 col-12">
 					<div class="box">
 						<div class="box-body">
-							<p class="text-fade">Nombre d'heure acheter</p>
-							<h3 class="mt-0 mb-20">21 h 30 min <small class="text-danger"><i class="fa fa-arrow-down ml-25 mr-5"></i> 15%</small></h3>
-							<div id="charts_widget_1_chart"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-3 col-12">
-					<div class="box">
-						<div class="box-header with-border">
-							<h4 class="box-title">Temps de Travail</h4>
+							<p class="text-fade">stat numéro 2</p>
+							<canvas id="stat2" width="430" height="220"></canvas>
 							
 						</div>
-						<div class="box-body">
-							<div id="revenue5"></div>
-							<div class="d-flex justify-content-center">
-								<p class="d-flex align-items-center font-weight-600 mx-20"><span class="badge badge-xl badge-dot badge-warning mr-20"></span> En cours</p>
-								<p class="d-flex align-items-center font-weight-600 mx-20"><span class="badge badge-xl badge-dot badge-primary mr-20"></span> Terminé</p>
-							</div>
-						</div>
 					</div>
 				</div>
+				
 			</div>
 
 		  <div class="col-12">
@@ -142,8 +127,40 @@
 
              
 				  </div>  
-</div>  
+			</div>  
 			
 		</section>
+		<script>
+			let d1=document.querySelector('#stat1')
+			let graphd1=new Chart(d1,
+				{
+					type:"pie",
+					data:{
+						labels:{{doctype|raw}},
+						datasets:[{
+							label:"essaie de graph en camenbert",
+							data:{{docnbre|raw}},
+							backgroundColor:["#d47130","#ffd3cd","#80bfce"]
+					}]
+					}
+				}
+			)
+
+
+			let d2=document.querySelector('#stat2')
+			let graphd2=new Chart(d2,
+				{
+					type:"bar",
+					data:{
+						labels:{{ar1|raw}},
+						datasets:[{
+							label:"essaie de graph en baton",
+							data:{{ar2|raw}},
+							backgroundColor:["#FA2577 ","#ffd3cd","#80bfce"]
+					}]
+					}
+				}
+			)
+		</script>
 {% endif %}
 {% endblock %}

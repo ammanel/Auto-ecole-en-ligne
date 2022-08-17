@@ -12,9 +12,11 @@ use App\Repository\ApprenantRepository;
 use App\Repository\AutoEcoleRepository;
 use App\Repository\ChoisirRepository;
 use App\Repository\CoursRepository;
+use App\Repository\DocumentRepository;
 use App\Repository\MessageRepository;
 use App\Repository\PersonneRepository;
 use App\Repository\QuestionRepository;
+use App\Repository\RapportRepository;
 use App\Repository\TransactionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +45,7 @@ class TemplateApprenantController extends AbstractController
 
     
     #[Route('/template/apprenant', name: 'app_template_apprenant')]
-    public function index(UserInterface $user, ApprenantRepository $ar): Response
+    public function index(UserInterface $user, ApprenantRepository $ar,RapportRepository $rapportRepository,DocumentRepository $documentRepository): Response
     {
         $a = $user->getUserIdentifier();
         $connecter = $ar->findOneBy(array("Telephone"=>$a));
@@ -51,9 +53,35 @@ class TemplateApprenantController extends AbstractController
         {
             return $this->render("authentification/NonValide.html.twig");;
         }else{
+
+            $docs=$documentRepository->findAll();
+            $doctype=[];
+            $docnombre=[];
+
+            $rars=$rapportRepository->findAll();
+            $ar1=[];
+            $ar2=[];
+           
+            foreach ($docs as $doc) {
+                $doctype[]=$doc->getTypedoc()->getLibelle();
+              
+                $docnombre[]= count([$doc->getTypedoc()]);
+            }
+
+            foreach ($rars as $rar) {
+                $ar1[]=$rar->getContenu();
+              
+                $ar2[]= count($rapportRepository->findAll());
+            }
+
             return $this->render('template_apprenant/index.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,
+                'doctype'=>json_encode($doctype),
+                'docnbre'=>json_encode($docnombre),
+                'ar1'=>json_encode($ar1),
+                'ar2'=>json_encode($ar2),
+
                 
             ]);
         }
