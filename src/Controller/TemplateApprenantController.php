@@ -246,7 +246,7 @@ class TemplateApprenantController extends AbstractController
        
          return $this->render('template_apprenant/profil_auto_ecoles.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
-                "user"=> $user,'autoecole'=>$autoEcole
+                "user"=> $user,'ecole'=>$autoEcole
             ]);
         
         

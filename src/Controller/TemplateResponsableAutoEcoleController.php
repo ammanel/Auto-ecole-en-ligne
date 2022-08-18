@@ -2,11 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\AutoEcole;
 use App\Entity\Rapport;
+use App\Repository\AutoEcoleRepository;
+use App\Repository\ChoisirRepository;
+use App\Repository\MessageRepository;
+use App\Repository\PersonneRepository;
 use DateTime;
+use Doctrine\ORM\Mapping\Id;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,11 +22,29 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class TemplateResponsableAutoEcoleController extends AbstractController
 {
-    #[Route('/template/responsable/auto/ecole', name: 'app_template_responsable_auto_ecole')]
-    public function index(): Response
+
+    private $requestStack; 
+    private $params;
+
+    public function __construct(RequestStack $requestStack, ParameterBagInterface $params)
     {
+        $this->requestStack = $requestStack;
+        $this->params=$params;
+    }
+
+    #[Route('/template/responsable/auto/ecole', name: 'app_template_responsable_auto_ecole')]
+    public function index(ChoisirRepository $choisirRepository,UserInterface $user,AutoEcoleRepository $autoEcoleRepository,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
+    {
+        $personneconnecter = $personneRepository->findBy(array("Telephone"=>$user->getUserIdentifier()));
+        $personneconnecterid = $personneconnecter[0]->getId();
+        $messages = $messageRepository->find($personneconnecterid);
+        $choix = $choisirRepository->findAll();
         return $this->render('template_responsable_auto_ecole/index.html.twig', [
             'controller_name' => 'TemplateResponsableAutoEcoleController',
+            "choix"=> $choix,
+            "messages"=> $messages,
+            "idapprenant"=>2
+
         ]);
     }
 

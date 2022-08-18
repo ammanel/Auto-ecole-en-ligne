@@ -56,7 +56,7 @@
 				  </div>
 				  <div class="box-footer">	
                 
-                   <a href="{{url('app_inscription',{'id':autoecole.id})}}" class="btn btn-info">S'inscrire</a>
+                   <a href="{{url('app_inscription_auto_ecole',{'id':ecole.id})}}" class="btn btn-info">S'inscrire</a>
                    <a href="{{url('app_liste_Auto_Ecole')}}"  class="btn btn-danger pull-right">Retour</a>
 				  </div>
 				</div> 
@@ -66,8 +66,8 @@
 			  <div class="col-12 col-lg-5 col-xl-4">
 				 <div class="box box-widget widget-user">
 					<!-- Add the bg color to the header using any of the bg-* classes -->
-					<div class="widget-user-header bg-black" style="background: url('{{asset('../AdminResponsable/img/ImageAutoEcole/' ~ autoecole.image)}}') center center;">
-					  <h3 class="widget-user-username">{{autoecole.nom}}</h3>
+					<div class="widget-user-header bg-black" style="background: url('{{asset('../AdminResponsable/img/ImageAutoEcole/' ~ ecole.image)}}') center center;">
+					  <h3 class="widget-user-username">{{ecole.nom}}</h3>
 					  <h6 class="widget-user-desc">Auto-Ecole</h6>
 					</div>
 					<div class="widget-user-image">
@@ -85,7 +85,7 @@
 						<!-- /.col -->
 						<div class="col-sm-4 br-1 bl-1">
 						  <div class="description-block">
-							<h5 class="description-header">{{autoecole.note}}</h5>
+							<h5 class="description-header">{{ecole.note}}</h5>
 							<span class="description-text">Note</span>
 						  </div>
 						  <!-- /.description-block -->
@@ -93,7 +93,7 @@
 						<!-- /.col -->
 						<div class="col-sm-4">
 						  <div class="description-block">
-							<h6 class="description-header">{{autoecole.HoraireDebut}}</h6>
+							<h6 class="description-header">{{ecole.HoraireDebut}}</h6>
 							<span class="description-text">Ouvert</span>
 						  </div>
 						  <!-- /.description-block -->
@@ -108,9 +108,9 @@
 					  <div class="row">
 						<div class="col-12">
 							<div>
-								<p>Email :<span class="text-gray pl-10">{{autoecole.mail}}</span> </p>
-								<p>Phone :<span class="text-gray pl-10">{{autoecole.telephone}}</span></p>
-								<p>Address :<span class="text-gray pl-10">{{autoecole.addresse}}</span></p>
+								<p>Email :<span class="text-gray pl-10">{{ecole.mail}}</span> </p>
+								<p>Phone :<span class="text-gray pl-10">{{ecole.telephone}}</span></p>
+								<p>Address :<span class="text-gray pl-10">{{ecole.addresse}}</span></p>
 							</div>
 						</div>
 						<div class="col-12">
