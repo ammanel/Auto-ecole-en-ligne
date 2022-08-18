@@ -168,13 +168,26 @@ class TemplateApprenantController extends AbstractController
     #[Route('/template/apprenant/liste/auto/ecole', name: 'app_liste_Auto_Ecole')]
     public function listeAutoEcole(Request $request, UserInterface $user,AutoEcoleRepository $autoEcoleRepository, ChoisirRepository $choixrepository,PersonneRepository $personneRepository, MessageRepository $messageRepository): Response
     {
-        $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
+
+         $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
         $idConnecter = $arraypersonne[0]->getId();
         $arrayautoecole = $choixrepository->findBy(array("idApprenant" => $idConnecter));
         $autoecoleId = $arrayautoecole[0]->getIdEcole();
 
         $autoecole = $autoEcoleRepository->findBy(array("id"=>$autoecoleId));
         
+
+
+        
+
+        $allautoecole = $autoEcoleRepository->findAll();
+        $choix = $choixrepository->findBy(array("idApprenant"=>$idConnecter,"satut"=>false));
+
+        
+
+        $auto = $autoEcoleRepository->find($choix[0]->getIdEcole());
+
+       
         //Creation d'une session
         $message = new Message();
         
@@ -188,12 +201,12 @@ class TemplateApprenantController extends AbstractController
             if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != ""){
             $message->setContenu($_REQUEST["contenu"]);
             $message->setEnvoyerPar($personneRepository->find($idConnecter));
-            $message->setRecuPar($personneRepository->find($autoecoleId));
+            $message->setRecuPar($personneRepository->find($auto->getId()));
             $messageRepository->add($message,true);
         }else{
             
             
-            echo "vide";
+            
 
             
             
@@ -213,9 +226,10 @@ class TemplateApprenantController extends AbstractController
          return $this->render('template_apprenant/listeAutoEcole.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
-                "autoecole"=> $session->get("autoecole"),
+                "autoecole"=> $auto->getDescription(),
+                "autoecoleid"=>"",
                 "envoyerpar"=>$idConnecter,
-                "recupar"=>$autoecoleId,
+                "recupar"=>$auto->getId(),
                 "form" => $form->createView(),
                 "messages"=> $messages
             ]);
