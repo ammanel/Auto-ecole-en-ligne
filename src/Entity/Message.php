@@ -16,10 +16,10 @@ class Message
     #[ORM\Column(type: 'string', length: 255)]
     private $Contenu;
 
-    #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'EnvoyerPar')]
+    #[ORM\ManyToOne(targetEntity: Personne::class)]
     private $EnvoyerPar;
 
-    #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'RecuPar')]
+    #[ORM\ManyToOne(targetEntity: Personne::class)]
     private $RecuPar;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -47,9 +47,9 @@ class Message
         return $this->EnvoyerPar;
     }
 
-    public function setEnvoyerPar(?Personne $EnvoyerPar): self
+    public function setEnvoyerPar(?Personne $send): self
     {
-        $this->EnvoyerPar = $EnvoyerPar;
+        $this->EnvoyerPar = $send;
 
         return $this;
     }

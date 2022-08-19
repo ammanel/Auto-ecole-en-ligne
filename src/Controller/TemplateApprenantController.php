@@ -172,17 +172,22 @@ class TemplateApprenantController extends AbstractController
 
          $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
         $idConnecter = $arraypersonne[0]->getId();
-        $arrayautoecole = $choixrepository->findBy(array("idApprenant" => $idConnecter));
-        $autoecoleId = $arrayautoecole[0]->getIdEcole();
+        $arrayautoecole = $choixrepository->findBy(array("idApprenant" => $idConnecter,"satut"=>false));
+        try {
+            $autoecoleId = $arrayautoecole[0]->getIdEcole();
+        } catch (\Throwable $th) {
+            $autoecoleId = 0;
+        }
+        
 
-        $autoecole = $autoEcoleRepository->findBy(array("id"=>$autoecoleId));
+        $autoecole = $autoEcoleRepository->find($autoecoleId);
         
 
 
         
 
         $allautoecole = $autoEcoleRepository->findAll();
-        $choix = $choixrepository->findBy(array("idApprenant"=>$idConnecter,"satut"=>false));
+        $choix = $choixrepository->findBy(array("idApprenant"=>$idConnecter,"satut"=>true));
 
         
 
@@ -199,7 +204,7 @@ class TemplateApprenantController extends AbstractController
         $form->handleRequest($request);
         
         
-            if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != "" && $_REQUEST["contenu"] != "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd"){
+        if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != "" && $_REQUEST["contenu"] != "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd"){
             $message->setContenu($_REQUEST["contenu"]);
             $message->setEnvoyerPar($personneRepository->find($idConnecter));
             $message->setRecuPar($personneRepository->find($auto->getId()));
@@ -237,14 +242,13 @@ class TemplateApprenantController extends AbstractController
         
         
         $session = $this->requestStack->getSession();
-        $session->set("idautoecole", $autoecole[0]->getId() );
-        $session->set('autoecole', $autoecole[0]->getDescription() );
-
-        $messages = $messageRepository->findAll();
         
 
+        //$messages = $messageRepository->findAll();
         
-         return $this->render('template_apprenant/listeAutoEcole.html.twig', [
+        try {
+            //code...
+            return $this->render('template_apprenant/listeAutoEcole.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
                 "autoecole"=> $auto->getDescription(),
@@ -252,8 +256,23 @@ class TemplateApprenantController extends AbstractController
                 "envoyerpar"=>$idConnecter,
                 "recupar"=>$auto->getId(),
                 "form" => $form->createView(),
-                "messages"=> $messages
+                //"messages"=> $messages
             ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->render('template_apprenant/listeAutoEcole.html.twig', [
+                'controller_name' => 'TemplateApprenantController',
+                "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
+                //"autoecole"=> $auto->getDescription(),
+                "autoecoleid"=>"",
+                "envoyerpar"=>$idConnecter,
+                //"recupar"=>$auto->getId(),
+                "form" => $form->createView(),
+                //"messages"=> $messages
+            ]);
+        }
+        
+         
         
         
     }
