@@ -35,9 +35,11 @@ class TemplateResponsableAutoEcoleController extends AbstractController
     #[Route('/template/responsable/auto/ecole', name: 'app_template_responsable_auto_ecole')]
     public function index(ChoisirRepository $choisirRepository,UserInterface $user,AutoEcoleRepository $autoEcoleRepository,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
     {
-        $personneconnecter = $personneRepository->findBy(array("Telephone"=>$user->getUserIdentifier()));
-        $personneconnecterid = $personneconnecter[0]->getId();
-        $messages = $messageRepository->find($personneconnecterid);
+
+
+        $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
+        $idConnecter = $arraypersonne[0]->getId();
+        $messages = $messageRepository->find($idConnecter);
         $choix = $choisirRepository->findAll();
         return $this->render('template_responsable_auto_ecole/index.html.twig', [
             'controller_name' => 'TemplateResponsableAutoEcoleController',
@@ -46,6 +48,12 @@ class TemplateResponsableAutoEcoleController extends AbstractController
             "idapprenant"=>2
 
         ]);
+    }
+
+    #[Route('/template/responsable/auto/ecole/message_choix_apprenant', name: 'message_choix_apprenant')]
+    public function message_choix_apprenant(ChoisirRepository $choisirRepository,UserInterface $user,AutoEcoleRepository $autoEcoleRepository,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
+    {
+        return $this->render("template_responsable_auto_ecole/liste_apprenant.html.twig");
     }
 
     #[Route('/template/responsable/auto/ecole/payement', name: 'app_payement_stat')]

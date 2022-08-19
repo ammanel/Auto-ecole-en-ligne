@@ -44,8 +44,8 @@
                         
                         
                         
-
-                        {{autoecole}}
+                        {% if autoecole is defined %}{{autoecole}}{% endif %}
+                        
                         
                         
                         
@@ -65,13 +65,13 @@
             <div class="chat-box-body">
                 <div class="chat-box-overlay">   
                 </div>
-                <div class="chat-logs">
+                <div class="chat-logs" id="chat-logs">
 
                     
 
                     
-
-                    {% for i in messages %}
+                    <div id="mess" >
+                        {% for i in messages %}
                     
                     {% if i.EnvoyerPar.id == user.id and i.RecuPar.id == recupar %}
 
@@ -116,6 +116,8 @@
                     
 
                     {% endfor %}
+                    </div>
+                    
 
                          
 
@@ -128,7 +130,7 @@
 
 
                     
-
+                    <div id="response"></div>
 
                 </div><!--chat-log -->
             </div>
@@ -145,7 +147,8 @@
                     }} 
                         
                         <a id="envoi" type="submit" href="{{path('app_liste_Auto_Ecole')}}">
-                            
+                        <input type="hidden" id="idconnecter" value = "{{user.id}}">
+                        <input type="hidden" id="idrecupar" value = "{{recupar}}">
                             
                             <span class="icon-Send font-size-22 chat-submit"></span>
                             </a> {{form_end(form)}}

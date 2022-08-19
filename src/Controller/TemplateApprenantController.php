@@ -21,6 +21,7 @@ use App\Repository\TransactionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -198,11 +199,31 @@ class TemplateApprenantController extends AbstractController
         $form->handleRequest($request);
         
         
-            if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != ""){
+            if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != "" && $_REQUEST["contenu"] != "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd"){
             $message->setContenu($_REQUEST["contenu"]);
             $message->setEnvoyerPar($personneRepository->find($idConnecter));
             $message->setRecuPar($personneRepository->find($auto->getId()));
+            $message->setDateEnvoi(new \DateTime('now'));
             $messageRepository->add($message,true);
+            $mess = $messageRepository->findAll();
+            $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+            
+            return  $this->json($ar);
+        }elseif (isset($_REQUEST["contenu"]) && $_REQUEST["contenu"] == "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd") {
+            # code...
+            $mess = $messageRepository->findAll();
+            $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+
+            return  $this->json($ar);
+
         }else{
             
             

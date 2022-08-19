@@ -22,6 +22,9 @@ class Message
     #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'RecuPar')]
     private $RecuPar;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $DateEnvoi;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Message
     public function setRecuPar(?Personne $RecuPar): self
     {
         $this->RecuPar = $RecuPar;
+
+        return $this;
+    }
+
+    public function getDateEnvoi(): ?\DateTimeInterface
+    {
+        return $this->DateEnvoi;
+    }
+
+    public function setDateEnvoi(?\DateTimeInterface $DateEnvoi): self
+    {
+        $this->DateEnvoi = $DateEnvoi;
 
         return $this;
     }
