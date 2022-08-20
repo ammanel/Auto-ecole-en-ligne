@@ -2,5 +2,22 @@
 
 
 {% block contenu %}
-    
+
+    <p> Liste des Apprenant Inscrit dans votre auto ecole</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for apprenant in apprenant %}
+        <tr>
+        <td>{{apprenant.idApprenant.Telephone}}</td>
+        <td><a href="{{path("message_apprenant",{'id': apprenant.idApprenant.id })}}">Message</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

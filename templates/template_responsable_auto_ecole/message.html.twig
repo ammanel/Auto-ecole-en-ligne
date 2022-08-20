@@ -1,0 +1,132 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+
+{% block contenu %}
+
+    <p></p>
+
+    <div class="chat-boxs">
+        <div class="chat-box-header p-15 d-flex justify-content-between align-items-center">
+           
+            <div class="btn-group">
+                
+              <button class="waves-effect waves-circle btn btn-circle btn-primary-light h-40 w-40 rounded-circle l-h-45" type="button" data-toggle="dropdown">
+                  <span class="icon-Add-user font-size-22"><span class="path1"></span><span class="path2"></span></span>
+              </button>
+              
+              <div class="dropdown-menu min-w-200">
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Color mr-15"></span>
+                    New Group </a>
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Clipboard mr-15"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>
+                    Contacts</a>
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Group mr-15"><span class="path1"></span><span class="path2"></span></span>
+                    Groups</a>
+                    
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Active-call mr-15"><span class="path1"></span><span class="path2"></span></span>
+                    Calls</a>
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Settings1 mr-15"><span class="path1"></span><span class="path2"></span></span>
+                    Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Question-circle mr-15"><span class="path1"></span><span class="path2"></span></span>
+                    Help</a>
+                <a class="dropdown-item font-size-16" href="#">
+                    <span class="icon-Notifications mr-15"><span class="path1"></span><span class="path2"></span></span> 
+                    Privacy</a>
+              </div>
+            </div>
+            <div class="text-center flex-grow-1">
+                <div class="text-dark font-size-18">{% if apprenant is defined %}  
+                    {{apprenant.Nom}} 
+                    {% else %} 
+                    {% endif %} </div>
+                <div>
+                    <span class="badge badge-sm badge-dot badge-primary"></span>
+                    <span class="text-muted font-size-12">Active</span>
+                </div>
+            </div>
+            <div class="chat-box-toggle">
+                <button id="chat-box-toggle" class="waves-effect waves-circle btn btn-circle btn-danger-light h-40 w-40 rounded-circle l-h-45" type="button">
+                  <span class="icon-Close font-size-22"><span class="path1"></span><span class="path2"></span></span>
+                </button>                    
+            </div>
+        </div>
+        <div class="chat-box-body">
+            <div class="chat-box-overlay">   
+            </div>
+            <div class="chat-logs" id="chat-logs">
+
+                
+
+                
+                <div id="mess">
+                {% for i in messages %}
+                
+                {% if i.Envoyerpar.id == user.id and i.recupar.id == apprenant.id  %}
+                
+                <!-- Mes messages -->
+                <div class="chat-msg self">
+                    <div class="cm-msg-text">
+                       {{i.contenu}}
+                    </div>  
+                    <br/> 
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+
+                {% elseif i.Envoyerpar.id == apprenant.id and i.recupar.id == user.id %}
+
+                <!-- Mes messages -->
+                <div class="chat-msg user">
+                    <div class="cm-msg-text">
+                        {{i.contenu}}
+                    </div>  
+                    <br/> 
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+
+                {% endif %}
+                
+                {% endfor %}
+              
+
+                <div>
+            </div><!--chat-log -->
+        </div>
+
+
+
+
+        
+    </div>
+</div>
+
+<div class="chat-input">      
+                
+                    
+    {{form_start(form)}} {{
+        form_row(form.Contenu,{'id':"chat-input"})
+        
+}} 
+    
+    <a id="sendmessage" type="submit" href="{{path('message_apprenant_async')}}">
+    <input type="hidden" id="idpersonneconnecter" value = "{{user.id}}">
+    <input type="hidden" id="idrecupar" value = "{{apprenant.id}}">
+        
+        <span class="icon-Send font-size-22 chat-submit"></span>
+        </a> {{form_end(form)}}
+    
+    
+    
+  
+</div>
+    
+{% endblock %}

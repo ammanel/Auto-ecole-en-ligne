@@ -1,3 +1,25 @@
+/*function creationXHR(){
+    var resultat = null;
+    try{
+        resultat = new XMLHttpRequest();
+    }
+    catch(Error){
+        try{
+            resultat = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch(Error){
+            try{
+                resultat = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch(Error){
+                resultat = null;
+            }
+        }
+    }
+    return resultat;
+    
+}
+*/
 
 
 
@@ -10,17 +32,20 @@ function messageenvoi(event){
     document.getElementById("chat-input").innerHTML="";
     var contenu = document.getElementById("chat-input").value;
     
+    var idconnecter = document.getElementById("idpersonneconnecter").value;
+    var idrecupar = document.getElementById("idrecupar").value;
     
-    axios.post("ecole?contenu="+contenu).then(function(response) {
+    axios.post("ecole?contenu="+contenu+"&idconnecter="+idconnecter+"&idrecupar="+idrecupar).then(function(response) {
         
         const messages = response.data;
-        var idconnecter = document.getElementById("idconnecter").value;
+        var idconnecter = document.getElementById("idpersonneconnecter").value;
         var idrecupar = document.getElementById("idrecupar").value;
         listeMessage = [];
         listeIdEnvoyerPar = [];
         listeIdRecuPar = [];
+        document.getElementById("chat-input").innerHTML = "";
         
-        
+        console.log(message);
 
         for (let index = 0; index < messages.length; index++) {
            listeMessage[index] = messages[index].contenu;
@@ -28,7 +53,20 @@ function messageenvoi(event){
            listeIdRecuPar[index] = messages[index].recupar;
             
         }
+        var idconnecter = document.getElementById("idpersonneconnecter").value;
+			var idrecupar = document.getElementById("idrecupar").value;
+			listeMessage = [];
+			listeIdEnvoyerPar = [];
+			listeIdRecuPar = [];
             
+	
+	
+			for (let index = 0; index < messages.length; index++) {
+			   listeMessage[index] = messages[index].contenu;
+			   listeIdEnvoyerPar[index] = messages[index].envoyerpar;
+			   listeIdRecuPar[index] = messages[index].recupar;
+				
+			}
 			
 		mot = "";
         
@@ -63,6 +101,7 @@ function messageenvoi(event){
             }
         }*/
 
+        
 
         
         
@@ -78,14 +117,15 @@ function messageenvoi(event){
 };
 
 
-document.getElementById("envoi").addEventListener('click',messageenvoi)
+document.getElementById("sendmessage").addEventListener('click',messageenvoi)
 
 
 setInterval(function () {
+        var link = document.getElementById("sendmessage").href
         
-        axios.post("ecole?contenu=uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd").then(function(response) {
+        axios.post(link+"?contenu=uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd").then(function(response) {
         const messages = response.data;
-        var idconnecter = document.getElementById("idconnecter").value;
+        var idconnecter = document.getElementById("idpersonneconnecter").value;
         var idrecupar = document.getElementById("idrecupar").value;
         listeMessage = [];
         listeIdEnvoyerPar = [];
@@ -99,7 +139,7 @@ setInterval(function () {
            listeIdRecuPar[index] = messages[index].recupar;
             
         }
-        var idconnecter = document.getElementById("idconnecter").value;
+        var idconnecter = document.getElementById("idpersonneconnecter").value;
 			var idrecupar = document.getElementById("idrecupar").value;
 			listeMessage = [];
 			listeIdEnvoyerPar = [];

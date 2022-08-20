@@ -47,6 +47,32 @@ class AutoEcoleRepository extends ServiceEntityRepository
         }
     }
 
+/*
+    public function getApprenant($value)
+    {
+
+        $entitymanager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT p.Telephone, p.nom
+            FROM App\Entity\Personne p
+            INNER JOIN App\Entity\Choisir c
+            ON p.id = c.idApprenant
+            '
+        )->setParameter('price', $price);
+
+        // returns an array of Product objects
+        return $query->getResult();
+
+       /* return $this->createQueryBuilder('od')
+        ->join('od.order', 'o')
+        ->addSelect('o')
+        ->where('o.userid = :userid')
+        ->andWhere('od.orderstatusid IN (:orderstatusid)')
+        ->setParameter('userid', $userid)
+        ->setParameter('orderstatusid', array(5, 6, 7, 8, 10))
+        ->getQuery()->getResult()*/
+   
+
     // /**
     //  * @return AutoEcole[] Returns an array of AutoEcole objects
     //  */

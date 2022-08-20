@@ -189,9 +189,17 @@ class TemplateApprenantController extends AbstractController
         $allautoecole = $autoEcoleRepository->findAll();
         $choix = $choixrepository->findBy(array("idApprenant"=>$idConnecter,"satut"=>true));
 
-        
+        $auto = new AutoEcole();
+        try {
+            //code...
+            $auto = $autoEcoleRepository->find($choix[0]->getIdEcole());
+        } catch (\Throwable $th) {
+            //throw $th;
+            $auto->setDescription("");
+            
+        }
 
-        $auto = $autoEcoleRepository->find($choix[0]->getIdEcole());
+        
 
        
         //Creation d'une session
@@ -216,7 +224,7 @@ class TemplateApprenantController extends AbstractController
                 //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
                 $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
             }
-            
+            echo "Sa marche";
             return  $this->json($ar);
         }elseif (isset($_REQUEST["contenu"]) && $_REQUEST["contenu"] == "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd") {
             # code...

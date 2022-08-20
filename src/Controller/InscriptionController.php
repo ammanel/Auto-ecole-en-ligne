@@ -29,7 +29,7 @@ class InscriptionController extends AbstractController
         } else {
             $choixInscription=new Choisir();
             $choixInscription->setIdEcole($autoEcole->getId());
-            $choixInscription->setIdApprenant($connecter->getId());
+            $choixInscription->setIdApprenant($connecter);
             $choixInscription->setDateInscription(new \DateTime('now'));
             $choixInscription->setSatut(true);
             $em->persist($choixInscription);

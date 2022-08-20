@@ -13,10 +13,11 @@ class Choisir
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\ManyToOne(targetEntity: AutoEcole::class)]
+    
     private $idEcole;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\ManyToOne(targetEntity: Apprenant::class)]
     private $idApprenant;
 
     #[ORM\Column(type: 'date')]
@@ -30,24 +31,24 @@ class Choisir
         return $this->id;
     }
 
-    public function getIdEcole(): ?int
+    public function getIdEcole(): ?AutoEcole
     {
         return $this->idEcole;
     }
 
-    public function setIdEcole(int $idEcole): self
+    public function setIdEcole(?AutoEcole $idEcole): self
     {
         $this->idEcole = $idEcole;
 
         return $this;
     }
 
-    public function getIdApprenant(): ?int
+    public function getIdApprenant(): ?Apprenant
     {
         return $this->idApprenant;
     }
 
-    public function setIdApprenant(int $idApprenant): self
+    public function setIdApprenant(?Apprenant $idApprenant): self
     {
         $this->idApprenant = $idApprenant;
 
