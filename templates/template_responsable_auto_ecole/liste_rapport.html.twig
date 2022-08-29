@@ -1,0 +1,35 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block contenu %}
+
+	<section class="content">
+    <div class="row">
+    {% for rapport in listeRapport %}
+        
+   
+         <div class="col-xl-4 col-12">
+				<div class="box">
+				  <div class="box-header with-border">
+					<h4 class="box-title">Rapport {{loop.index}}</h4>
+                    <br>
+                    <label>{{rapport.dateCrea|date('d-m-Y')}}</label>
+                    <div class="box-controls pull-right">
+					 <a href="#" class="btn btn-xs btn-info">*</a>
+					</div>  
+				  </div>
+                    
+				  <div class="box-body">
+					<div class="inner-content-div">
+			
+					  <p>{{rapport.contenu}}</p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+        {% endfor %}
+        </div>
+    </section>
+		
+{% endblock %}

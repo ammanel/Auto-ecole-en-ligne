@@ -17,6 +17,7 @@ use App\Repository\MessageRepository;
 use App\Repository\PersonneRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\RapportRepository;
+use App\Repository\SessionRepository;
 use App\Repository\TransactionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -170,7 +171,7 @@ class TemplateApprenantController extends AbstractController
     public function listeAutoEcole(Request $request, UserInterface $user,AutoEcoleRepository $autoEcoleRepository, ChoisirRepository $choixrepository,PersonneRepository $personneRepository, MessageRepository $messageRepository): Response
     {
 
-         $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
+        $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
         $idConnecter = $arraypersonne[0]->getId();
         $arrayautoecole = $choixrepository->findBy(array("idApprenant" => $idConnecter,"satut"=>false));
         try {
@@ -316,13 +317,21 @@ class TemplateApprenantController extends AbstractController
 
 
     #[Route('/template/apprenant/mon/auto/ecole', name: 'app_mon_Auto_Ecole')]
-    public function monAutoEcole(UserInterface $user): Response
+    public function monAutoEcole(UserInterface $user,SessionRepository $sessionRepository,PersonneRepository $personneRepository,ChoisirRepository $choisirRepository): Response
     {
         
-       
+        $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
+        $idConnecter = $arraypersonne[0]->getId();
+        $ecole= $choisirRepository->findByEcole($idConnecter);
+        $sessions=[];
+        foreach ($ecole as $val) {
+            $sessions=$sessionRepository->findBy(["autoEcole"=>$val->getIdEcole()]);
+        }
          return $this->render('template_apprenant/monEcole.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
-                "user"=> $user
+                "user"=> $user,
+                "ecole"=>$ecole,
+                "sessions"=>$sessions
             ]);
         
         

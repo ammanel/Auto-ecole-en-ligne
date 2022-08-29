@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class InscriptionController extends AbstractController
 {
     #[Route('/inscriptions/{id}/', name: 'app_inscription_auto_ecole')]
-    public function index(ApprenantRepository $ar,ManagerRegistry $doctrine,Request $request,UserInterface $user,AutoEcole $autoEcole,ChoisirRepository $choisirRepository): Response
+    public function index(ApprenantRepository $ar,ManagerRegistry $doctrine,UserInterface $user,AutoEcole $autoEcole,ChoisirRepository $choisirRepository): Response
     {
         $a = $user->getUserIdentifier();
         $connecter = $ar->findOneBy(array("Telephone"=>$a));
@@ -28,7 +28,7 @@ class InscriptionController extends AbstractController
             return $this->redirectToRoute('app_liste_Auto_Ecole');
         } else {
             $choixInscription=new Choisir();
-            $choixInscription->setIdEcole($autoEcole->getId());
+            $choixInscription->setIdEcole($autoEcole);
             $choixInscription->setIdApprenant($connecter);
             $choixInscription->setDateInscription(new \DateTime('now'));
             $choixInscription->setSatut(true);

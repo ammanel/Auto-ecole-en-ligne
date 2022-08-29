@@ -1,0 +1,135 @@
+{% extends 'base_apprenant.html.twig' %}
+
+
+{% block title %}Horaire index{% endblock %}
+
+{% block contenu %}
+
+   <div><a href="#" class="btn btn-primary">S'inscricre a cette session ?</a></div>
+	<div class="col-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title align-items-start flex-column">
+							Planning pratique
+							<small class="subtitle"></small>
+						</h4>
+					</div>
+					<div class="box-body py-0">
+						<div class="table-responsive">
+							<table class="table no-border">
+								<thead>
+									<tr class="text-left">
+										
+                                       
+										
+									</tr>
+								</thead>
+								<tbody>
+                                {% for horaire in pp %}
+                                    
+                               
+									<tr>										
+										 {% if horaire.enable == false %}
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{horaire.jours}}</a>
+											<span class="text-fade d-block">Pharetra, Nulla , Nec, Aliquet</span>
+										</td>
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												Web, UI/UX Design
+											</span>
+										</td>
+										<td>
+											<div class="d-flex flex-column w-p100">
+												<div class="d-flex align-items-center justify-content-between mb-2">
+													<span class="text-fade">
+													{{ horaire.description }}
+													</span>
+													
+												</div>
+												
+											</div>
+										</td>
+										
+										{% endif %}
+									</tr>
+									 {% endfor %}
+								</tbody>
+
+                                
+							</table>
+
+                            
+						</div>
+					</div>
+				</div>  
+	</div>
+
+    <div class="col-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title align-items-start flex-column">
+							Planning théorique
+							<small class="subtitle"></small>
+						</h4>
+					</div>
+					<div class="box-body py-0">
+						<div class="table-responsive">
+							<table class="table no-border">
+								<thead>
+									<tr class="text-left">
+										
+                                       
+										
+									</tr>
+								</thead>
+								<tbody>
+                                {% for horaire in pt %}
+                                    
+                               
+									<tr>										
+										 {% if horaire.enable == false %}
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{horaire.jours}}</a>
+											<span class="text-fade d-block">Pharetra, Nulla , Nec, Aliquet</span>
+										</td>
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												Web, UI/UX Design
+											</span>
+										</td>
+										<td>
+											<div class="d-flex flex-column w-p100">
+												<div class="d-flex align-items-center justify-content-between mb-2">
+													<span class="text-fade">
+													{{ horaire.description }}
+													</span>
+													
+												</div>
+												
+											</div>
+										</td>
+										
+										{% endif %}
+									</tr>
+									 {% endfor %}
+								</tbody>
+
+                                
+							</table>
+
+                            
+						</div>
+					</div>
+				</div>  
+	</div>
+
+    
+   
+{% endblock %}

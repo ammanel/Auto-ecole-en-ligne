@@ -37,10 +37,14 @@ class AutoEcole extends Personne
     #[ORM\ManyToMany(targetEntity: Apprenant::class, mappedBy: 'idAutoEcolr')]
     private $apprenants;
 
+    #[ORM\OneToMany(mappedBy: 'autoEcole', targetEntity: Session::class)]
+    private Collection $session;
+
     public function __construct()
     {
         $this->rapports = new ArrayCollection();
         $this->apprenants = new ArrayCollection();
+        $this->session = new ArrayCollection();
     }
 
     
@@ -172,7 +176,42 @@ class AutoEcole extends Personne
         return $this;
     }
 
-   
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSession(): Collection
+    {
+        return $this->session;
+    }
 
+    public function addSession(Session $session): self
+    {
+        if (!$this->session->contains($session)) {
+            $this->session->add($session);
+            $session->setAutoEcole($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->session->removeElement($session)) {
+            // set the owning side to null (unless already changed)
+            if ($session->getAutoEcole() === $this) {
+                $session->setAutoEcole(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+    
+    public function __toString() {
+        return $this->Nom;
+        ;
+    }
+   
   
 }

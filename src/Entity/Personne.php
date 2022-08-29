@@ -144,7 +144,7 @@ class Personne extends Infos implements UserInterface,PasswordAuthenticatedUserI
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }

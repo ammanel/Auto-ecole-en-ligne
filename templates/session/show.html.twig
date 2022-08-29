@@ -1,0 +1,34 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+{% block title %}Session{% endblock %}
+
+{% block contenu %}
+    <h1>Session</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ session.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ session.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date Debut</th>
+                <td>{{ session.dateDebut ? session.dateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date Fin</th>
+                <td>{{ session.dateFin ? session.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_session_index') }}">Annuler</a>
+
+    <a href="{{ path('app_session_edit', {'id': session.id}) }}">Modifier</a>
+
+   
+{% endblock %}

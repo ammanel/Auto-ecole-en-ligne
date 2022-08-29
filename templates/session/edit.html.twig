@@ -1,0 +1,13 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+{% block title %}Edit Session{% endblock %}
+
+{% block contenu %}
+    <h1>Modifier la Session</h1>
+
+    {{ include('session/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_session_index') }}">Annuler</a>
+
+    
+{% endblock %}

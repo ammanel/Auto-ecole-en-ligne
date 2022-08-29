@@ -42,18 +42,30 @@ class ChoisirRepository extends ServiceEntityRepository
 //    /**
 //     * @return Choisir[] Returns an array of Choisir objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByApprenant($ecole): array
+    {
+        return $this->createQueryBuilder('c')
+            
+            ->where('c.satut = 1')
+            ->andWhere('c.idEcole = :val')
+            ->setParameter('val', $ecole)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
+
+    public function findByEcole($ecole): array
+    {
+        return $this->createQueryBuilder('c')
+            
+            ->where('c.satut = 1')
+            ->andWhere('c.idApprenant = :val')
+            ->setParameter('val', $ecole)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    public function findOneBySomeField($value): ?Choisir
 //    {
 //        return $this->createQueryBuilder('c')

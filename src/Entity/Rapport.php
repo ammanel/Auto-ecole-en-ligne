@@ -25,6 +25,9 @@ class Rapport
     #[ORM\ManyToOne(targetEntity: AutoEcole::class, inversedBy: 'rapports')]
     private $createur;
 
+    #[ORM\ManyToOne(inversedBy: 'rapports')]
+    private ?Apprenant $apRapport = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Rapport
     public function setCreateur(?AutoEcole $createur): self
     {
         $this->createur = $createur;
+
+        return $this;
+    }
+
+    public function getApRapport(): ?Apprenant
+    {
+        return $this->apRapport;
+    }
+
+    public function setApRapport(?Apprenant $apRapport): self
+    {
+        $this->apRapport = $apRapport;
 
         return $this;
     }

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jour{% endblock %}
+
+{% block contenu %}
+    <h1>Jour</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jour.id }}</td>
+            </tr>
+            <tr>
+                <th>Jour</th>
+                <td>{{ jour.jour }}</td>
+            </tr>
+            <tr>
+                <th>Enable</th>
+                <td>{{ jour.enable ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_jour_index') }}">back to list</a>
+
+    <a href="{{ path('app_jour_edit', {'id': jour.id}) }}">edit</a>
+
+  
+{% endblock %}

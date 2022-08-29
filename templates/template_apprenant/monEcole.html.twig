@@ -22,52 +22,30 @@
 		</div>
 
 		<!-- Main content -->
-		<section class="content">
+<section class="content">
 
-		  <div class="row">
-			<div class="col-12 col-lg-7 col-xl-8">
-				
-			<div class="box">
-				  <div class="box-header bg-primary">
-					<h4 class="box-title"><strong>Horaire</strong></h4>
-				  </div>
-
-				  <div class="box-body">
-					<div class="table-responsive">
-						<table class="table simple mb-0">
-							<tbody>
-								<tr>
-									<td>JOURS</td>
-									<td class="text-right font-weight-700">HEURE</td>
-								</tr>
-								
-								<tr>
-									<th class="bt-1">Payable Amount</th>
-									<th class="bt-1 text-right font-weight-900 font-size-18">$1688</th>
-								</tr>
-
-                                <tr>
-									<th class="bt-1">Payable Amount</th>
-									<th class="bt-1 text-right font-weight-900 font-size-18">$1688</th>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				  </div>
-				  <div class="box-footer">	
-                
-                 
-				  </div>
-				</div> 
+		<div class="row">
+			<div class="col-md-12 col-lg-6">
+			  <div class="card">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Sessions disponiples  </li> 
+					{% for session in sessions %}
+						
+					<li class="list-group-item">{{session.nom}} ({{session.dateDebut|date('d-m-Y')}} - {{session.dateFin|date('d-m-Y')}} ) <a href="{{url('app_planning_part_apprenant',{'id':session.id})}}"> <span class="glyphicon glyphicon-eye-open "></span></a></li> 
+					{% endfor %}
+				</ul>
+			  </div>
+			  <!-- /.card -->
 			</div>
-			<!-- /.col -->		
 
-			  <div class="col-12 col-lg-5 col-xl-4">
+			{% for autoecole in ecole %}
+				
+			<div class="col-12 col-lg-5 col-xl-6">
 				 <div class="box box-widget widget-user">
 					<!-- Add the bg color to the header using any of the bg-* classes -->
 					<div class="widget-user-header bg-black" style="background: url('') center center;">
 					  <h3 class="widget-user-username"></h3>
-					  <h6 class="widget-user-desc">Auto-Ecole</h6>
+					  <h6 class="widget-user-desc"> </h6>
 					</div>
 					<div class="widget-user-image">
 					  <img class="rounded-circle" src="{{asset('AdminApprenant/images/user.png')}}" alt="User Avatar">
@@ -76,7 +54,7 @@
 					  <div class="row">
 						<div class="col-sm-4">
 						  <div class="description-block">
-							<h5 class="description-header">12K</h5>
+							<h5 class="description-header"></h5>
 							<span class="description-text">Membres</span>
 						  </div>
 						  <!-- /.description-block -->
@@ -84,7 +62,7 @@
 						<!-- /.col -->
 						<div class="col-sm-4 br-1 bl-1">
 						  <div class="description-block">
-							<h5 class="description-header"></h5>
+							<h5 class="description-header">{{autoecole.idEcole.Note}}</h5>
 							<span class="description-text">Note</span>
 						  </div>
 						  <!-- /.description-block -->
@@ -92,7 +70,7 @@
 						<!-- /.col -->
 						<div class="col-sm-4">
 						  <div class="description-block">
-							<h6 class="description-header"></h6>
+							<h6 class="description-header">{{autoecole.idEcole.Horairedebut}}</h6>
 							<span class="description-text">Ouvert</span>
 						  </div>
 						  <!-- /.description-block -->
@@ -107,9 +85,9 @@
 					  <div class="row">
 						<div class="col-12">
 							<div>
-								<p>Email :<span class="text-gray pl-10"></span> </p>
-								<p>Phone :<span class="text-gray pl-10"></span></p>
-								<p>Address :<span class="text-gray pl-10"></span></p>
+								<p>Email :<span class="text-gray pl-10"></span>{{autoecole.idEcole.Mail}} </p>
+								<p>Phone :<span class="text-gray pl-10"></span>{{autoecole.idEcole.Telephone}}</p>
+								<p>Address :<span class="text-gray pl-10"></span>{{autoecole.idEcole.Addresse}}</p>
 							</div>
 						</div>
 						<div class="col-12">
@@ -136,54 +114,17 @@
 				
 			
 
-			  </div>
+			</div>
+			{% endfor %}
+		</div>
+			<!-- /.col -->		
 
-		  </div>
+			 
+
+		
 		  <!-- /.row -->
 
-		</section>
+</section>
 
-         <div class="box">
-				<div class="box-header with-border">
-				  <h3 class="box-title">Liste des documents enregistrées</h3>
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-					<div class="table-responsive">
-					  <table id="example1" class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Document</th>
-								<th>Date</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							
-							<tr>
-							
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
-								<td><a href="# "><span class="glyphicon glyphicon-pencil"></span></a>|<a href="" onclick="return confirm('Voulez vraiment Supprimer ce document?')"><span class="glyphicon glyphicon-trash"></span></a></td>
-							
-							
-							</tr>
-							
-						</tbody>
-						<tfoot>
-							<tr>
-								<th>Id</th>
-								<th>Document</th>
-								<th>Date</th>
-								<th>Actions</th>
-							</tr>
-						</tfoot>
-					  </table>
-					</div>
-				</div>
-				<!-- /.box-body -->
-			  </div>
-		
+        
 {% endblock %}

@@ -5,50 +5,77 @@
 {% block contenu %}
 <section class="content">
 
-		<div class="row">
-			<div class="col-12 col-lg-7 col-xl-8">
-				
-			<div class="box">
-				  <div class="box-header bg-primary">
-					<h4 class="box-title"><strong>Horaire</strong></h4>
-				  </div>
+	<div class="row">
 
-				  <div class="box-body">
-					<div class="table-responsive">
-						<table class="table simple mb-0">
-							<tbody>
-								<tr>
-									<td>JOURS</td>
-									<td class="text-right font-weight-700">HEURE</td>
-								</tr>
+		<div class="col-lg-6 col-12">
+					  <div class="box">
+						<div class="box-header with-border">
+						  <h4 class="box-title">Sample form 1</h4>
+						</div>
+						<!-- /.box-header -->
+						{{form_start(form)}}
+				 		  <div class="row">
+								  <div class="col-md-6">
+									<div class="form-group">
+									  <label >Nom</label>
+									  {{form_widget(form.Nom)}}
+									</div>
+								  </div>
+								  <div class="col-md-6">
+									<div class="form-group">
+									  <label >Prenom</label>
+									    {{form_widget(form.image)}}
+									</div>
+								  </div>
+								</div>
+
+								<div class="row">
+								  <div class="col-md-6">
+									<div class="form-group">
+									  <label >E-mail</label>
+									   {{form_widget(form.Mail)}}
+									</div>
+								  </div>
+								  <div class="col-md-6">
+									<div class="form-group">
+									  <label >Contact </label>
+									   {{form_widget(form.Telephone)}}
+									</div>
+								  </div>
+								</div>
+
+								<div class="row">
+								  <div class="col-md-6">
+									<div class="form-group">
+									  <label >Description</label>
+									   {{form_widget(form.Description)}}
+									</div>
+								  </div>
+								  <div class="col-md-6">
+									<div class="form-group">
+									<label >Password</label>
+									  {{form_widget(form.password)}}
+									 
+									</div>
+								  </div>
+								</div>
+
+								<hr class="my-15">
+								<div class="form-group">
+								  <label>Addresse</label>
+								  {{form_widget(form.Addresse)}}
+								</div>
 								
-								<tr>
-									<th class="bt-1">Payable Amount</th>
-									<th class="bt-1 text-right font-weight-900 font-size-18">$1688</th>
-								</tr>
-
-                                <tr>
-									<th class="bt-1">Payable Amount</th>
-									<th class="bt-1 text-right font-weight-900 font-size-18">$1688</th>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				  </div>
-				  <div class="box-footer">	
-				  </div>
-                  
-				</div> 
-
-
-                
-                
-			</div>
-
-            
-			<!-- /.col -->		
-
-			  <div class="col-12 col-lg-5 col-xl-4">
+								<div class="box-footer">
+								<input type="submit" value="Enregistrer" class="btn btn-primary">
+								
+							   </div>  
+						{{form_end(form)}}
+					  </div>
+					  <!-- /.box -->			
+		</div>
+		
+			<div class="col-12 col-lg-10 col-xl-6">
 				 <div class="box box-widget widget-user">
 					<!-- Add the bg color to the header using any of the bg-* classes -->
 					<div class="widget-user-header bg-black" style="background: url('{{asset('../AdminResponsable/img/Imageuser/' ~ user.image)}}') center center;">
@@ -62,7 +89,7 @@
 					  <div class="row">
 						<div class="col-sm-4">
 						  <div class="description-block">
-							<h5 class="description-header">12K</h5>
+							<h5 class="description-header">{{inscrit}}</h5>
 							<span class="description-text">Membres</span>
 						  </div>
 						  <!-- /.description-block -->
@@ -76,13 +103,16 @@
 						  <!-- /.description-block -->
 						</div>
 						<!-- /.col -->
-						<div class="col-sm-4">
+						<div class="col-sm-2">
 						  <div class="description-block">
-							<h6 class="description-header">{{user.HoraireDebut}}</h6>
+							<h3 class="description-header">{{user.HoraireDebut}}</h3>
 							<span class="description-text">Ouvert</span>
+							<h3 class="description-header">{{user.HoraireDebut}}</h3>
+							<span class="description-text">Fermer</span>
 						  </div>
 						  <!-- /.description-block -->
 						</div>
+						
 						<!-- /.col -->
 					  </div>
 					  <!-- /.row -->
@@ -122,10 +152,13 @@
 				
 			
 
-			  </div>
+			</div>
+			<!-- /.col -->		
 
-		  </div>
+			  
+
+	</div>
 		  <!-- /.row -->
 
-		</section>
+</section>
 {% endblock %}

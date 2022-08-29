@@ -1,0 +1,70 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block contenu %}
+
+	<div class="col-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title align-items-start flex-column">
+							Apprenant
+							<small class="subtitle">liste des personnes pouvant recevoir un rapport </small>
+						</h4>
+					</div>
+					<div class="box-body py-0">
+						<div class="table-responsive">
+							<table class="table no-border">
+								<thead>
+									<tr class="text-left">
+										<th style="width: 50px">Apprenants</th>
+										<th style="min-width: 200px"></th>
+										<th style="min-width: 150px">Session</th>
+										<th class="text-right" style="min-width: 150px">Details</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for apprenant in apprenants %}
+									<tr>										
+										<td>
+											<div class="bg-lightest h-50 w-50 l-h-50 rounded text-center overflow-hidden">
+												<img src="{{asset('AdminApprenant/images/user.png')}}" class="h-50 align-self-end" alt="">
+											</div>
+										</td>
+										
+										
+										<td>
+									
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{apprenant.idApprenant.Nom}}</a>
+											<span class="text-fade d-block">{{apprenant.idApprenant.Prenom}}</span>
+										</td>
+										
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												Intertico
+											</span>
+											<span class="text-fade d-block">
+												Web, UI/UX Design
+											</span>
+										</td>
+										
+											
+										
+										<td class="text-right">
+											<a href="" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>
+											
+										</td>
+									 
+									</tr>
+									
+										
+								{% endfor %}
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>  
+			</div>
+		
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+
+{% block title %}Horaire index{% endblock %}
+
+{% block contenu %}
+    <h1>Horaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Heure</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Enable</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for horaire in horaires %}
+            <tr>
+                <td>{{ horaire.id }}</td>
+                <td>{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}</td>
+                <td>{{ horaire.description }}</td>
+                <td>{{ horaire.type }}</td>
+                <td>{{ horaire.enable ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_horaire_show', {'id': horaire.id}) }}">show</a>
+                    <a href="{{ path('app_horaire_edit', {'id': horaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

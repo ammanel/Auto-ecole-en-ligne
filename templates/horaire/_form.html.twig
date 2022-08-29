@@ -1,0 +1,25 @@
+						{{ form_start(form) }}
+							<div class="box-body">
+								
+								<hr class="my-15">
+								<div class="form-group">
+								  <label>Jours</label>
+								      {{ form_widget(form.jours) }}
+								</div>
+                                <div class="form-group">
+								  <label>Heure</label>
+								      {{ form_widget(form.heure) }}
+								</div>
+                                <div class="form-group">
+								  <label>Description</label>
+								     {{ form_widget(form.description) }}
+								</div>
+								
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer">
+                                    <input type="submit" value="Enregistrer" class="btn btn-rounded btn-warning btn-outline mr-1">
+								
+								
+							</div>  
+						{{ form_end(form) }}

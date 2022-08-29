@@ -5,24 +5,24 @@ namespace App\Controller;
 use App\Entity\Apprenant;
 use App\Entity\AutoEcole;
 use App\Entity\Message;
-use App\Entity\Personne;
 use App\Entity\Rapport;
+use App\Form\AutoEcoleModifType;
 use App\Form\MessageType;
 use App\Repository\AutoEcoleRepository;
 use App\Repository\ChoisirRepository;
 use App\Repository\MessageRepository;
 use App\Repository\PersonneRepository;
-use DateTime;
-use Doctrine\ORM\Mapping\Id;
+use App\Repository\RapportRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\Date;
+
 
 class TemplateResponsableAutoEcoleController extends AbstractController
 {
@@ -37,7 +37,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
     }
 
     #[Route('/template/responsable/auto/ecole', name: 'app_template_responsable_auto_ecole')]
-    public function index(ChoisirRepository $choisirRepository,UserInterface $user,AutoEcoleRepository $autoEcoleRepository,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
+    public function index(ChoisirRepository $choisirRepository,UserInterface $user,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
     {
 
 
@@ -55,7 +55,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
     }
 
     #[Route('/template/responsable/auto/ecole/message_choix_apprenant', name: 'message_choix_apprenant')]
-    public function message_choix_apprenant(ChoisirRepository $choisirRepository,UserInterface $user,AutoEcoleRepository $autoEcoleRepository,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
+    public function message_choix_apprenant(ChoisirRepository $choisirRepository,UserInterface $user,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
     {
         $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
         $idConnecter = $arraypersonne[0]->getId();
@@ -70,7 +70,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
     
 
     #[Route('/template/responsable/auto/ecole/message_apprenant/{id}/ecole', name: 'message_apprenant', methods: ['GET', 'POST'])]
-    public function message_apprenant(Personne $personne,Request $request,Apprenant $apprenant,ChoisirRepository $choisirRepository,UserInterface $user,AutoEcoleRepository $autoEcoleRepository,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
+    public function message_apprenant(Apprenant $apprenant,ChoisirRepository $choisirRepository,UserInterface $user,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
     {
         
         $message = new Message();
@@ -179,8 +179,8 @@ class TemplateResponsableAutoEcoleController extends AbstractController
         ]);
     }
 
-    #[Route('/template/responsable/auto/ecole/rapport', name: 'app_rapport',methods:['POST','GET'])]
-    public function raport(Request $request,ManagerRegistry $doctrine): Response
+    #[Route('vue/{id}/rapport', name: 'app_rapport',methods:['POST','GET'])]
+    public function raport(Request $request,ManagerRegistry $doctrine,Apprenant $apprenant): Response
     {    
         $user = $this->getUser();
         $rapport=$request->request->get('contenu_rapport');
@@ -190,6 +190,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
         $EntiteRapport->setCreateur($user);
         $EntiteRapport->setDateCrea(new \DateTime('now'));
         $EntiteRapport->setTimeCrea(new \DateTime('now'));
+        $EntiteRapport->setApRapport($apprenant);
         $em=$doctrine->getManager();
         $em->persist($EntiteRapport);
         $em->flush();
@@ -200,22 +201,103 @@ class TemplateResponsableAutoEcoleController extends AbstractController
         ]);
     }
 
+
     #[Route('/template/responsable/auto/ecole/{id}/profil', name: 'app_template_responsable_auto_ecole_profil')]
-    public function profilEcole(UserInterface $user): Response
+    public function profilEcole(AutoEcoleRepository $autoEcoleRepository,UserPasswordHasherInterface $passwordhash,ChoisirRepository $choisirRepository,PersonneRepository $personneRepository,UserInterface $user,Request $request,ManagerRegistry $doctrine): Response
     {
+        $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
+        $idConnecter = $arraypersonne[0]->getId();
+
+        $a = $user->getUserIdentifier();
+        $connecter = $autoEcoleRepository->findOneBy(array("Telephone"=>$a));
+
+        $res=count($choisirRepository->findByApprenant($idConnecter)) ;
+        $form = $this->createForm(AutoEcoleModifType::class, $connecter);
+        $form->handleRequest($request);
+        
+
+      
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $hashdePassword=$passwordhash->hashPassword($connecter,$connecter->getpassword());
+            $connecter->setpassword($hashdePassword);
+            $em=$doctrine->getManager();
+            $em->flush();
+            
+        }
 
         return $this->render('template_responsable_auto_ecole/profil_auto_ecole.html.twig', [
-            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user
+            'controller_name' => 'TemplateResponsableAutoEcoleController','id'=>$idConnecter,
+            'user'=>$user,
+            'form' => $form->createView(),
+            'inscrit'=>$res
         ]);
     }
 
 
-    #[Route('/template/responsable/auto/ecole/{id}/paramètre/compte', name: 'app_template_responsable_auto_ecole_parametre')]
-    public function parametres(UserInterface $user): Response
+   
+    #[Route('liste/rapport', name: 'app_liste_rapport')]
+    public function liste_rapport(RapportRepository $rapportRepository): Response
     {
+        $listeRapport=$rapportRepository->findByDateRes();
 
-        return $this->render('template_responsable_auto_ecole/parametres.html.twig', [
-            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user
+        return $this->render('template_responsable_auto_ecole/liste_rapport.html.twig', [
+            'controller_name' => 'TemplateResponsableAutoEcoleController',
+            'listeRapport'=>$listeRapport
+        ]);
+    }
+
+   
+
+    #[Route('/template/responsable/auto/ecole/choix/ecrire/rapport', name: 'app_choix_rapport')]
+    public function choixRapport(UserInterface $user,ChoisirRepository $choisirRepository, AutoEcoleRepository $autoEcoleRepository): Response
+    {
+        
+        $a = $user->getUserIdentifier();
+        $connecter = $autoEcoleRepository->findOneBy(array("Telephone"=>$a));
+        $res=$choisirRepository->findByApprenant($connecter->getId());
+
+       
+        return $this->render('template_responsable_auto_ecole/choix_apprenant_rapport.html.twig', [
+            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user,"apprenants"=>
+            $res,
+        ]);
+    }
+
+
+    #[Route('/apprenat/inscrit', name: 'app_apprenant_inscrit')]
+    public function apprenatInscrit(UserInterface $user,ChoisirRepository $choisirRepository, AutoEcoleRepository $autoEcoleRepository): Response
+    {
+        
+        $a = $user->getUserIdentifier();
+        $connecter = $autoEcoleRepository->findOneBy(array("Telephone"=>$a));
+        $res=$choisirRepository->findByApprenant($connecter->getId());
+
+       
+        return $this->render('template_responsable_auto_ecole/liste_apprenant_inscrit.html.twig', [
+            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user,"apprenants"=>
+            $res,
+        ]);
+    }
+
+    #[Route('/template/portefeuille', name: 'app_portefeuille')]
+    public function portefeuille(): Response
+    {
+       
+        return $this->render("template_responsable_auto_ecole/portefeuille.html.twig",
+        
+    );
+    }
+
+
+    #[Route('/template/header', name: 'app_header')]
+    public function header(): Response
+    {
+         
+      
+        $currentUser = $this->container->get('security.context')->getToken()->getUser();
+        return $this->render("template_responsable_auto_ecole/header_responsable.html.twig",
+        [
+        
         ]);
     }
 }

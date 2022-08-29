@@ -47,6 +47,9 @@ class Apprenant extends Personne
     #[ORM\ManyToMany(targetEntity: AutoEcole::class, inversedBy: 'apprenants')]
     private $idAutoEcolr;
 
+    #[ORM\OneToMany(mappedBy: 'apRapport', targetEntity: Rapport::class)]
+    private Collection $rapports;
+
   
 
 
@@ -59,6 +62,7 @@ class Apprenant extends Personne
         $this->documents = new ArrayCollection();
         $this->transactions = new ArrayCollection();
         $this->idAutoEcolr = new ArrayCollection();
+        $this->rapports = new ArrayCollection();
     }
 
     
@@ -241,8 +245,41 @@ class Apprenant extends Personne
         return $this;
     }
 
-   
+    /**
+     * @return Collection<int, Rapport>
+     */
+    public function getRapports(): Collection
+    {
+        return $this->rapports;
+    }
 
+    public function addRapport(Rapport $rapport): self
+    {
+        if (!$this->rapports->contains($rapport)) {
+            $this->rapports->add($rapport);
+            $rapport->setApRapport($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRapport(Rapport $rapport): self
+    {
+        if ($this->rapports->removeElement($rapport)) {
+            // set the owning side to null (unless already changed)
+            if ($rapport->getApRapport() === $this) {
+                $rapport->setApRapport(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+    public function __toString() {
+        return $this->Nom;
+        ;
+    }
    
 
 

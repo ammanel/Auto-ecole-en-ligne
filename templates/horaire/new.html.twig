@@ -1,0 +1,83 @@
+{% extends 'base_responsable_auto_ecole.html.twig' %}
+
+
+{% block title %}New Horaire{% endblock %}
+
+{% block contenu %}
+    
+
+<section class="content">
+    <div class="row">
+            
+    <div class="col-lg-4 col-12">
+					  <div class="box">
+						<div class="box-header with-border">
+						  <h4 class="box-title">Ajouter une date </h4>
+						</div>
+						
+                            {{ include('horaire/_form.html.twig') }}
+					  </div>
+							
+				</div>  
+
+
+    
+
+
+    <div class="col-lg-8 col-12">
+                	<div class="box">
+                        <div class="box-header with-border">
+                        <h3 class="box-title">pratique</h3>
+                        </div>
+				
+                    <div class="box-body">
+                        <div class="table-responsive">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for horaire in horaires %}
+                            {% if horaire.type =="pratique" %}
+                                
+                            
+                                <tr>
+                                    <td>{{horaire.jours}}</td>
+                                    <td>{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}</td>
+                                    <td>{{ horaire.description }}</td>
+                                    
+                                </tr>
+                     
+                            
+                            {% endif %}
+                            {% endfor %}                           
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                   
+                                </tr>
+                            </tfoot>
+                        </table>
+                        </div>
+                    </div>
+		
+			  </div>
+        </div>
+
+				
+					  
+						
+	
+    </div>
+</section>
+
+
+    <a href="{{ path('app_horaire_index') }}">back to list</a>
+{% endblock %}
