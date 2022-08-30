@@ -25,6 +25,9 @@ class Message
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $DateEnvoi;
 
+    #[ORM\Column(type: 'boolean')]
+    private $lu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,17 @@ class Message
     public function setDateEnvoi(?\DateTimeInterface $DateEnvoi): self
     {
         $this->DateEnvoi = $DateEnvoi;
+
+        return $this;
+    }
+    public function getLu(): ?bool
+    {
+        return $this->lu;
+    }
+
+    public function setLu(bool $lu): self
+    {
+        $this->lu = $lu;
 
         return $this;
     }

@@ -317,24 +317,175 @@ class TemplateApprenantController extends AbstractController
 
 
     #[Route('/template/apprenant/mon/auto/ecole', name: 'app_mon_Auto_Ecole')]
-    public function monAutoEcole(UserInterface $user,SessionRepository $sessionRepository,PersonneRepository $personneRepository,ChoisirRepository $choisirRepository): Response
+    public function monAutoEcole(Request $request,AutoEcoleRepository $autoEcoleRepository,ChoisirRepository $choixrepository,MessageRepository $messageRepository,UserInterface $user,SessionRepository $sessionRepository,PersonneRepository $personneRepository,ChoisirRepository $choisirRepository): Response
     {
-        
+        if (isset($_REQUEST['contenu']) && $_REQUEST['contenu'] != "" && $_REQUEST['contenu'] != "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd") {
+            
+
+           
+            $message = new Message();
+            # code...
+            $message->setContenu($_REQUEST["contenu"]);
+            $message->setEnvoyerPar( $personneRepository->find($_REQUEST["idconnecter"]));
+            $message->setRecuPar($personneRepository->find($_REQUEST["idrecupar"]));
+            $message->setDateEnvoi(new \DateTime('now'));
+            $message->setLu(false);
+            $messageRepository->add($message,true);
+
+            $mess = $messageRepository->findAll();
+            $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+            return $this->json($ar);
+
+        }elseif ( isset($_REQUEST['contenu']) && $_REQUEST['contenu']  == "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd") {
+            # code...
+            $mess = $messageRepository->findAll();
+            $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+
+            return  $this->json($ar);
+        }
+
         $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
         $idConnecter = $arraypersonne[0]->getId();
-        $ecole= $choisirRepository->findByEcole($idConnecter);
-        $sessions=[];
-        foreach ($ecole as $val) {
-            $sessions=$sessionRepository->findBy(["autoEcole"=>$val->getIdEcole()]);
+        $arrayautoecole = $choixrepository->findBy(array("idApprenant" => $idConnecter,"satut"=>false));
+        try {
+            $autoecoleId = $arrayautoecole[0]->getIdEcole();
+        } catch (\Throwable $th) {
+            $autoecoleId = 0;
         }
-         return $this->render('template_apprenant/monEcole.html.twig', [
-                'controller_name' => 'TemplateApprenantController',
-                "user"=> $user,
-                "ecole"=>$ecole,
-                "sessions"=>$sessions
-            ]);
+        
+
+        $autoecole = $autoEcoleRepository->find($autoecoleId);
+        
+
+
+        
+
+        $allautoecole = $autoEcoleRepository->findAll();
+        $choix = $choixrepository->findBy(array("idApprenant"=>$idConnecter,"satut"=>true));
+
+        $auto = new AutoEcole();
+        try {
+            //code...
+            $auto = $autoEcoleRepository->find($choix[0]->getIdEcole());
+        } catch (\Throwable $th) {
+            //throw $th;
+            $auto->setDescription("");
+            
+        }
+
+        
+
+       
+        //Creation d'une session
+        $message = new Message();
+        
+        $form = $this->createForm(MessageType::class, $message);
+
         
         
+        $form->handleRequest($request);
+        
+        
+        if (isset($_REQUEST["contenu"]) && $_REQUEST["contenu"] == "uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd") {
+            # code...
+            $mess = $messageRepository->findAll();
+            $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+
+            return  $this->json($ar);
+
+        }else{
+            
+            $messages = $messageRepository->findAll();
+            $ecole= $choisirRepository->findByEcole($idConnecter);
+            $sessions=[];
+            foreach ($ecole as $val) {
+                $sessions=$sessionRepository->findBy(["autoEcole"=>$val->getIdEcole()]);
+            }
+            
+            try {
+                //code...
+                return $this->render('template_apprenant/monEcole.html.twig', [
+                    'controller_name' => 'TemplateApprenantController',
+                    "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
+                    "autoecole"=> $auto->getDescription(),
+                    "autoecoleid"=>"",
+                    "envoyerpar"=>$idConnecter,
+                    "recupar"=>$auto->getId(),
+                    "form" => $form->createView(),
+                    "messages"=> $messages,
+                    "ecole"=>$ecole,
+                    "sessions"=>$sessions
+                ]);
+            } catch (\Throwable $th) {
+                //throw $th;
+                return $this->render('template_apprenant/monEcole.html.twig', [
+                    'controller_name' => 'TemplateApprenantController',
+                    "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
+                    //"autoecole"=> $auto->getDescription(),
+                    "autoecoleid"=>"",
+                    "envoyerpar"=>$idConnecter,
+                    //"recupar"=>$auto->getId(),
+                    "form" => $form->createView(),
+                    "messages"=> $messages,
+                    "ecole"=>$ecole,
+                    "sessions"=>$sessions
+                ]);
+            }
+
+            
+            
+        }
+
+        
+        
+    }
+
+
+    //Notifications
+    #[Route('/template/apprenant/mon/auto/notifications', name: 'app_notification_apprenant')]
+    public function notifapprenant(ApprenantRepository $apprenantRepository,MessageRepository $messageRepository)
+    {   
+
+        if (isset($_REQUEST["lu"])) {
+            # code...
+            $apprenantRepository->UpdateNotifications($_REQUEST["envoyerpar"]);
+        }
+        
+        if (isset($_REQUEST["envoyerpar"])) {
+            # code...
+            $notifs = $messageRepository->findBy(array("lu"=>false,"RecuPar"=>$_REQUEST["envoyerpar"]));
+            $a = count($notifs);
+            $array = array("nombre"=>$a);
+            return $this->json($array);
+        }
+        
+        
+        
+
+    }
+    #[Route('/template/apprenant/mon/auto/listeNotifications', name: 'app_liste_notification_apprenant')]
+    public function listeNotifications(ApprenantRepository $apprenantRepository)
+    {
+        $mess = $apprenantRepository->listeNotifications($_REQUEST["envoyerpar"]);
+        
+        $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+        return $this->json($ar);
     }
 
   

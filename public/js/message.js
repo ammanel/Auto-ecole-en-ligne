@@ -1,17 +1,35 @@
 
 
+function scollebas() {
+    document.getElementById("chat-logs").scrollTo(0,document.getElementById("chat-logs").scrollHeight);
+    lu()
+}
 
 var message = ""
 
 
+
+
+
 function messageenvoi(event){
+    
     event.preventDefault();
     const url = this.href;
-    document.getElementById("chat-input").innerHTML="";
+    
     var contenu = document.getElementById("chat-input").value;
+    document.getElementById("chat-logs").scrollTo(0,document.getElementById("chat-logs").scrollHeight);
+
+    try {
+        document.getElementById("chat-input").value="";
+    } catch (error) {
+        
+    }
     
+    const link = document.getElementById("envoi").value;
+    var idconnecter = document.getElementById("idconnecter").value;
+    var idrecupar = document.getElementById("idrecupar").value;
     
-    axios.post("ecole?contenu="+contenu).then(function(response) {
+    axios.post("ecole?contenu="+contenu+"&idconnecter="+idconnecter+"&idrecupar="+idrecupar).then(function(response) {
         
         const messages = response.data;
         var idconnecter = document.getElementById("idconnecter").value;
@@ -45,7 +63,11 @@ function messageenvoi(event){
            
         
         };
+
+        
         document.getElementById("mess").innerHTML= mot;
+        
+        
 		
         /*const html = response.map(function(message){
             return '<div class="chat-msg self"><div class="cm-msg-text">'+message.contenu+'</div><br/><br/><br/><br/></div><div class="chat-msg user"><div class="cm-msg-text">textox</div><br/><br/><br/><br/></div>'
@@ -81,6 +103,7 @@ function messageenvoi(event){
 document.getElementById("envoi").addEventListener('click',messageenvoi)
 
 
+
 setInterval(function () {
         
         axios.post("ecole?contenu=uvbsuvbsiudbvdjksbvjkbsvcjkxbkjvbxjkcbvkjvbdfsvkvjbskjdbvsjkbvsjkdvb skcv kjs dvjskvksjvbkjsdbvkjsbvjksd").then(function(response) {
@@ -90,7 +113,7 @@ setInterval(function () {
         listeMessage = [];
         listeIdEnvoyerPar = [];
         listeIdRecuPar = [];
-        document.getElementById("chat-input").innerHTML = "";
+        
         
 
         for (let index = 0; index < messages.length; index++) {
@@ -131,5 +154,51 @@ setInterval(function () {
         };
         console.log(messages);
         document.getElementById("mess").innerHTML= mot;
+        
     });
 },3000)
+
+
+
+setInterval(function () {
+    var idconnecter = document.getElementById("idconnecter").value;
+    axios.post("notifications?envoyerpar="+idconnecter).then(function(response) {
+    const messages = response.data;
+    document.getElementById("notifs").innerHTML=messages.nombre
+    axios.post("listeNotifications?envoyerpar="+idconnecter).then(function(response) {
+        const messages = response.data;
+        var listeMessage = [];
+        for (let index = 0; index < messages.length; index++) {
+        listeMessage[index] = messages[index].contenu;
+        }
+        mot = "";
+        for (let index = 0; index < listeMessage.length; index++) {
+
+            if (index == 10) {
+                break;
+            }
+            mot = mot + "<li><i class='fa fa-envelope' aria-hidden='true'></i> &emsp;"+listeMessage[index]+"</li>";
+            
+            
+           
+        
+        };
+
+        document.getElementById("message_notifications").innerHTML=mot;
+    })
+    
+    
+    
+});
+},3000)
+
+function lu() {
+    var idconnecter = document.getElementById("idconnecter").value;
+    axios.post("notifications?lu=oui&envoyerpar="+idconnecter).then(function(response) {
+        const messages = response.data;
+        document.getElementById("chat-logs").scrollTo(0,document.getElementById("chat-logs").scrollHeight);
+})
+}
+
+
+

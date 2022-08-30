@@ -86,6 +86,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
             $message->setEnvoyerPar( $personneRepository->find($_REQUEST["idconnecter"]));
             $message->setRecuPar($personneRepository->find($_REQUEST["idrecupar"]));
             $message->setDateEnvoi(new \DateTime('now'));
+            $message->setLu(false);
             $messageRepository->add($message,true);
 
             $mess = $messageRepository->findAll();
@@ -156,6 +157,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
             $message->setEnvoyerPar($personneRepository->find($idConnecter));
             $message->setRecuPar($personneRepository->find($auto->getId()));
             $message->setDateEnvoi(new \DateTime('now'));
+            $message->setLu(false);
             $messageRepository->add($message,true);
 
             $mess = $messageRepository->findAll();
@@ -299,5 +301,39 @@ class TemplateResponsableAutoEcoleController extends AbstractController
         [
         
         ]);
+    }
+
+    #[Route('/template/responsable/auto/ecole/message_apprenant/{id}/notifications', name: 'app_notification_responsable')]
+    public function notifapprenant(AutoEcoleRepository $autoEcoleRepository,MessageRepository $messageRepository)
+    {   
+
+        if (isset($_REQUEST["lu"])) {
+            # code...
+            $autoEcoleRepository->UpdateNotifications($_REQUEST["envoyerpar"]);
+        }
+        
+        if (isset($_REQUEST["envoyerpar"])) {
+            # code...
+            $notifs = $messageRepository->findBy(array("lu"=>false,"RecuPar"=>$_REQUEST["envoyerpar"]));
+            $a = count($notifs);
+            $array = array("nombre"=>$a);
+            return $this->json($array);
+        }
+
+        return $this->json([]);
+
+    }
+
+    #[Route('/template/responsable/auto/ecole/message_apprenant/{id}/listeNotifications', name: 'app_liste_notification_responsable')]
+    public function listeNotifications(AutoEcoleRepository $autoEcoleRepository)
+    {
+        $mess = $autoEcoleRepository->listeNotifications($_REQUEST["envoyerpar"]);
+        
+        $ar = array();
+            for ($i=0; $i < count($mess); $i++) { 
+                //$ar("$mess[$i]->getId()" => $mess[$i]->getContenu())
+                $ar[$i] = array("contenu" => $mess[$i]->getContenu(),"recupar"=>$mess[$i]->getRecuPar()->getId(),"envoyerpar"=>$mess[$i]->getEnvoyerPar()->getId());
+            }
+        return $this->json($ar);
     }
 }

@@ -47,6 +47,35 @@ class AutoEcoleRepository extends ServiceEntityRepository
         }
     }
 
+    public function UpdateNotifications($personne)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'UPDATE App\Entity\Message p SET p.lu = true
+            WHERE p.lu = false and  p.RecuPar = :personne
+            '
+        )->setParameter('personne',$personne);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+    public function listeNotifications($personne)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p FROM App\Entity\Message p
+            WHERE p.lu = false and p.RecuPar = :personne ORDER BY p.DateEnvoi DESC'
+            
+        )->setParameter('personne',$personne);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
 /*
     public function getApprenant($value)
     {
