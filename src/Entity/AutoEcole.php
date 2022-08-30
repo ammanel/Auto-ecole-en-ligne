@@ -208,10 +208,7 @@ class AutoEcole extends Personne
 
    
     
-    public function __toString() {
-        return $this->Nom;
-        ;
-    }
+    
    
   
 }

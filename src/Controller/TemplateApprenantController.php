@@ -260,8 +260,8 @@ class TemplateApprenantController extends AbstractController
             return $this->render('template_apprenant/listeAutoEcole.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,"ecoles"=>$autoEcoleRepository->findAll(),
-                "autoecole"=> $auto->getDescription(),
-                "autoecoleid"=>"",
+                //"autoecole"=> $auto->getDescription(),
+                
                 "envoyerpar"=>$idConnecter,
                 "recupar"=>$auto->getId(),
                 "form" => $form->createView(),

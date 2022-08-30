@@ -88,12 +88,12 @@ class AuthentificationController extends AbstractController
 
     #[Route('/{id}', name: 'Confirmation',  methods: ['GET', 'POST'])]
     public function Confirmation(Apprenant $apprenant)
-    {/*
-        $apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
+    {
+        /*$apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
         $userUid = " RORJJ4";
 
         $moi = new Goxens($apiKey, $userUid);
-        $lien = "http://http://127.0.0.1:8000//validation/".$apprenant->getId();
+        $lien = "http://192.168.1.64:8000//validation/".$apprenant->getId();
         //$lien= "test";
         $message = "Monsieur ".$apprenant->getNom()." votre compte a bien ete créer \n Il ne vous reste plus qu'a l'activer avec ce lien ".$lien;
         $sender = "AutoEcole";
