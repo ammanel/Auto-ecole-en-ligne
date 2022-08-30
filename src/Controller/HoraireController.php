@@ -38,6 +38,7 @@ class HoraireController extends AbstractController
         return $this->render('horaire/planing_part_apprenant.html.twig', [
             'pt' => $horaireRepository->findBySortePlanning($session,'théorique'),
             'pp' => $horaireRepository->findBySortePlanning($session,'pratique'),
+            'session'=>$session
         ]);
     }
 

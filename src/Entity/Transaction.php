@@ -28,6 +28,9 @@ class Transaction
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $cours=false;
 
+    #[ORM\ManyToOne(inversedBy: 'transactions')]
+    private ?Session $idSession = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Transaction
     public function setCours(?bool $cours): self
     {
         $this->cours = $cours;
+
+        return $this;
+    }
+
+    public function getIdSession(): ?Session
+    {
+        return $this->idSession;
+    }
+
+    public function setIdSession(?Session $idSession): self
+    {
+        $this->idSession = $idSession;
 
         return $this;
     }

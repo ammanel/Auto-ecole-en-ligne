@@ -5,9 +5,10 @@
 
 {% block contenu %}
 
-   <div><a href="#" class="btn btn-primary">S'inscricre a cette session ?</a></div>
 	<div class="col-12">
 				<div class="box">
+				
+   				<div><a href="{{url('app_incription_session_presentiel',{'id':session.id})}}" class="btn btn-primary">S'inscricre en présensiel ?</a>  <a href="{{url('app_incription_session_pratique',{'id':session.id})}}" class="btn btn-primary pull-right">S'inscricre pour la pratique ?</a> </div>
 					<div class="box-header">
 						<h4 class="box-title align-items-start flex-column">
 							Planning pratique

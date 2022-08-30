@@ -21,51 +21,40 @@
 			</div>
 		</div>
 
-		<!-- Main content -->
-		<section class="content">
+	
+	<section class="content">
 
-		  <div class="row">
-			<div class="col-12 col-lg-7 col-xl-8">
+		<div class="row">
+			<div class="col-12 col-lg-4 col-xl-6">
 				
-			<div class="box">
-				  <div class="box-header bg-primary">
-					<h4 class="box-title"><strong>Horaire</strong></h4>
-				  </div>
+				<div class="row">
+				
+					<div class="col-md-12 col-lg-10">
+					<a href="{{url('app_inscription_auto_ecole',{'id':ecole.id})}}" class="waves-effect waves-light btn btn-outline btn-success-light mb-5">S'inscrire Ici</a>
+						<div class="card">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Sessions disponiples  </li> 
+								{% for session in sessions %}
+									
+								<li class="list-group-item">{{session.nom}} ({{session.dateDebut|date('d-m-Y')}} - {{session.dateFin|date('d-m-Y')}} ) <a href="{{url('app_planning_part_apprenant',{'id':session.id})}}"> <span class="glyphicon glyphicon-eye-open "></span></a></li> 
+								{% endfor %}
+							</ul>
+						</div>
+			  
 
-				  <div class="box-body">
-					<div class="table-responsive">
-						<table class="table simple mb-0">
-							<tbody>
-								<tr>
-									<td>JOURS</td>
-									<td class="text-right font-weight-700">HEURE</td>
-								</tr>
-								
-								<tr>
-									<th class="bt-1">Payable Amount</th>
-									<th class="bt-1 text-right font-weight-900 font-size-18">$1688</th>
-								</tr>
+			  			
+			     	</div>
 
-                                <tr>
-									<th class="bt-1">Payable Amount</th>
-									<th class="bt-1 text-right font-weight-900 font-size-18">$1688</th>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				  </div>
-				  <div class="box-footer">	
-                
-                   <a href="{{url('app_inscription_auto_ecole',{'id':ecole.id})}}" class="btn btn-info">S'inscrire</a>
-                   <a href="{{url('app_liste_Auto_Ecole')}}"  class="btn btn-danger pull-right">Retour</a>
-				  </div>
-				</div> 
-			</div>
-			<!-- /.col -->		
+					
 
-			  <div class="col-12 col-lg-5 col-xl-4">
+			  	
+			    </div>
+			</div>		
+
+			
+			  <div class="col-12 col-lg-12 col-xl-6">
 				 <div class="box box-widget widget-user">
-					<!-- Add the bg color to the header using any of the bg-* classes -->
+	
 					<div class="widget-user-header bg-black" style="background: url('{{asset('../AdminResponsable/img/ImageAutoEcole/' ~ ecole.image)}}') center center;">
 					  <h3 class="widget-user-username">{{ecole.nom}}</h3>
 					  <h6 class="widget-user-desc">Auto-Ecole</h6>
@@ -113,23 +102,7 @@
 								<p>Address :<span class="text-gray pl-10">{{ecole.addresse}}</span></p>
 							</div>
 						</div>
-						<div class="col-12">
-							<div class="pb-15">						
-								<p class="mb-10">reseaux sociaux</p>
-								<div class="user-social-acount">
-									<button class="btn btn-circle btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></button>
-									<button class="btn btn-circle btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></button>
-									<button class="btn btn-circle btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></button>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div>
-								<div class="map-box">
-									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2805244.1745767146!2d-86.32675167439648!3d29.383165774894163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c1766591562abf%3A0xf72e13d35bc74ed0!2sFlorida%2C+USA!5e0!3m2!1sen!2sin!4v1501665415329" width="100%" height="100" frameborder="0" style="border:0" allowfullscreen></iframe>
-								</div>
-							</div>
-						</div>
+					
 					  </div>
 					</div>
 					<!-- /.box-body -->
@@ -139,8 +112,9 @@
 
 			  </div>
 
-		  </div>
-		  <!-- /.row -->
 
-		</section>
+		</div>
+		 
+
+	</section>
 {% endblock %}

@@ -277,7 +277,7 @@ class Apprenant extends Personne
 
    
     public function __toString() {
-        return $this->Nom;
+        return $this->id;
         ;
     }
    

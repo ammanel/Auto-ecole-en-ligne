@@ -188,16 +188,23 @@ class TemplateResponsableAutoEcoleController extends AbstractController
         $rapport=$request->request->get('contenu_rapport');
 
         $EntiteRapport=new Rapport();
-        $EntiteRapport->setContenu(strval($rapport));
-        $EntiteRapport->setCreateur($user);
-        $EntiteRapport->setDateCrea(new \DateTime('now'));
-        $EntiteRapport->setTimeCrea(new \DateTime('now'));
-        $EntiteRapport->setApRapport($apprenant);
-        $em=$doctrine->getManager();
-        $em->persist($EntiteRapport);
-        $em->flush();
-        
-
+        if ($rapport== null || $rapport=="") {
+            # code...
+        } else {
+            $EntiteRapport->setContenu(strval($rapport));
+            $EntiteRapport->setCreateur($user);
+            $EntiteRapport->setDateCrea(new \DateTime('now'));
+            $EntiteRapport->setTimeCrea(new \DateTime('now'));
+            $EntiteRapport->setApRapport($apprenant);
+            $em=$doctrine->getManager();
+            $em->persist($EntiteRapport);
+            $em->flush();
+            
+    
+        }
+       
+       
+       
         return $this->render('template_responsable_auto_ecole/rapport.html.twig', [
            
         ]);
@@ -260,8 +267,8 @@ class TemplateResponsableAutoEcoleController extends AbstractController
 
        
         return $this->render('template_responsable_auto_ecole/choix_apprenant_rapport.html.twig', [
-            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user,"apprenants"=>
-            $res,
+            'controller_name' => 'TemplateResponsableAutoEcoleController',"user"=>$user,
+            "apprenants"=>$res,
         ]);
     }
 

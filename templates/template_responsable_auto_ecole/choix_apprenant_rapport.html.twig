@@ -19,7 +19,7 @@
 									<tr class="text-left">
 										<th style="width: 50px">Apprenants</th>
 										<th style="min-width: 200px"></th>
-										<th style="min-width: 150px">Session</th>
+										
 										<th class="text-right" style="min-width: 150px">Rapport</th>
 									</tr>
 								</thead>
@@ -35,23 +35,16 @@
 										
 										<td>
 									
-											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{apprenant.idApprenant}}</a>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{apprenant.idApprenant.Nom}}</a>
 											<span class="text-fade d-block">apprenant</span>
 										</td>
 										
-										<td>
-											<span class="text-dark font-weight-600 d-block font-size-16">
-												Intertico
-											</span>
-											<span class="text-fade d-block">
-												Web, UI/UX Design
-											</span>
-										</td>
+										
 										
 											
 										
 										<td class="text-right">
-											<a href="{{url('app_rapport',{'id':apprenant.idApprenant.id})}}" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>
+											<a href="{{url('app_rapport',{'id':apprenant.idApprenant})}}" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>
 											
 										</td>
 									 

@@ -3,21 +3,65 @@
 
 {% block contenu %}
 
-    <p> Liste des Apprenant Inscrit dans votre auto ecole</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Prenom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for apprenant in apprenant %}
-        <tr>
-        <td>{{apprenant.idApprenant.Telephone}}</td>
-        <td><a href="{{path("message_apprenant",{'id': apprenant.idApprenant.id })}}">Message</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    
+
+
+	<div class="col-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title align-items-start flex-column">
+							Apprenant
+							<small class="subtitle">Liste des Apprenants Inscrit dans votre auto ecole </small>
+						</h4>
+					</div>
+					<div class="box-body py-0">
+						<div class="table-responsive">
+							<table class="table no-border">
+								<thead>
+									<tr class="text-left">
+										<th>Téléphone</th>
+                                        <th>Nom</th>
+										<th>Actions</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+								 {% for apprenant in apprenant %}
+									<tr>										
+										
+										
+										
+										<td>
+									
+											
+											<span class="text-fade d-block">{{apprenant.idApprenant.Telephone}}</span>
+										</td>
+
+                                        <td>
+									
+											
+											<span class="text-fade d-block">{{apprenant.idApprenant.Nom}}</span>
+										</td>
+										
+                                        <td>
+									
+											<a href="{{path("message_apprenant",{'id': apprenant.idApprenant.id })}}">Message</a>
+											
+										</td>
+										
+										
+											
+										
+										
+									</tr>
+									
+										
+								{% endfor %}
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>  
+			</div>
 {% endblock %}

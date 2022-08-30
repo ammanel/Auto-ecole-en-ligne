@@ -67,25 +67,7 @@
   <div class="control-sidebar-bg"></div>
   
 </div>
-<!-- ./wrapper -->
-	
-	<!-- ./side demo panel -->
-	
-	<!-- Sidebar -->
-		
-	  {% block chat %}
 
-	  {% if autoecole is defined %} {{ include('template_apprenant/chat.html.twig') }}
-		{% else %}
-	  {% endif %}
-	  
-	{% endblock %}
-	
-	
-	<!-- Page Content overlay -->
-	
-	
-	<!-- Vendor JS -->
 	<script src="{{asset('js/vendors.min.js')}}"></script>
 	<script src="{{asset('js/message.js')}}"></script>
 	<script src="{{asset('js/pages/chat-popup.js')}}"></script>

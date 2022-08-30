@@ -20,7 +20,7 @@ class Rapport
     private $timeCrea;
 
     #[ORM\Column(type: 'text')]
-    private $contenu;
+    private $contenu=' ';
 
     #[ORM\ManyToOne(targetEntity: AutoEcole::class, inversedBy: 'rapports')]
     private $createur;
@@ -62,9 +62,9 @@ class Rapport
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): self
+    public function setContenu(string $contenu): ?self
     {
-        $this->contenu = $contenu;
+        $this->contenu =(string) $contenu;
 
         return $this;
     }
@@ -73,7 +73,7 @@ class Rapport
     {
         return $this->createur;
     }
-
+    
     public function setCreateur(?AutoEcole $createur): self
     {
         $this->createur = $createur;

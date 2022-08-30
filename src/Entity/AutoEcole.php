@@ -26,10 +26,10 @@ class AutoEcole extends Personne
     private $Note;
 
     #[ORM\Column(type: 'string')]
-    private $Horaire_debut;
+    private $Horairedebut;
 
     #[ORM\Column(type: 'string')]
-    private $Horaire_fin;
+    private $Horairefin;
 
     #[ORM\OneToMany(mappedBy: 'createur', targetEntity: Rapport::class)]
     private $rapports;
@@ -96,12 +96,12 @@ class AutoEcole extends Personne
 
     public function getHoraireDebut(): ?string
     {
-        return $this->Horaire_debut;
+        return $this->Horairedebut;
     }
 
     public function setHoraireDebut(string $Horaire): self
     {
-        $this->Horaire_debut = $Horaire;
+        $this->Horairedebut = $Horaire;
 
         return $this;
     }
@@ -109,12 +109,12 @@ class AutoEcole extends Personne
 
     public function getHoraireFin(): ?string
     {
-        return $this->Horaire_fin;
+        return $this->Horairefin;
     }
 
     public function setHoraireFin(string $Horaire): self
     {
-        $this->Horaire_fin = $Horaire;
+        $this->Horairefin = $Horaire;
 
         return $this;
     }
