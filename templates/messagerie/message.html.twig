@@ -3,8 +3,8 @@
 
 {% block contenu %}
 
-    <p></p>
 
+    
     <div class="chat-boxs">
         <div class="chat-box-header p-15 d-flex justify-content-between align-items-center">
            
@@ -41,7 +41,17 @@
               </div>
             </div>
             <div class="text-center flex-grow-1">
-                <div class="text-dark font-size-18"> </div>
+                <div class="text-dark font-size-18">
+                    
+                    
+                    
+                    {% if autoecole is defined %}{{autoecole}}{% endif %}
+                    
+                    
+                    
+                    
+                   
+                     </div>
                 <div>
                     <span class="badge badge-sm badge-dot badge-primary"></span>
                     <span class="text-muted font-size-12">Active</span>
@@ -57,16 +67,22 @@
             <div class="chat-box-overlay">   
             </div>
             <div class="chat-logs" id="chat-logs">
+                
+
+                <input type="hidden" value="lu" id="lu">
 
                 
 
                 
                 <div id="mess">
+                    {% for i in messages %}
                 
+                {% if i.EnvoyerPar.id == user.id and i.RecuPar.id == recupar %}
+
                 <!-- Mes messages -->
                 <div class="chat-msg self">
                     <div class="cm-msg-text">
-                      
+                        {{i.contenu}}
                     </div>  
                     <br/> 
                     <br/>
@@ -74,48 +90,80 @@
                     <br/>
                 </div>
 
-                
+                {% elseif i.EnvoyerPar.id == recupar and i.RecuPar.id == user.id %}
+
                 <!-- Mes messages -->
                 <div class="chat-msg user">
                     <div class="cm-msg-text">
-                    
+                        {{i.contenu}}
                     </div>  
                     <br/> 
                     <br/>
                     <br/>
                     <br/>
                 </div>
+                
+                {% endif %}
+                
 
-               
               
 
-                <div>
+                
+              
+
+                
+
+
+               
+                
+
+                
+
+                {% endfor %}
+                </div>
+                
+
+                     
+
+                
+
+                    
+
+                        
+                
+
+
+                
+                <div id="response"></div>
+
             </div><!--chat-log -->
         </div>
 
 
 
 
-        
-    </div>
-</div>
-
-<div class="chat-input">      
-                
+        <div class="chat-input">      
+            
+            {% if autoecole is defined %}  
+                    {{form_start(form)}} {{
+                        form_row(form.Contenu,{'id':"chat-input"})
+                        
+                }} 
                     
-    <form><input type="text" placeholder="ajouter votre texte" class="form-control" id="chat-input">
-    
-    <a id="sendmessage" type="submit" href="{{path('message_apprenant_async')}}">
-    {# <input type="hidden" id="idpersonneconnecter" value = "{{user.id}}">
-    <input type="hidden" id="idrecupar" value = "{{apprenant.id}}">
-    <input type="hidden" id="lu" name="lu" value="lu"> #}
-        
-        <span class="icon-Send font-size-22 chat-submit"></span>
-        </a> </form>
-    
-    
-    
-  
+                    <a id="envoi" type="submit" href="{{path('app_liste_Auto_Ecole')}}">
+                    <input type="hidden" id="idconnecter" value = "{{user.id}}">
+                    <input type="hidden" id="idrecupar" value = "{{recupar}}">
+                    
+                        
+                        <span class="icon-Send font-size-22 chat-submit"></span>
+                        </a> {{form_end(form)}}
+                    
+                    
+                    
+                    {% else %} 
+                    {% endif %}  
+        </div>
+    </div>
 </div>
     
 {% endblock %}

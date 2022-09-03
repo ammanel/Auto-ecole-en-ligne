@@ -27,7 +27,13 @@ var message = ""
 
 
 function messageenvoi(event){
-    event.preventDefault();
+
+    try {
+        event.preventDefault();
+    } catch (error) {
+        
+    }
+    
     const url = this.href;
    
     var contenu = document.getElementById("chat-input").value;
@@ -233,3 +239,11 @@ function lu() {
 })
 
 }
+
+function EnvoiMesssage(event) {
+    event.preventDefault();
+
+    messageenvoi();
+}
+
+document.addEventListener("submit",EnvoiMesssage());
