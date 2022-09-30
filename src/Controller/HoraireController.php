@@ -3,14 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Horaire;
+use App\Entity\RDV;
 use App\Entity\Session;
+use App\Entity\Transaction;
 use App\Form\HoraireType;
+use App\Repository\ApprenantRepository;
+use App\Repository\ChoisirRepository;
 use App\Repository\HoraireRepository;
+use App\Repository\PersonneRepository;
+use App\Repository\RDVRepository;
+use App\Repository\SessionRepository;
+use App\Repository\TransactionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/horaire')]
 class HoraireController extends AbstractController
@@ -126,5 +135,117 @@ class HoraireController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('app_horaire_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/rdv/planifiez', name: 'app_planifiez_rdv')]
+    public function planning_rdv(TransactionRepository $transactionRepository,HoraireRepository $horaireRepository,SessionRepository $sessionRepository,PersonneRepository $personneRepository,UserInterface $user,ApprenantRepository $ar,ChoisirRepository $choisirRepository): Response
+    {   
+      
+        $a = $user->getUserIdentifier();
+        $connecter = $ar->findOneBy(array("Telephone"=>$a));    
+       
+        $recup_transaction_session=$transactionRepository->findsession($connecter);
+        $derniere_transaction= end($recup_transaction_session);
+       
+
+        if ($derniere_transaction== null) {
+
+            $t=new Transaction();
+            return $this->render('horaire/planing_rdv.html.twig', [
+              
+            "dt"=>$t
+            
+            ]);
+        }
+
+        if ($derniere_transaction->getTypeDePayement()=="présentiel") {
+            return $this->render('horaire/planing_rdv.html.twig', [
+                "dt"=>$derniere_transaction,
+               
+           
+            
+            ]);
+        }
+       
+        if ($derniere_transaction->getTypeDePayement()=="pratique") {
+
+            $session= $derniere_transaction->getIdSession();
+           
+            return $this->render('horaire/planing_rdv.html.twig', [
+                "dt"=>$derniere_transaction ,
+                "pp"=> $horaireRepository->findBySortePlanning($session,'pratique'),
+       
+            
+            ]);
+        }
+       
+
+       
+
+      
+        
+        
+
+    }
+
+
+    #[Route('/rdv/liste', name: 'app_liste_rdv')]
+    public function liste_rdv(RDVRepository $rDVRepository): Response
+    {   
+        
+       
+      
+
+        return $this->render('horaire/liste_rdv.html.twig', [
+            
+            "RDVS"=>$rDVRepository->findByRDV()
+        
+        ]);
+      
+        
+        
+
+    }
+
+
+    #[Route('/rdv/validé/{id}', name: 'app_valide_rdv')]
+    public function valider_rdv(Request $request,Horaire $horaire,ApprenantRepository $ar,ManagerRegistry $doctrine,UserInterface $user,ChoisirRepository $choisirRepository): Response
+    {   
+        $a = $user->getUserIdentifier();
+        $connecter = $ar->findOneBy(array("Telephone"=>$a));
+        $em=$doctrine->getManager();
+        $info_inscription=$choisirRepository->findByInscription($connecter);
+
+        $RDV=new RDV();
+        $RDV->setPlaning($horaire);
+        $RDV->setChoix($info_inscription);
+        $RDV->setDateJour(new \DateTime('now'));
+        $em->persist($RDV);
+        $em->flush();
+
+
+        $transaction=new Transaction();
+        $form = $this->createForm(TransactionType::class, $transaction);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $em=$doctrine->getManager();
+            $transaction->setIdApprenant($connecter);
+            $transaction->setTypeDePayement("cours conduite");
+
+            $em->persist($transaction);
+            $em->flush();
+            return $this->redirectToRoute('app_liste_rdv');
+            
+        }
+
+       
+      
+        return $this->render('template_apprenant/transaction_conduite.html.twig', [
+            
+            'form' => $form->createView()
+        
+        ]);
+      
     }
 }

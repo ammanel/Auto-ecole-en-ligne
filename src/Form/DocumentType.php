@@ -15,7 +15,7 @@ class DocumentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateEtablissement',DateType::class,['attr'=>['class'=>'form-control']])
+            ->add('dateEtablissement',DateType::class,['widget' => 'single_text','attr'=>['class'=>'form-control']])
             ->add('typedoc',EntityType::class,[
                 'class'=>TypeDocument::class, 'choice_label'=>function($typedoc){
                     return $typedoc-> getLibelle();

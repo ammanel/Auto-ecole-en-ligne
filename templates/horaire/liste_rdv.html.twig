@@ -1,0 +1,80 @@
+{% extends 'base_apprenant.html.twig' %}
+
+
+{% block title %}Horaire index{% endblock %}
+
+
+{% block contenu %}
+	 <div class="col-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title align-items-start flex-column">
+							Vos rendez-vous
+							<small class="subtitle"></small>
+						</h4>
+					</div>
+					<div class="box-body py-0">
+						<div class="table-responsive">
+							<table class="table no-border">
+								<thead>
+									<tr class="text-left">
+										
+                                       
+										
+									</tr>
+								</thead>
+								<tbody>
+                             {% for RDV in RDVS %}
+								
+										<tr>										
+										
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{RDV.planing.dateDebut|date('m-d-Y')}}  </a>
+											<span class="text-fade d-block">Date de début</span>
+										</td>
+
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{RDV.planing.dateFin|date('m-d-Y')}}</a>
+											<span class="text-fade d-block">Date de fin</span>
+										</td>
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{RDV.planing.heure|date('H:i:s')}}
+											</span>
+											<span class="text-fade d-block">
+												Heure début
+											</span>
+										</td>
+
+									
+										
+
+										
+										
+										
+										
+									</tr>
+								
+								
+								 {% endfor %}
+								</tbody>
+
+                                
+							</table>
+
+                            
+						</div>
+					</div>
+				</div>  
+	</div>
+
+
+	
+
+
+     
+    
+    
+
+{% endblock %}

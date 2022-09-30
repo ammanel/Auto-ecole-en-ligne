@@ -35,9 +35,11 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
+                                    <th>Date debut</th>
+                                    <th>Date fin</th>
+                                    <th>Heure debut</th>
+                                    <th>Heure fin</th>
+                                    <th>Description</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,8 +48,10 @@
                                 
                             
                                 <tr>
-                                    <td>{{horaire.jours}}</td>
+                                    <td>{{horaire.dateDebut|date('d-m-Y')}}</td>
+                                    <td>{{horaire.dateFin|date('d-m-Y')}}</td>
                                     <td>{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}</td>
+                                      <td>{{ horaire.heureFin ? horaire.heureFin|date('H:i:s') : '' }}</td>
                                     <td>{{ horaire.description }}</td>
                                     
                                 </tr>
@@ -58,9 +62,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
+                                   <th>Date debut</th>
+                                    <th>Date fin</th>
+                                    <th>Heure debut</th>
+                                    <th>Heure fin</th>
+                                    <th>Description</th>
                                    
                                 </tr>
                             </tfoot>

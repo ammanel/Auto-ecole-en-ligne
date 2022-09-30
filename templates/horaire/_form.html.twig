@@ -3,16 +3,36 @@
 								
 								<hr class="my-15">
 								<div class="form-group">
-								  <label>Jours</label>
-								      {{ form_widget(form.jours) }}
+								  <label>Date debut</label>
+								      {{ form_widget(form.dateDebut) }}
+								</div>
+
+								<div class="form-group">
+								  <label>Date fin</label>
+								      {{ form_widget(form.dateFin) }}
 								</div>
                                 <div class="form-group">
-								  <label>Heure</label>
+								  <label>Heure debut</label>
 								      {{ form_widget(form.heure) }}
 								</div>
+								<div class="form-group">
+								  <label>Heure fin</label>
+								      {{ form_widget(form.heureFin) }}
+								</div>
+								
                                 <div class="form-group">
-								  <label>Description</label>
+								  <label>Description / titre</label>
 								     {{ form_widget(form.description) }}
+								</div>
+
+								<div class="form-group">
+								  <label>Couleur de texte</label>
+								      {{ form_widget(form.couleurBordure) }}
+								</div>
+
+								<div class="form-group">
+								  <label>Couleur de fond</label>
+								      {{ form_widget(form.couleurTexte) }}
 								</div>
 								
 							</div>

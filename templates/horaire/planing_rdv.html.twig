@@ -1,0 +1,112 @@
+{% extends 'base_apprenant.html.twig' %}
+
+
+{% block title %}Horaire index{% endblock %}
+
+
+{% block contenu %}
+
+{% if dt.typeDePayement =="pratique" %}
+	 <div class="col-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title align-items-start flex-column">
+							Planning pratique
+							<small class="subtitle"></small>
+						</h4>
+					</div>
+					<div class="box-body py-0">
+						<div class="table-responsive">
+							<table class="table no-border">
+								<thead>
+									<tr class="text-left">
+										
+                                       
+										
+									</tr>
+								</thead>
+								<tbody>
+                                {% for horaire in pp %}
+                                    
+                               
+									<tr>										
+										 {% if horaire.enable == false %}
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"> {{ horaire.dateDebut ? horaire.dateDebut|date('d-m-Y') : '' }}</a>
+											<span class="text-fade d-block">Date de début</span>
+										</td>
+
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"> {{ horaire.dateFin ? horaire.dateFin|date('d-m-Y') : '' }}</a>
+											<span class="text-fade d-block">Date de fin</span>
+										</td>
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												Heure début
+											</span>
+										</td>
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.dateFin ? horaire.dateFin|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												Heure Fin
+											</span>
+										</td>
+
+										
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.description }}
+											</span>
+											<span class="text-fade d-block">
+												Description
+											</span>
+										</td>
+
+										<td>
+											<div class="d-flex flex-column w-p100">
+												<div class="d-flex align-items-center justify-content-between mb-2">
+													<span class="text-fade">
+													<a href="{{url('app_valide_rdv',{'id':horaire.id})}}" class="btn btn-primary"  onclick="return confirm('Voulez vraiment Confirmer cette transaction?')">Plannifiez</a>
+													</span>
+													
+												</div>
+												
+											</div>
+										</td>
+
+										
+										
+										{% endif %}
+									</tr>
+									 {% endfor %}
+								</tbody>
+
+                                
+							</table>
+
+                            
+						</div>
+					</div>
+				</div>  
+	</div>
+{% else %}
+	
+   
+    
+{% endif %}
+
+	
+
+
+     
+    
+    
+
+{% endblock %}

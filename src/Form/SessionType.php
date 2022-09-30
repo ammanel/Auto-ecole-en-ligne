@@ -15,8 +15,8 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class,['attr'=>['class'=>'form-control']])
-            ->add('dateDebut',DateType::class,['attr'=>['class'=>'form-control']])
-            ->add('dateFin',DateType::class,['attr'=>['class'=>'form-control']])
+            ->add('dateDebut',DateType::class,['widget' => 'single_text','attr'=>['class'=>'form-control']])
+            ->add('dateFin',DateType::class,['widget' => 'single_text','attr'=>['class'=>'form-control']])
             
         ;
     }
