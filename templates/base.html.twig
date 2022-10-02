@@ -86,5 +86,41 @@
             {% endblock %}
         
         {% endblock %}
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            function notifier2(idrecupar){
+                
+            
+                    
+                    
+                    
+            
+                    
+            }
+
+
+            
+
+            $('body a.ecole').click(function(event){
+                event.preventDefault();
+                const like = this.href;
+                axios.get(like).then(function(response){
+                console.log(response.data[0].id);
+                Nom = document.getElementById("Nom").value;
+                heure = document.getElementById("heure").value;
+                idconnecter = document.getElementById("idconnecter").value;
+                
+                var contenu = "Vous avez un cour pratique de "+heure+" avec Monsieur/Madame "+Nom
+                axios.post("apprenant/messages?contenu="+contenu+"&idconnecter="+idconnecter+"&idrecupar="+response.data[0].id).then(function(response) {
+        
+                    const messages = response.data;
+                })
+
+                
+            })
+            });
+    
+        </script>
     </body>
 </html>

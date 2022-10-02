@@ -7,7 +7,9 @@ use App\Entity\RDV;
 use App\Entity\Session;
 use App\Entity\Transaction;
 use App\Form\HoraireType;
+use App\Form\TransactionType;
 use App\Repository\ApprenantRepository;
+use App\Repository\AutoEcoleRepository;
 use App\Repository\ChoisirRepository;
 use App\Repository\HoraireRepository;
 use App\Repository\PersonneRepository;
@@ -209,7 +211,7 @@ class HoraireController extends AbstractController
 
 
     #[Route('/rdv/validé/{id}', name: 'app_valide_rdv')]
-    public function valider_rdv(Request $request,Horaire $horaire,ApprenantRepository $ar,ManagerRegistry $doctrine,UserInterface $user,ChoisirRepository $choisirRepository): Response
+    public function valider_rdv(Horaire $heure,PersonneRepository $personneRepository,AutoEcoleRepository $autoEcoleRepository,Request $request,Horaire $horaire,ApprenantRepository $ar,ManagerRegistry $doctrine,UserInterface $user,ChoisirRepository $choisirRepository): Response
     {   
         $a = $user->getUserIdentifier();
         $connecter = $ar->findOneBy(array("Telephone"=>$a));
@@ -227,6 +229,17 @@ class HoraireController extends AbstractController
         $transaction=new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
+        $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
+        $idConnecter = $arraypersonne[0]->getId();
+        $arrayautoecole = $choisirRepository->findBy(array("idApprenant" => $idConnecter,"satut"=>false));
+        try {
+            $autoecoleId = $arrayautoecole[0]->getIdEcole();
+        } catch (\Throwable $th) {
+            $autoecoleId = 0;
+        }
+        
+
+        $autoecole = $autoEcoleRepository->find($autoecoleId);
 
         if ($form->isSubmitted() && $form->isValid()) { 
             $em=$doctrine->getManager();
@@ -243,7 +256,13 @@ class HoraireController extends AbstractController
       
         return $this->render('template_apprenant/transaction_conduite.html.twig', [
             
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            "Nom"=> $connecter->getNom(),
+            "Prenom"=>$connecter->getPrenom(),
+            "Mail"=>$connecter->getMail(),
+            "autoecole"=> $autoecole,
+            "debut"=> $heure->getHeure(),
+            "fin" => $heure->getHeureFin()
         
         ]);
       

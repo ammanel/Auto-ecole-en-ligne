@@ -110,20 +110,26 @@
 	
 	<script type="text/javascript">
 		function payer() {
-		
+			
+			Nom = document.getElementById("Nom").value;
+			Prenom = document.getElementById("Prenom").value;
+			Adresse = document.getElementById("Adresse").value;
+			ecoleNom = document.getElementById("ecoleNom").value;
+			ecoleTel = document.getElementById("ecoleTel").value;
+			ecoleTel = document.getElementById("debut").value;
+			ecoleTel = document.getElementById("fin").value;
 			FedaPay.init('.btn-pay-fedapay', {
 				public_key: 'pk_live_PIMy2jvfkKqZEWS1NCP-ldEy',
 				transaction: {
-				  amount: 1000,
-				  description: 'Buy my product'
+				  amount: 100,
+				  description: "Monsieur/Madame "+Nom+' '+Prenom+" demande un cour de conduire pour l'autoecole : "+ecoleNom+' Tel : '+ecoleTel+" de "+debut+' à '+fin
 				},
 				customer: {
-				  email: 'johndoe@gmail.com',
-				  lastname: 'Doe',
-				  firstname: 'John',
+				  email: Adresse,
+				  lastname: Prenom,
+				  firstname: Nom,
 				}
 			   });
-		
 		
 		}
 		

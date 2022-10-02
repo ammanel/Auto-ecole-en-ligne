@@ -66,6 +66,18 @@ class ChoisirRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findByInscription($apprenant):  ?Choisir
+    {
+        return $this->createQueryBuilder('c')
+            
+            ->where('c.satut = 1')
+            ->andWhere('c.idApprenant = :val')
+            ->setParameter('val', $apprenant)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 //    public function findOneBySomeField($value): ?Choisir
 //    {
 //        return $this->createQueryBuilder('c')

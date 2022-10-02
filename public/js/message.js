@@ -359,12 +359,12 @@ setInterval(function () {
 var idconnecter = document.getElementById("idconnecter").value;
 axios.post("apprenant/notifications?envoyerpar="+idconnecter).then(function(response) {
 const messages = response.data;
-try {
+/*try {
     document.getElementById("lu").value;
     lu();
 } catch (error) {
     
-}
+}*/
 document.getElementById("notifs").innerHTML=messages.nombre
 axios.post("listeNotifications?envoyerpar="+idconnecter).then(function(response) {
     const messages = response.data;

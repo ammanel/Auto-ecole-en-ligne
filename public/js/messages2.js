@@ -231,14 +231,14 @@ setInterval(function () {
 },3000)
 
 
-function lu() {
+/*function lu() {
     var idconnecter = document.getElementById("idpersonneconnecter").value;
     axios.post("notifications?lu=oui&envoyerpar="+idconnecter).then(function(response) {
         const messages = response.data;
         document.getElementById("chat-logs").scrollTo(0,document.getElementById("chat-logs").scrollHeight);
 })
 
-}
+}*/
 
 function EnvoiMesssage(event) {
     event.preventDefault();

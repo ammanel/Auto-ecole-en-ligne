@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Admin;
 use App\Entity\Apprenant;
 use App\Entity\AutoEcole;
+use App\Entity\Message;
 use App\Form\AdminType;
 use App\Form\AutoEcoleType;
 use App\Repository\AdminRepository;
 use App\Repository\ApprenantRepository;
 use App\Repository\AutoEcoleRepository;
+use App\Repository\HoraireRepository;
+use App\Repository\MessageRepository;
+use App\Repository\PersonneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class TemplateSuperAdminController extends AbstractController
 {
@@ -153,13 +158,44 @@ class TemplateSuperAdminController extends AbstractController
 
 
 
-    #[Route('/template/super/admin/liste_ecole_part', name: 'app_liste_ecole_part_admin')]
-    public function liste_Ecole_part_admin(AutoEcoleRepository $autoEcoleRepository): Response
+    #[Route('/template/super/admin/liste_ecole_part/', name: 'app_liste_ecole_part_admin')]
+    public function liste_Ecole_part_admin(UserInterface $userInterface,HoraireRepository $horaire,ApprenantRepository $apprenantRepository,AutoEcoleRepository $autoEcoleRepository): Response
     {
         return $this->render('template_super_admin/listeEcole.html.twig', [
             'controller_name' => 'TemplateSuperAdminController',
-            'ecoles'=>$autoEcoleRepository->findAll()
+            'ecoles'=>$autoEcoleRepository->findAll(),
+            "apprenants"=>$apprenantRepository->findAll(),
+            "horaires"=>$horaire->findAll(),
+            "user"=>$userInterface
         ]);
+    }
+    #[Route('/template/super/admin/liste_ecole_part/apprenant/messages', name: 'app_notifier_ecole')]
+    public function notifierEcole(PersonneRepository $personneRepository,MessageRepository $messageRepository,UserInterface $userInterface,HoraireRepository $horaire,ApprenantRepository $apprenantRepository,AutoEcoleRepository $autoEcoleRepository): Response
+    {
+        $message = new Message();
+            # code...
+            $message->setContenu($_REQUEST["contenu"]);
+            $message->setEnvoyerPar( $personneRepository->find($_REQUEST["idconnecter"]));
+            $message->setRecuPar($personneRepository->find($_REQUEST["idrecupar"]));
+            $message->setDateEnvoi(new \DateTime('now'));
+            $message->setLu(false);
+            $messageRepository->add($message,true);
+        
+        return $this->render('template_super_admin/listeEcole.html.twig', [
+            'controller_name' => 'TemplateSuperAdminController',
+            'ecoles'=>$autoEcoleRepository->findAll(),
+            "apprenants"=>$apprenantRepository->findAll(),
+            "horaires"=>$horaire->findAll(),
+            "user"=>$userInterface
+        ]);
+    }
+    #[Route('/template/super/admin/liste_ecole_part/ecole', name: 'idecole')]
+    public function idecole(PersonneRepository $personneRepository,MessageRepository $messageRepository,UserInterface $userInterface,HoraireRepository $horaire,ApprenantRepository $apprenantRepository,AutoEcoleRepository $autoEcoleRepository): Response
+    {
+        $id = $_REQUEST["id"];
+        $ar = array();
+        $ar[0] = array("id" => $id);
+        return $this->json($ar);
     }
 
     #[Route('/template/super/ecole/modification/{id}', name: 'app_modif_ecole')]
