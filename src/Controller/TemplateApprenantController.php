@@ -47,7 +47,7 @@ class TemplateApprenantController extends AbstractController
 
     
     #[Route('/template/apprenant', name: 'app_template_apprenant')]
-    public function index(UserInterface $user, ApprenantRepository $ar,RapportRepository $rapportRepository,DocumentRepository $documentRepository): Response
+    public function index(DocumentRepository $documentRepository,UserInterface $user, ApprenantRepository $ar,TransactionRepository $transactionRepository): Response
     {
         $a = $user->getUserIdentifier();
         $connecter = $ar->findOneBy(array("Telephone"=>$a));
@@ -56,33 +56,20 @@ class TemplateApprenantController extends AbstractController
             return $this->render("authentification/NonValide.html.twig");;
         }else{
 
-            $docs=$documentRepository->findAll();
-            $doctype=[];
-            $docnombre=[];
+            $transaction_pratique=count($transactionRepository->findBy(['typeDePayement'=>'pratique']));
+            $transaction_présentiel=count($transactionRepository->findBy(['typeDePayement'=>'présentiel']));
+            $transaction_conduite=count($transactionRepository->findBy(['typeDePayement'=>'cours conduite']));
+            $nombre_doc=count($documentRepository->findBy(['compte'=>$connecter]));
 
-            $rars=$rapportRepository->findAll();
-            $ar1=[];
-            $ar2=[];
-           
-            foreach ($docs as $doc) {
-                $doctype[]=$doc->getTypedoc()->getLibelle();
-              
-                $docnombre[]= count([$doc->getTypedoc()]);
-            }
-
-            foreach ($rars as $rar) {
-                $ar1[]=$rar->getContenu();
-              
-                $ar2[]= count($rapportRepository->findAll());
-            }
+            
 
             return $this->render('template_apprenant/index.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
                 "user"=> $user,
-                'doctype'=>json_encode($doctype),
-                'docnbre'=>json_encode($docnombre),
-                'ar1'=>json_encode($ar1),
-                'ar2'=>json_encode($ar2),
+                'pra'=>json_encode($transaction_pratique),
+                'pre'=>json_encode($transaction_présentiel),
+                'cc'=>json_encode($transaction_conduite),
+                'document_repository'=>$nombre_doc
 
                 
             ]);
@@ -116,7 +103,11 @@ class TemplateApprenantController extends AbstractController
 
                 return $this->render('template_apprenant/cours.html.twig', [
                     'controller_name' => 'TemplateApprenantController',
-                    "user"=> $user,'cours' => $coursRepository->findAll(),'form' => $form->createView()
+                    "user"=> $user,'cours' => $coursRepository->findAll(),'form' => $form->createView(),
+                    "Nom"=>$connecter->getNom(),
+                    "Prenom"=>$connecter->getPrenom(),
+                    "Mail"=>$connecter->getMail()
+
                 ]);
                
                 
@@ -282,13 +273,24 @@ class TemplateApprenantController extends AbstractController
 
 
     #[Route('/template/apprenant/profile/{id}/auto/ecole', name: 'app_profil_Auto_Ecole')]
-    public function profilAutoEcole(AutoEcole $autoEcole): Response
+    public function profilAutoEcole(AutoEcole $autoEcole,UserInterface $user,ChoisirRepository $choisirRepository,ApprenantRepository $ar,SessionRepository $sessionRepository): Response
     {
         
        
+        $a = $user->getUserIdentifier();
+        $connecter = $ar->findOneBy(array("Telephone"=>$a));    
+        $ecole= $choisirRepository->findByEcole($connecter);
+        $sessions=[];
+        
+       
+        foreach ($ecole as $val) {
+            $sessions=$sessionRepository->findBy(["autoEcole"=>$val->getIdEcole()]);
+            
+        }
          return $this->render('template_apprenant/profil_auto_ecoles.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
-               'ecole'=>$autoEcole
+               'ecole'=>$autoEcole,
+               'sessions'=>$sessions
             ]);
         
         
@@ -340,6 +342,16 @@ class TemplateApprenantController extends AbstractController
         
     }
    
+
+    #[Route('/tansaction/cours', name: 'app_transaction_cours')]
+    public function transaction_cours(): Response
+    {  
+        
+        return $this->render('template_apprenant/transaction.html.twig', [
+            'controller_name' => 'WebsiteController'
+            
+        ]);
+    }
   
 
 }

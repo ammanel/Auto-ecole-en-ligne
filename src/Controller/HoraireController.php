@@ -262,7 +262,8 @@ class HoraireController extends AbstractController
             "Mail"=>$connecter->getMail(),
             "autoecole"=> $autoecole,
             "debut"=> $heure->getHeure(),
-            "fin" => $heure->getHeureFin()
+            "fin" => $heure->getHeureFin(),
+            "date"=>$heure->getDateDebut()
         
         ]);
       

@@ -13,6 +13,7 @@ use App\Repository\ChoisirRepository;
 use App\Repository\MessageRepository;
 use App\Repository\PersonneRepository;
 use App\Repository\RapportRepository;
+use App\Repository\SessionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -37,7 +38,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
     }
 
     #[Route('/template/responsable/auto/ecole', name: 'app_template_responsable_auto_ecole')]
-    public function index(ChoisirRepository $choisirRepository,UserInterface $user,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
+    public function index(SessionRepository $sessionRepository,RapportRepository $rapportRepository,ChoisirRepository $choisirRepository,UserInterface $user,PersonneRepository $personneRepository,MessageRepository $messageRepository): Response
     {
 
 
@@ -45,11 +46,19 @@ class TemplateResponsableAutoEcoleController extends AbstractController
         $idConnecter = $arraypersonne[0]->getId();
         $messages = $messageRepository->find($idConnecter);
         $choix = $choisirRepository->findAll();
+
+        $napp=count($choisirRepository->findByApprenant($idConnecter));
+        $nrapp=count($rapportRepository->findBy(["createur"=>$idConnecter]));
+        $nsess=count($sessionRepository->findBy(["autoEcole"=>$idConnecter]));
         return $this->render('template_responsable_auto_ecole/index.html.twig', [
             'controller_name' => 'TemplateResponsableAutoEcoleController',
             "choix"=> $choix,
             "messages"=> $messages,
-            "idapprenant"=>2
+            "idapprenant"=>2,
+            "napp"=>$napp,
+            "nra"=>$nrapp,
+            "ns"=>$nsess
+
 
         ]);
     }

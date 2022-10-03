@@ -2,10 +2,16 @@
 
 {% block contenu %}
 
-{% if user.coursActive ==0 %}
+{% if user.coursActive == 1%}
 <section class="content">
 {% block transaction %}
-	{{ include('template_apprenant/transaction.html.twig') }}
+<form action="">
+	<input type="hidden" name="Nom" id="Nom" value="{{Nom}}">
+	<input type="hidden" name="Prenom" id="Prenom" value="{{Prenom}}">
+	<input type="hidden" name="Adresse" id="Adresse" value="{{Mail}}">
+	
+</form>
+<button class="btn btn-primary btn-pay-fedapay" onclick="payercour()" type="submit" id="pay-btn">Valider payement cour conduite</button>
 {% endblock %}
 </section>
 	
@@ -28,6 +34,7 @@
 				  <img class="card-img-top img-responsive" src="{{asset('AdminApprenant/images/card/img1.jpg')}}" alt="Card image cap">
 				<div class="card-body">            	
 					<h4 class="card-title">{{ cour.titre }}</h4>
+					
 					<p class="card-text"></p>
 					<a href="{{url('app_detail_cours',{'id':cour.id})}}" class="btn btn-rounded btn-primary">Commencer</a>
 				</div>
@@ -41,7 +48,7 @@
           
 			
 		  </div>
-		  <button class="btn-pay-fedapay" onclick="payer()" type="submit" id="pay-btn">Payer 100 francs</button>
+		  
 		 
 		
 	

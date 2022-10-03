@@ -33,6 +33,12 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
+
+                                        {% for messages in app.flashes('info') %}
+                                        <div class="alert alert-success">
+                                            {{messages}}
+                                        </div>
+                                        {% endfor %}
                                         
                                     </div>
                                     <div class="card-body">
@@ -62,7 +68,7 @@
                                                 <td>
                                                     
                                                     <a href="{{url('supp_apprenant',{'id':apprenant.id})}}" onclick="return confirm('Voulez vraiment Supprimer cet admin cette action est iréversible?')">effacer</a>
-                                                    
+                                                    <a href="{{url('val_cour_apprenant',{'id':apprenant.id})}}" onclick="return confirm('Permettre a cet apprenant d'acceder aux differants cours de la plateforme?')">Activer cour</a>
                                                 </td>
                                             </tr>
                                             

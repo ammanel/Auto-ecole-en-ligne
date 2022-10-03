@@ -23,8 +23,9 @@
 										<input type="hidden" name="Adresse" id="Adresse" value="{{Mail}}">
 										<input type="hidden" name="ecoleNom" id="ecoleNom" value="{{autoecole.Description}}">
 										<input type="hidden" name="ecoleTel" id="ecoleTel" value="{{autoecole.Telephone}}">
-										<input type="hidden" name="ecoleTel" id="debut" value="{{debut}}">
-										<input type="hidden" name="ecoleTel" id="fin" value="fin">
+										<input type="hidden" name="debut" id="debut" value="{{debut|date("H:m:s")}}">
+										<input type="hidden" name="fin" id="fin" value="{{fin|date("h:m:s")}}">
+										<input type="hidden" name="date" id="date" value="{{date|date("d/m/y")}}">
 									</form>
 								
 								  

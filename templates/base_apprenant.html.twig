@@ -116,13 +116,35 @@
 			Adresse = document.getElementById("Adresse").value;
 			ecoleNom = document.getElementById("ecoleNom").value;
 			ecoleTel = document.getElementById("ecoleTel").value;
-			ecoleTel = document.getElementById("debut").value;
-			ecoleTel = document.getElementById("fin").value;
+			debut = document.getElementById("debut").value;
+			fin = document.getElementById("fin").value;
+			date = document.getElementById("date").value;
 			FedaPay.init('.btn-pay-fedapay', {
 				public_key: 'pk_live_PIMy2jvfkKqZEWS1NCP-ldEy',
 				transaction: {
 				  amount: 100,
-				  description: "Monsieur/Madame "+Nom+' '+Prenom+" demande un cour de conduire pour l'autoecole : "+ecoleNom+' Tel : '+ecoleTel+" de "+debut+' à '+fin
+				  description: "Monsieur/Madame "+Nom+' '+Prenom+" demande un cour de conduire pour l'autoecole : "+ecoleNom+' Tel : '+ecoleTel+" de "+debut+' à '+fin+" le "+date
+				},
+				customer: {
+				  email: Adresse,
+				  lastname: Prenom,
+				  firstname: Nom,
+				}
+			   });
+		
+		}
+
+		function payercour() {
+			
+			Nom = document.getElementById("#Nom").value;
+			Prenom = document.getElementById("#Prenom").value;
+			Adresse = document.getElementById("#Adresse").value;
+			
+			FedaPay.init('.btn-pay-fedapay', {
+				public_key: 'pk_live_PIMy2jvfkKqZEWS1NCP-ldEy',
+				transaction: {
+				  amount: 100,
+				  description: "Monsieur/Madame "+Nom+' '+Prenom+" valide le payement pour avoir acces au cour"
 				},
 				customer: {
 				  email: Adresse,

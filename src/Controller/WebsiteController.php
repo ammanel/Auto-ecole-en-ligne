@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Apprenant;
 use App\Entity\Post;
 use App\Entity\Voir;
+use App\Repository\AutoEcoleRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,6 +68,28 @@ class WebsiteController extends AbstractController
         ]);
     }
 
+
+    #[Route('/contact/liste/website', name: 'app_contact')]
+    public function contact(): Response
+    {  
+        
+        return $this->render('website/contact.html.twig', [
+            'controller_name' => 'WebsiteController'
+            
+        ]);
+    }
+
+    #[Route('/ecole/liste/website', name: 'app_liste_ecole_site')]
+    public function liste_ecole_siteweb(AutoEcoleRepository $autoEcoleRepository): Response
+    {  
+        
+        return $this->render('website/ecole.html.twig', [
+            'controller_name' => 'WebsiteController',
+            'autoEcoles'=>$autoEcoleRepository->findAll()
+
+            
+        ]);
+    }
 
    
 }

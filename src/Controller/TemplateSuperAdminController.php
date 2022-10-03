@@ -6,6 +6,7 @@ use App\Entity\Admin;
 use App\Entity\Apprenant;
 use App\Entity\AutoEcole;
 use App\Entity\Message;
+use App\Entity\Transaction;
 use App\Form\AdminType;
 use App\Form\AutoEcoleType;
 use App\Repository\AdminRepository;
@@ -14,6 +15,9 @@ use App\Repository\AutoEcoleRepository;
 use App\Repository\HoraireRepository;
 use App\Repository\MessageRepository;
 use App\Repository\PersonneRepository;
+use App\Repository\RapportRepository;
+use App\Repository\SessionRepository;
+use App\Repository\TransactionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,13 +37,17 @@ class TemplateSuperAdminController extends AbstractController
     {
         $this->params=$params;
     }
-
     
     #[Route('/template/super/admin', name: 'app_template_super_admin')]
-    public function index(): Response
+    public function index(PersonneRepository $personneRepository ,TransactionRepository $transaction ,RapportRepository $rapportRepository,SessionRepository $sessionRepository): Response
     {
         return $this->render('template_super_admin/index.html.twig', [
             'controller_name' => 'TemplateSuperAdminController',
+            'pr'=>count($personneRepository->findAll()),
+            'tr'=>count($transaction->findAll()),
+            'r'=>count($rapportRepository->findAll()),
+            's'=>count($sessionRepository->findAll()),
+          
         ]);
     }
 
@@ -236,6 +244,23 @@ class TemplateSuperAdminController extends AbstractController
     #[Route('/template/super/admin/liste_apprenant_part', name: 'app_liste_apprenant_part_admin')]
     public function liste_Apprenant_part_admin(ApprenantRepository $apprenantRepository): Response
     {
+        return $this->render('template_super_admin/listeApprenant.html.twig', [
+            'controller_name' => 'TemplateSuperAdminController',
+            'apprenants'=>$apprenantRepository->findAll()
+        ]);
+    }
+
+    #[Route('/template/super/admin/val_cour_apprenant/{id}', name: 'val_cour_apprenant')]
+    public function val_cour_apprenant(ManagerRegistry $doctrine,Apprenant $connecter,ApprenantRepository $apprenantRepository,): Response
+    {
+        $transaction=new Transaction();
+        $em=$doctrine->getManager();
+        
+        $connecter->setCoursActive(0);
+        $em->persist($connecter);
+        $em->flush();
+
+        $this->addFlash('info','Cour débloquer avec succes');
         return $this->render('template_super_admin/listeApprenant.html.twig', [
             'controller_name' => 'TemplateSuperAdminController',
             'apprenants'=>$apprenantRepository->findAll()
