@@ -89,17 +89,17 @@ class AuthentificationController extends AbstractController
     #[Route('/{id}', name: 'Confirmation',  methods: ['GET', 'POST'])]
     public function Confirmation(Apprenant $apprenant)
     {
-        /*$apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
+        $apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
         $userUid = " RORJJ4";
 
         $moi = new Goxens($apiKey, $userUid);
-        $lien = "http://192.168.1.64:8000//validation/".$apprenant->getId();
+        $lien = "http://10.200.116.21:8000/validation/".$apprenant->getId();
         //$lien= "test";
         $message = "Monsieur ".$apprenant->getNom()." votre compte a bien ete créer \n Il ne vous reste plus qu'a l'activer avec ce lien ".$lien;
         $sender = "AutoEcole";
         $number = $apprenant->getTelephone();
         $serve = $moi->sendSms("ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH","RORJJ4",$number,"AutoEcole",$message);
-        //return $this->redirectToRoute("app_connexion");*/
+        //return $this->redirectToRoute("app_connexion");
         return $this->redirectToRoute("app_connexion");
     }
 
@@ -110,6 +110,39 @@ class AuthentificationController extends AbstractController
         $apprenant->setStatut(true);
         $ar->add($apprenant,true);
         return $this->render('authentification/validation.html.twig',['apprenant' => $apprenant]);
+    }
+
+    #[Route('mdp/mdpoublier/', name: 'app_mdpoublié')]
+    public function mdpoublier(ApprenantRepository $ar)
+    {
+        if (isset($_REQUEST["numero"])) {
+            # code...
+            
+
+            try {
+                //code...
+                $apprenant = $ar->findOneBy(array("Telephone"=>$_REQUEST["numero"]));
+                $apiKey = "ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH";
+                $userUid = " RORJJ4";
+
+                $moi = new Goxens($apiKey, $userUid);
+                $lien = "http://10.200.116.21:8000/validation/".$apprenant->getId();
+                //$lien= "test";
+                $message = "Monsieur ".$apprenant->getNom()."votre mot de passe est :".$apprenant->getUser;
+                $sender = "AutoEcole";
+                
+                $serve = $moi->sendSms("ROD-JZTIUBF3BO9VOO8ITNZ335D8TXIJB0FMZDH","RORJJ4",$_REQUEST["numero"],"AutoEcole",$message);
+                //return $this->redirectToRoute("app_connexion");
+                return $this->redirectToRoute("app_connexion");
+
+            } catch (\Throwable $th) {
+                //throw $th;
+                $this->addFlash('info','Entrer un numéro valide');
+                return $this->render('authentification/mdpoublier.html.twig');
+            }
+        }
+        
+        return $this->render('authentification/mdpoublier.html.twig');
     }
 
     

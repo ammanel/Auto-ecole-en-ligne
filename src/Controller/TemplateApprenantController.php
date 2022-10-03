@@ -116,9 +116,15 @@ class TemplateApprenantController extends AbstractController
         else{
 
         
+            $a = $user->getUserIdentifier();
+            $connecter = $ar->findOneBy(array("Telephone"=>$a));
+        
             return $this->render('template_apprenant/cours.html.twig', [
                 'controller_name' => 'TemplateApprenantController',
-                "user"=> $user,'cours' => $coursRepository->findAll()
+                "user"=> $user,'cours' => $coursRepository->findAll(),
+                "Nom"=>$connecter->getNom(),
+                "Prenom"=>$connecter->getPrenom(),
+                "Mail"=>$connecter->getMail()
             ]);
         }
         

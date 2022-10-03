@@ -68,7 +68,7 @@ class TemplateResponsableAutoEcoleController extends AbstractController
     {
         $arraypersonne = $personneRepository->findBy(array("Telephone" => $user->getUserIdentifier()));
         $idConnecter = $arraypersonne[0]->getId();
-        $choix = $choisirRepository->findBy(array("idEcole"=>$idConnecter));
+        $choix = $choisirRepository->findBy(array("idEcole"=>$idConnecter,"satut"=>true));
 
         return $this->render("template_responsable_auto_ecole/liste_apprenant.html.twig",
         ["apprenant" => $choix]
