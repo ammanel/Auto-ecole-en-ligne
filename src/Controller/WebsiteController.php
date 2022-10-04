@@ -17,11 +17,12 @@ use Doctrine\ORM\EntityManagerInterface;
 class WebsiteController extends AbstractController
 {
     #[Route('', name: 'app_website')]
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository,AutoEcoleRepository $autoEcoleRepository): Response
     {  
         return $this->render('website/index.html.twig', [
             'controller_name' => 'WebsiteController',
             'posts' => $postRepository->findAll(),
+            'autoecole'=>$autoEcoleRepository->findAll()
             
         ]);
     }

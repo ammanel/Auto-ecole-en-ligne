@@ -57,7 +57,8 @@ class TemplateResponsableAutoEcoleController extends AbstractController
             "idapprenant"=>2,
             "napp"=>$napp,
             "nra"=>$nrapp,
-            "ns"=>$nsess
+            "ns"=>$nsess,
+            "user"=>$user
 
 
         ]);

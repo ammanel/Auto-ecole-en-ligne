@@ -35,8 +35,12 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">Sessions disponiples  </li> 
 								{% for session in sessions %}
-									
+									{% if ecole.id == session.autoEcole.id %}
+										
+								
 								<li class="list-group-item">{{session.nom}} ({{session.dateDebut|date('d-m-Y')}} - {{session.dateFin|date('d-m-Y')}} ) <a href="{{url('app_planning_part_apprenant',{'id':session.id})}}"> <span class="glyphicon glyphicon-eye-open "></span></a></li> 
+
+									{% endif %}
 								{% endfor %}
 							</ul>
 						</div>

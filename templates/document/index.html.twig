@@ -33,7 +33,8 @@
 							<tr>
 								<th>Id</th>
 								<th>Document</th>
-								<th>Date</th>
+								<th>Date d'établissement</th>
+								<th>Date expiration</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -45,6 +46,7 @@
 								<td>{{ loop.index }}</td>
 								<td>{{ document.typedoc }}</td>
 								<td>{{ document.dateEtablissement ? document.dateEtablissement|date('Y-m-d') : '' }}</td>
+								<td>{{ document.dateEtablissement ? document.Rappelid.dateExpiration|date('Y-m-d') : '' }}</td>
 								<td><a href="{{ path('app_document_edit', {'id': document.id}) }} "><span class="glyphicon glyphicon-pencil"></span></a>|<a href=" {{ path('app_document_delete', {'id': document.id}) }}" onclick="return confirm('Voulez vraiment Supprimer ce document?')"><span class="glyphicon glyphicon-trash"></span></a></td>
 							
 							
@@ -57,7 +59,8 @@
 							<tr>
 								<th>Id</th>
 								<th>Document</th>
-								<th>Date</th>
+								<th>Date d'établissement</th>
+								<th>Date expiration</th>
 								<th>Actions</th>
 							</tr>
 						</tfoot>

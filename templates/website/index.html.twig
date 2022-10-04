@@ -290,46 +290,15 @@
 </div>
 </div>
 <div class="row justify-content-center">
-<div class="col-xl-4 col-lg-6 col-md-6" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
-<div class="team-card style1">
-<div class="team-img">
-<img src="{{asset('WebSite/assets/img/team/team-1.jpg')}}" alt="Image">
-<ul class="social-profile list-style style1">
-<li>
-<a target="_blank" href="https://facebook.com/">
-<i class="ri-facebook-fill"></i>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://linkedin.com/">
-<i class="ri-linkedin-fill"></i>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://twitter.com/">
-<i class="ri-twitter-fill"></i>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://pinterest.com/">
-<i class="ri-pinterest-fill"></i>
-</a>
-</li>
-</ul>
-</div>
-<div class="team-info-wrap">
-<div class="team-info">
-<h3><a href="team-details.html">Erik Ondricka</a></h3>
-<span>Senior Instructor</span>
-</div>
-<a href="team-details.html" class="team-link"><i class="flaticon-right-arrow"></i></a>
-</div>
-</div>
-</div>
+
+
+{% for ecole in autoecole %}
+    
+
 <div class="col-xl-4 col-lg-6 col-md-6" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
 <div class="team-card style1">
 <div class="team-img">
-<img src="{{asset('WebSite/assets/img/team/team-2.jpg')}}" alt="Image">
+<img src="{{asset('../AdminResponsable/img/ImageAutoEcole/' ~ ecole.image)}}" alt="Image">
 <ul class="social-profile list-style style1">
 <li>
 <a target="_blank" href="https://facebook.com/">
@@ -355,46 +324,18 @@
 </div>
 <div class="team-info-wrap">
 <div class="team-info">
-<h3><a href="team-details.html">Mossie Ullrich</a></h3>
+<h3><a href="team-details.html">{{ecole.Nom}}</a></h3>
 <span>Driving Instructor</span>
 </div>
 <a href="team-details.html" class="team-link"><i class="flaticon-right-arrow"></i></a>
 </div>
 </div>
 </div>
-<div class="col-xl-4 col-lg-6 col-md-6" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
-<div class="team-card style1">
-<div class="team-img">
-<img src="{{asset('WebSite/assets/img/team/team-3.jpg')}}" alt="Image">
-<ul class="social-profile list-style style1">
-<li>
-<a target="_blank" href="https://facebook.com/">
-<i class="ri-facebook-fill"></i>
-</a>
-</li>
- <li>
-<a target="_blank" href="https://linkedin.com/">
-<i class="ri-linkedin-fill"></i>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://twitter.com/">
-<i class="ri-twitter-fill"></i>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://pinterest.com/">
-<i class="ri-pinterest-fill"></i>
-</a>
-</li>
-</ul>
-</div>
+{% endfor %}
+
+
 <div class="team-info-wrap">
-<div class="team-info">
-<h3><a href="team-details.html">Jackie Schmeler</a></h3>
-<span>Senior Instructor</span>
-</div>
-<a href="team-details.html" class="team-link"><i class="flaticon-right-arrow"></i></a>
+
 </div>
 </div>
 </div>
@@ -541,7 +482,7 @@ Nunc quam arcu, pretium quis quam sed aoreet efficitur liuam volutpat. lobortis 
 <li><i class="flaticon-user-1"></i> <a href="posts-by-author.html">Admin</a></li>
 </ul>
 <h3><a href="#">{{post.titre}}</a></h3>
-<p>{{post.contenu}}.</p>
+<p>{{post.contenu|slice(0,50)}}...</p>
 <a href="{{ path('app_blog_detail', {'id': post.id}) }}" class="link style1">Lire plus
 <i class="flaticon-right-arrow"></i>
 </a>

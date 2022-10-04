@@ -30,7 +30,7 @@ class Document extends Infos
     
     #[ORM\ManyToOne(targetEntity: Rappel::class, inversedBy: 'documents',cascade: array("persist"))]
     #[ORM\GeneratedValue]
-    private $Rappel_id;
+    private $Rappelid;
 
     public function __construct()
     {
@@ -110,12 +110,12 @@ class Document extends Infos
 
     public function getRappelId(): ?Rappel
     {
-        return $this->Rappel_id;
+        return $this->Rappelid;
     }
 
-    public function setRappelId(?Rappel $Rappel_id): self
+    public function setRappelId(?Rappel $Rappelid): self
     {
-        $this->Rappel_id = $Rappel_id;
+        $this->Rappelid = $Rappelid;
 
         return $this;
     }

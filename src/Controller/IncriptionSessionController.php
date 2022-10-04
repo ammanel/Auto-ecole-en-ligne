@@ -27,14 +27,14 @@ class IncriptionSessionController extends AbstractController
                 $transaction=new Transaction();
                 $form = $this->createForm(TransactionType::class, $transaction);
                 $form->handleRequest($request);
-
+                $em=$doctrine->getManager();
+                $transaction->setIdApprenant($connecter);
+                $transaction->setTypeDePayement("présentiel");
+                $transaction->setIdSession($session);
+                $em->persist($transaction);
+                $em->flush();
                 if ($form->isSubmitted() && $form->isValid()) { 
-                    $em=$doctrine->getManager();
-                    $transaction->setIdApprenant($connecter);
-                    $transaction->setTypeDePayement("présentiel");
-                    $transaction->setIdSession($session);
-                    $em->persist($transaction);
-                    $em->flush();
+                   
                     $this->addFlash(type:'info',message:"votre inscription a cette session pour des cours en présentiel a été validé");
                     return $this->redirectToRoute('app_mon_Auto_Ecole');
                     
@@ -42,7 +42,9 @@ class IncriptionSessionController extends AbstractController
                 
         return $this->render('incription_session/transactionSession.html..twig', [
             'controller_name' => 'IncriptionSessionController',
-          
+            "Nom"=>$connecter->getNom(),
+            "Prenom"=>$connecter->getPrenom(),
+            "Mail"=>$connecter->getMail(),
             'form' => $form->createView()
         ]);
     }

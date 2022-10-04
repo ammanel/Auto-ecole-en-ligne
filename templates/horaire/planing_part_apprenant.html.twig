@@ -35,18 +35,34 @@
                                 {% for horaire in pp %}
                                     
                                
+									
 									<tr>										
 										 {% if horaire.enable == false %}
 										<td>
-											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{horaire.jours}}</a>
-											<span class="text-fade d-block">Pharetra, Nulla , Nec, Aliquet</span>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
+											<span class="text-fade d-block">{{ horaire.dateDebut|date('d-m-Y') }}</span>
+										</td>
+
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
+											<span class="text-fade d-block">{{ horaire.dateFin|date('d-m-Y') }}</span>
 										</td>
 										<td>
 											<span class="text-dark font-weight-600 d-block font-size-16">
 												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
 											</span>
 											<span class="text-fade d-block">
-												Web, UI/UX Design
+												
+											</span>
+										</td>
+
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heureFin|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												
 											</span>
 										</td>
 										<td>
@@ -100,15 +116,30 @@
 									<tr>										
 										 {% if horaire.enable == false %}
 										<td>
-											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16">{{horaire.jours}}</a>
-											<span class="text-fade d-block">Pharetra, Nulla , Nec, Aliquet</span>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
+											<span class="text-fade d-block">{{ horaire.dateDebut|date('d-m-Y') }}</span>
+										</td>
+
+										<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
+											<span class="text-fade d-block">{{ horaire.dateFin|date('d-m-Y') }}</span>
 										</td>
 										<td>
 											<span class="text-dark font-weight-600 d-block font-size-16">
 												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
 											</span>
 											<span class="text-fade d-block">
-												Web, UI/UX Design
+												
+											</span>
+										</td>
+
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heureFin|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												
 											</span>
 										</td>
 										<td>

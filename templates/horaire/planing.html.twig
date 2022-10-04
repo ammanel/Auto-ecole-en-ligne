@@ -29,16 +29,31 @@
                                
 									<tr>										
 										 {% if horaire.enable == false %}
+											<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
+											<span class="text-fade d-block">{{ horaire.dateDebut|date('d-m-Y') }}</span>
+										</td>
+
 										<td>
 											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
-											<span class="text-fade d-block">Pharetra, Nulla , Nec, Aliquet</span>
+											<span class="text-fade d-block">{{ horaire.dateFin|date('d-m-Y') }}</span>
 										</td>
 										<td>
 											<span class="text-dark font-weight-600 d-block font-size-16">
 												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
 											</span>
 											<span class="text-fade d-block">
-												Web, UI/UX Design
+												
+											</span>
+										</td>
+
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heureFin|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												
 											</span>
 										</td>
 										<td>
@@ -52,6 +67,7 @@
 												
 											</div>
 										</td>
+										
 										<td class="text-right">
 											
 											<a href="{{url('app_horaire_edit',{'id': horaire.id})}}" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>
@@ -95,16 +111,31 @@
                                
 									<tr>										
 										 {% if horaire.enable == false %}
+											<td>
+											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
+											<span class="text-fade d-block">{{ horaire.dateDebut|date('d-m-Y') }}</span>
+										</td>
+
 										<td>
 											<a href="#" class="text-dark font-weight-600 hover-primary font-size-16"></a>
-											<span class="text-fade d-block">Pharetra, Nulla , Nec, Aliquet</span>
+											<span class="text-fade d-block">{{ horaire.dateFin|date('d-m-Y') }}</span>
 										</td>
 										<td>
 											<span class="text-dark font-weight-600 d-block font-size-16">
 												{{ horaire.heure ? horaire.heure|date('H:i:s') : '' }}
 											</span>
 											<span class="text-fade d-block">
-												Web, UI/UX Design
+												
+											</span>
+										</td>
+
+
+										<td>
+											<span class="text-dark font-weight-600 d-block font-size-16">
+												{{ horaire.heure ? horaire.heureFin|date('H:i:s') : '' }}
+											</span>
+											<span class="text-fade d-block">
+												
 											</span>
 										</td>
 										<td>
@@ -118,6 +149,7 @@
 												
 											</div>
 										</td>
+										
 										<td class="text-right">
 											
 									       <a href="{{url('app_horaire_edit',{'id': horaire.id})}}" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>

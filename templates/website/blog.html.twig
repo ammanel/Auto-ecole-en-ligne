@@ -36,7 +36,7 @@
 <li><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>0 Comment</li>
 </ul>
 <h3><a href="#">{{post.titre}}</a></h3>
-<p>{{post.contenu}}</p>
+<p>{{post.contenu|slice(0,50)}}...</p>
 <a href="{{ path('app_blog_detail', {'id': post.id}) }}" class="link style1">Lire plus
 <i class="flaticon-right-arrow"></i>
 </a>

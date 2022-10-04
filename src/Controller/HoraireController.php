@@ -111,7 +111,7 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit_horaire', name: 'app_horaire_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit_horaire', name: 'app_horaire_edit')]
     public function edit(Request $request, Horaire $horaire, HoraireRepository $horaireRepository): Response
     {
         $form = $this->createForm(HoraireType::class, $horaire);
@@ -129,7 +129,7 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_horaire_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_horaire_delete')]
     public function delete(ManagerRegistry $doctrine, Horaire $horaire): Response
     {
         $em=$doctrine->getManager();
