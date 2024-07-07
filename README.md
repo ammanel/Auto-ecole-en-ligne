@@ -1,8 +1,8 @@
 Affichage
 
-![CHEESE!](Capture d'écran 2024-07-07 171458.png).
-![CHEESE!](acceuil.png).
-![CHEESE!](acceuil.png).
-![CHEESE!](acceuil.png).
-![CHEESE!](acceuil.png).
-![CHEESE!](acceuil.png).
+![CHEESE!](1.png).
+![CHEESE!](2.png).
+![CHEESE!](3.png).
+![CHEESE!](4.png).
+![CHEESE!](5.png).
+![CHEESE!](6.png).
